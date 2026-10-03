@@ -5,6 +5,8 @@ import rssPlugin from "@11ty/eleventy-plugin-rss";
 import pinyin from "node-pinyin";
 import htmlmin from "html-minifier-terser";
 import { createRequire } from "module";
+import postcss from "postcss";
+import autoprefixer from "autoprefixer";
 const require = createRequire(import.meta.url);
 const siteData = require("./src/_data/site.json");
 
@@ -80,7 +82,32 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("filterByTag", (posts, tag) => {
     return posts.filter((post) => (post.data.tags || []).includes(tag));
   });
-  eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addPassthroughCopy({ "src/assets/images": "assets/images" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/vendor": "assets/vendor" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/fonts": "assets/fonts" });
+
+  // 让 Eleventy 把 .css 文件当作模板处理
+  eleventyConfig.addTemplateFormats("css");
+  eleventyConfig.addExtension("css", {
+    outputFileExtension: "css",
+    compile: function (inputContent) {
+      return function () {
+        return inputContent;
+      };
+    },
+  });
+
+  // 对所有输出的 CSS 跑 PostCSS + Autoprefixer
+  eleventyConfig.addTransform("postcss", async function (content, outputPath) {
+    if (outputPath && outputPath.endsWith(".css")) {
+      const result = await postcss([autoprefixer]).process(content, {
+        from: undefined,
+        map: false,
+      });
+      return result.css;
+    }
+    return content;
+  });
   eleventyConfig.addFilter("groupPostsByYear", (posts) => {
     const groups = {};
     for (const post of posts) {

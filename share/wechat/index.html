@@ -1,0 +1,53 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>分享到微信 - AYP</title><meta name="description" content="使用微信扫一扫，把本页分享给好友或分享到朋友圈。"><meta name="author" content="AeYunDian"><meta property="og:title" content="分享到微信 - AYP"><meta property="og:description" content="使用微信扫一扫，把本页分享给好友或分享到朋友圈。"><meta property="og:url" content="https://undz.cn/share/wechat/"><meta property="og:site_name" content="韵典综合平台"><meta name="twitter:title" content="分享到微信 - AYP"><meta name="twitter:description" content="使用微信扫一扫，把本页分享给好友或分享到朋友圈。"><link rel="canonical" href="https://undz.cn/share/wechat/"><link rel="alternate" type="application/atom+xml" title="韵典综合平台" href="https://undz.cn/feed.xml"><link rel="stylesheet" href="/assets/css/style.css"><script src="/assets/vendor/jquery-1.12.4.min.js"></script><noscript><style>.only-js { display: none !important; }</style></noscript><link rel="stylesheet" href="/assets/css/base/reset.css"><link rel="stylesheet" href="/assets/css/base/variables.css"><link rel="stylesheet" href="/assets/css/base/layout.css"><link rel="stylesheet" href="/assets/css/components/header.css"><link rel="stylesheet" href="/assets/css/components/footer.css"><link rel="stylesheet" href="/assets/css/pages/share-wechat.css"><!--[if lt IE 8]>
+<link rel="stylesheet" href="/assets/css/ie7.css">
+<![endif]--></head><body><main class="main"><div class="container"><div class="wxshare"><h2 class="wxshare__title">分享到微信</h2><div class="wxshare__code" id="wxshare-code"></div><p class="wxshare__tip">用微信「扫一扫」，点击右上角分享按钮，<br>即可将网页分享给您的微信好友或朋友圈。</p></div><div class="only-js"><script src="/assets/vendor/jquery-1.12.4.min.js"></script><script src="/assets/vendor/jquery.qrcode.min.js"></script><script>$(function () {
+  var ALLOWED = ["undz.cn", "yzhyzxy.cn", "gov.cn", "edu.cn"];
+
+  function isAllowedHost(hostname) {
+    hostname = (hostname || "").toLowerCase();
+    for (var i = 0; i < ALLOWED.length; i++) {
+      var d = ALLOWED[i];
+      if (hostname === d || hostname.slice(-(d.length + 1)) === "." + d) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  var $codeBox = $("#wxshare-code");
+
+  var m = window.location.search.match(/[?&]url=([^&]*)/);
+  var url = m ? decodeURIComponent(m[1]) : "";
+
+  function fail(msg) {
+    $codeBox.html('<p class="wxshare__err">' + msg + '</p>');
+  }
+
+  if (!/^https?:\/\//i.test(url)) {
+    $(".wxshare").remove();
+    return;
+  }
+
+  var hostname = "";
+  try {
+    var a = document.createElement("a");
+    a.href = url;
+    hostname = a.hostname;
+  } catch (e) {
+    fail("链接格式不正确。");
+    return;
+  }
+
+  if (!isAllowedHost(hostname)) {
+    $(".wxshare").remove();
+    return;
+  }
+
+
+  $codeBox.qrcode({
+    render: "table",
+    width: 200,
+    height: 200,
+    text: url
+  });
+});</script></div></div></main></body></html>

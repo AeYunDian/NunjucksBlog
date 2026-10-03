@@ -1,0 +1,38 @@
+.wxshare {
+  max-width: 320px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  background: #fff;
+  text-align: center;
+}
+.wxshare__title {
+  margin: 0 0 16px;
+  font-size: 18px;
+  color: #222;
+}
+.wxshare__code {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 16px;
+}
+.wxshare__code table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+.wxshare__code td {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+.wxshare__tip {
+  margin: 0;
+  font-size: 13px;
+  line-height: 22px;
+  color: #555;
+}
+.wxshare__err {
+  color: #c0392b;
+  font-size: 13px;
+}

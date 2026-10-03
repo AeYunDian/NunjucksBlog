@@ -1,0 +1,24 @@
+{% macro tag(opts) %}
+{% set text = opts.text or "" %}
+{% set href = opts.href %}
+{% set color = opts.color or "default" %}
+{% set count = opts.count %}
+{% set size = opts.size or "md" %}
+
+{% set classStr = "tag tag--" + color + " tag--" + size %}
+{% if href %}
+<a href="{{ href }}" class="{{ classStr }}">{{ text }}{% if count %} <span class="tag__count">{{ count }}</span>{% endif %}</a>
+{% else %}
+<span class="{{ classStr }}">{{ text }}{% if count %} <span class="tag__count">{{ count }}</span>{% endif %}</span>
+{% endif %}
+{% endmacro %}
+
+{% macro tagList(tags, opts) %}
+{% set options = opts or {} %}
+{% set baseUrl = options.baseUrl or "/tags/" %}
+<div class="tag-list">
+  {% for t in tags %}
+    {{ tag({ text: t, href: baseUrl + (t | tagSlug) + "/", color: options.color }) }}
+  {% endfor %}
+</div>
+{% endmacro %}

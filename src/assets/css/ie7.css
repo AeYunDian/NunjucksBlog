@@ -1,0 +1,132 @@
+/* ie7.css
+ * 仅通过 <!--[if lt IE 8]> 加载，只对 IE7 及以下生效。
+ * 因为整个文件只有 IE7 会读，所以不需要 * 前缀 hack，直接写标准属性。
+ * 现代浏览器永远不会请求这个文件。
+ */
+
+/* ---------- 通用：让 inline-block 在 IE7 生效 ---------- */
+/* IE7 对块级元素不认 inline-block，需要先 inline 再触发 hasLayout */
+.btn,
+.tag,
+.pagination__link,
+.post__content img,
+.site-logo,
+.site-nav li {
+  display: inline;
+  zoom: 1;
+}
+
+/* 块级元素保持块级 */
+.btn--block,
+.post__content img {
+  display: block;
+  zoom: 1;
+}
+
+/* ---------- 清除浮动 ---------- */
+.site-header .container,
+.site-nav ul,
+.pagination,
+.post-nav {
+  zoom: 1;
+}
+.site-header .container::after,
+.site-nav ul::after,
+.pagination::after,
+.post-nav::after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+}
+
+/* ---------- Header ---------- */
+.site-header .container {
+  /* IE7 不支持 flex，退回浮动 */
+  overflow: hidden;
+}
+.site-logo {
+  float: left;
+  line-height: 40px;
+}
+.site-nav {
+  float: right;
+}
+.site-nav li {
+  float: left;
+  margin-right: 16px;
+  /* 抵消 IE7 双倍 margin bug：浮动元素朝同一方向的 margin 会翻倍 */
+  display: inline;
+}
+.site-nav li:last-child {
+  /* IE7 不支持 :last-child，统一给右边距，最后一项也留一点无所谓 */
+  margin-right: 16px;
+}
+
+/* ---------- 面包屑 ---------- */
+/* IE7 不支持 ::before，用 background 模拟分隔符 */
+.breadcrumb__item + .breadcrumb__item {
+  padding-left: 12px;
+  background: url(data:image/gif;base64,R0lGODlhCgAKAIAAAP///wAAACH5BAAAAAAALAAAAAAKAAoAAAIIhI+py+0PYysAOw==)
+    no-repeat left center;
+}
+.breadcrumb__item + .breadcrumb__item::before {
+  content: none; /* 覆盖现代写法，IE7 里不生效也无所谓 */
+}
+
+/* ---------- 归档、文章列表：去掉最后一项的边框 ---------- */
+/* IE7 不支持 :last-child，用类名标记（需要在模板里输出 last 类） */
+.archive-list li.last,
+.post-list .post-card:last-child {
+  border-bottom: none;
+}
+
+/* ---------- 分页 ---------- */
+.pagination {
+  /* IE7 不支持 font-size: 0 完全消除间隙，但基本可用 */
+  text-align: center;
+}
+.pagination__link {
+  margin: 0 2px;
+  /* IE7 的 inline-block 元素会有空白间隙，靠父级 font-size: 0 处理 */
+}
+
+/* ---------- 标签 ---------- */
+.tag {
+  /* IE7 下 inline-block 元素多，靠父级 font-size: 0 消除间隙 */
+  white-space: nowrap;
+}
+
+/* ---------- 按钮 opacity ---------- */
+.btn[disabled] {
+  filter: alpha(opacity=50);
+  opacity: 0.5;
+}
+
+/* ---------- 卡片 ---------- */
+.card,
+.post-card {
+  zoom: 1; /* 触发 hasLayout，避免内部浮动影响外部 */
+}
+
+/* ---------- 文章内容 ---------- */
+.post__content pre {
+  /* IE7 不支持 overflow-x: auto，改为 scroll 让它能横向滚动 */
+  overflow-x: scroll;
+}
+.post__content table {
+  /* IE7 下 width: 100% 加 border-collapse 可能塌陷，加个最小宽度 */
+  width: auto;
+  min-width: 100%;
+}
+
+/* ---------- 空状态 ---------- */
+.empty-state {
+  zoom: 1;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  clear: both;
+}

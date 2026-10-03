@@ -1,0 +1,71 @@
+.site-footer {
+  background: #000000;
+  color: #aaa;
+  padding: 24px 0;
+  margin-top: 48px;
+  font-size: 15px;
+  line-height: 2;
+}
+.site-footer a {
+  color: #fff;
+  text-decoration: none;
+}
+.site-footer a:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+.site-footer p {
+  margin: 0;
+}
+
+.footer-inner {
+  overflow: hidden;
+  zoom: 1; /* IE7 清浮动 */
+}
+
+.footer-text {
+  float: left;
+  width: 78%;
+}
+
+.footer-badges {
+  float: right;
+  width: 20%;
+  text-align: right;
+  padding-top: 6px;
+}
+.footer-badges img {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 6px 8px;
+  border: 0;
+  width: 78%;
+}
+
+.footer-links {
+  margin-bottom: 4px;
+}
+.footer-links .sep {
+  margin: 0 6px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* 窄屏时上下堆叠 */
+@media (max-width: 640px) {
+  .footer-text,
+  .footer-badges {
+    float: none;
+    width: auto;
+    text-align: left;
+  }
+  .footer-badges {
+    text-align: center !important;
+    margin-top: 12px;
+    text-align: left;
+  }
+  .footer-badges img {
+    margin-left: 0;
+    width: 50%;
+    margin-right: 8px;
+  }
+}

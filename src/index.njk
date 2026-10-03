@@ -1,0 +1,34 @@
+---
+layout: layouts/base.njk
+description: 欢迎来到我的博客
+pagination:
+  data: collections.posts
+  size: 6
+  alias: posts
+css:
+  - components/post-card
+  - components/pagination
+  - components/tag
+  - pages/home
+---
+
+{% from "components/post-card.njk" import postCard %}
+{% from "components/pagination.njk" import paginationNav %}
+
+<section class="hero">
+  <h1>{{ site.title }}</h1>
+  <p>{{ site.description }}</p>
+</section>
+
+{% if posts.length %}
+  <section class="post-list">
+    {% for post in posts %}
+      {{ postCard(post) }}
+    {% endfor %}
+  </section>
+  {{ paginationNav(pagination) }}
+{% else %}
+  <div class="empty-state">
+    <p>作者还没有发布过文章。</p>
+  </div>
+{% endif %}

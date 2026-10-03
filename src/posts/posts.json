@@ -1,0 +1,11 @@
+{
+    "layout": "layouts/post.njk",
+    "css": [
+        "components/tag",
+        "components/breadcrumb",
+        "pages/post"
+    ],
+    "eleventyNavigation": {
+        "hide": true
+    }
+}

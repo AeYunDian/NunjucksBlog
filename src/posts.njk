@@ -1,0 +1,32 @@
+---
+layout: layouts/base.njk
+title: 全部文章
+permalink: "/posts/{% if pagination.pageNumber > 0 %}{{ pagination.pageNumber | addOne }}/{% endif %}"
+description: 所有文章列表
+css:
+  - components/post-card
+  - components/tag
+  - components/pagination
+pagination:
+  data: collections.posts
+  size: 6
+  alias: posts
+---
+
+{% from "components/post-card.njk" import postCard %}
+{% from "components/pagination.njk" import paginationNav %}
+
+<h1  class="title">全部文章</h1>
+
+{% if posts.length %}
+  <div class="post-list">
+    {% for post in posts %}
+      {{ postCard(post) }}
+    {% endfor %}
+  </div>
+  {{ paginationNav(pagination) }}
+{% else %}
+  <div class="empty-state">
+    <p>作者还没有发布过文章。</p>
+  </div>
+{% endif %}

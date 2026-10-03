@@ -1,0 +1,11 @@
+{% macro alert(opts) %}
+{% set type = opts.type or "info" %}
+{% set title = opts.title %}
+{% set content = opts.content or "" %}
+{% set dismissible = opts.dismissible %}
+<div class="alert alert--{{ type }}" role="alert">
+  {% if title %}<div class="alert__title">{{ title }}</div>{% endif %}
+  <div class="alert__content">{{ content | safe }}</div>
+  {% if dismissible %}<button type="button" class="alert__close" aria-label="关闭">&times;</button>{% endif %}
+</div>
+{% endmacro %}

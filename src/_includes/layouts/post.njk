@@ -1,0 +1,31 @@
+---
+layout: layouts/base.njk
+css:
+  - components/tag
+  - components/breadcrumb
+  - pages/post
+---
+
+{% from "components/breadcrumb.njk" import breadcrumb %}
+{% from "components/tag.njk" import tagList %}
+
+{{ breadcrumb([
+    { text: "首页", href: "/" },
+    { text: "文章", href: "/posts/" },
+    { text: title }
+]) }}
+<article class="post">
+  <header class="post__header">
+    <h1 class="post__title">{{ title }}</h1>
+    {% if date %}
+    <time class="post__date" datetime="{{ date | dateFormat }}">{{ date | dateFormat }}</time>
+    {% endif %}
+    {% if tags %}
+      {{ tagList(tags) }}
+    {% endif %}
+  </header>
+
+  <div class="post__content">
+    {{ content | safe }}
+  </div>
+</article>

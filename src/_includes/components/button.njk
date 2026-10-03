@@ -1,0 +1,21 @@
+{% macro button(opts) %}
+{% set text = opts.text or "" %}
+{% set type = opts.type or "primary" %}
+{% set size = opts.size or "md" %}
+{% set href = opts.href %}
+{% set id = opts.id %}
+{% set block = opts.block %}
+{% set disabled = opts.disabled %}
+{% set extraClass = opts.class %}
+{% set attrs = opts.attrs %}
+
+{% set classStr = "btn btn--" + type + " btn--" + size %}
+{% if block %}{% set classStr = classStr + " btn--block" %}{% endif %}
+{% if extraClass %}{% set classStr = classStr + " " + extraClass %}{% endif %}
+
+{% if href %}
+<a href="{{ href }}" class="{{ classStr }}"{% if id %} id="{{ id }}"{% endif %}{% if attrs %} {{ attrs | safe }}{% endif %}>{{ text | safe }}</a>
+{% else %}
+<button type="button" class="{{ classStr }}"{% if id %} id="{{ id }}"{% endif %}{% if disabled %} disabled{% endif %}{% if attrs %} {{ attrs | safe }}{% endif %}>{{ text | safe }}</button>
+{% endif %}
+{% endmacro %}

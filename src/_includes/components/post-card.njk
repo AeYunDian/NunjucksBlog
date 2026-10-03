@@ -1,0 +1,35 @@
+{% macro postCard(post, opts) %}
+{% set options = opts or {} %}
+{% set showExcerpt = options.showExcerpt if options.showExcerpt is defined else true %}
+{% set showDate = options.showDate if options.showDate is defined else true %}
+{% set showTags = options.showTags if options.showTags is defined else true %}
+{% set showCover = options.showCover if options.showCover is defined else true %}
+{% from "components/tag.njk" import tagList %}
+<article class="post-card">
+  {% if showCover and post.data.cover %}
+  <a class="post-card__cover" href="{{ post.url }}">
+    <img src="{{ post.data.cover }}" alt="{{ post.data.title }}">
+  </a>
+  {% endif %}
+
+  <div class="post-card__body">
+    <h2 class="post-card__title">
+      <a href="{{ post.url }}">{{ post.data.title }}</a>
+    </h2>
+
+    {% if showDate and post.data.date %}
+    <time class="post-card__date" datetime="{{ post.data.date | dateFormat }}">
+      {{ post.data.date | dateFormat }}
+    </time>
+    {% endif %}
+
+    {% if showExcerpt and post.data.description %}
+    <p class="post-card__excerpt">{{ post.data.description }}</p>
+    {% endif %}
+
+    {% if showTags and post.data.tags %}
+      {{ tagList(post.data.tags) }}
+    {% endif %}
+  </div>
+</article>
+{% endmacro %}

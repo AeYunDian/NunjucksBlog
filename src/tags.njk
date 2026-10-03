@@ -1,0 +1,27 @@
+---
+layout: layouts/base.njk
+title: 标签
+description: 所有标签
+css:
+  - components/tag
+  - pages/tags
+permalink: /tags/
+---
+
+{% from "components/tag.njk" import tag %}
+
+{% set allTags = collections.posts | tagCounts %}
+
+<h1 class="title">标签</h1>
+
+{% if allTags | length %}
+  <div class="tag-cloud">
+    {% for t, count in allTags %}
+      {{ tag({ text: t, href: "/tags/" + (t | tagSlug) + "/", count: count, size: "lg" }) }}
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="empty-state">
+    <p>还没有任何标签。</p>
+  </div>
+{% endif %}

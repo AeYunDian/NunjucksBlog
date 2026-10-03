@@ -1,0 +1,23 @@
+{% macro card(opts) %}
+{% set title = opts.title %}
+{% set subtitle = opts.subtitle %}
+{% set content = opts.content or "" %}
+{% set footer = opts.footer %}
+{% set href = opts.href %}
+{% set image = opts.image %}
+{% set extraClass = opts.class or "" %}
+
+<div class="card {{ extraClass }}">
+  {% if image %}<div class="card__image"><img src="{{ image }}" alt="{{ title }}"></div>{% endif %}
+  <div class="card__body">
+    {% if title %}
+      <h3 class="card__title">
+        {% if href %}<a href="{{ href }}">{{ title }}</a>{% else %}{{ title }}{% endif %}
+      </h3>
+    {% endif %}
+    {% if subtitle %}<div class="card__subtitle">{{ subtitle }}</div>{% endif %}
+    <div class="card__content">{{ content | safe }}</div>
+  </div>
+  {% if footer %}<div class="card__footer">{{ footer | safe }}</div>{% endif %}
+</div>
+{% endmacro %}

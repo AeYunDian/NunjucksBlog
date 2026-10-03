@@ -1,0 +1,36 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.tagList
+  size: 1
+  alias: tag
+  addAllPagesToCollections: true
+permalink: "/tags/{{ tag | tagSlug }}/"
+eleventyComputed:
+  title: "标签：{{ tag }}"
+  description: "所有标记为「{{ tag }}」的文章"
+css:
+  - components/post-card
+  - components/tag
+  - pages/tags
+---
+
+{% from "components/post-card.njk" import postCard %}
+
+{% set posts = collections.posts | filterByTag(tag) %}
+
+<h1 class="title">标签：{{ tag }}</h1>
+
+{% if posts.length %}
+  <div class="post-list">
+    {% for post in posts %}
+      {{ postCard(post) }}
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="empty-state">
+    <p>这个标签下还没有文章。</p>
+  </div>
+{% endif %}
+
+<p style="margin-top: 24px;"><a href="/tags/">← 回到所有标签</a></p>

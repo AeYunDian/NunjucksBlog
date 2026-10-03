@@ -1,0 +1,69 @@
+---
+layout: layouts/doc.njk
+title: 联系我
+updated: 2026-09-13
+permalink: /contact/
+headerNavigation:
+  title: 联系
+  order: 6
+css:
+  - components/button
+  - pages/doc
+---
+
+{% from "components/button.njk" import button %}
+
+<h2>一、电子邮箱</h2>
+<ul>
+  <li><a href="mailto:aeyundian@gmail.com">aeyundian@gmail.com</a></li>
+  <li><a href="mailto:aeyundian@qq.com">aeyundian@qq.com</a></li>
+  <li><a href="mailto:aeyundian@outlook.com">aeyundian@outlook.com</a></li>
+  <li><a href="mailto:aeyundian@sina.com">aeyundian@sina.com</a></li>
+  <li><a href="mailto:aeyundian@sina.cn">aeyundian@sina.cn</a></li>
+  <li><a href="mailto:aeyundian@foxmail.com">aeyundian@foxmail.com</a></li>
+</ul>
+
+<h2>二、即时通讯</h2>
+<table>
+  <tbody>
+    <tr><th>QQ</th><td><a href="https://api.undz.cn/addqq?uid=2768223712" target="_blank" rel="noopener">2768223712</a></td></tr>
+  </tbody>
+</table>
+
+<h2>三、其他平台</h2>
+<table>
+  <tbody>
+    <tr><th style="width:140px">GitHub</th><td><a href="https://github.com/AeYunDian/" target="_blank" rel="noopener">AeYunDian</a></td></tr>
+    <tr><th>哔哩哔哩</th><td><a href="https://space.bilibili.com/3494370328185235" target="_blank" rel="noopener">3494370328185235</a></td></tr>
+    <tr><th>YouTube</th><td><a href="https://www.youtube.com/@aeydundz" target="_blank" rel="noopener">@aeydundz</a></td></tr>
+  </tbody>
+</table>
+
+<h2>四、办公信息</h2>
+<table>
+  <tbody>
+    <tr><th style="width:140px">工作时间</th><td>{{ site.workTime }}</td></tr>
+  </tbody>
+</table>
+
+<h2>五、在线留言</h2>
+<p>留言反馈已统一迁移至 <b>反馈中心</b>。为便于跟踪处理进度、留存沟通记录，请前往反馈中心提交您的问题或建议。</p>
+
+<div class="feedback-entry">
+  {{ button({
+    text: "前往反馈中心留言",
+    href: "https://console.undz.cn/console-panel/feedback-center",
+    type: "primary",
+    attrs: 'target="_blank" rel="noopener"'
+  }) }}
+  <p class="feedback-hint">
+    反馈中心地址：<code>https://console.undz.cn/console-panel/feedback-center</code>
+  </p>
+</div>
+
+<h2>六、友情提示</h2>
+<ul>
+  <li>请勿在留言中提交身份证号、银行卡等敏感信息。</li>
+  <li>广告、推广类留言将被直接忽略。</li>
+  <li>技术问题建议优先通过 GitHub Issue 反馈，便于追溯。</li>
+</ul>

@@ -1,0 +1,23 @@
+---
+layout: layouts/base.njk
+css:
+  - components/breadcrumb
+  - pages/doc
+---
+{% from "components/breadcrumb.njk" import breadcrumb %}
+  {{ breadcrumb([
+    { text: "首页", href: "/" },
+    { text: title }
+  ]) }}
+<article class="doc">
+  <header class="doc__header">
+    <h1 class="doc__title">{{ title }}</h1>
+    {% if updated %}
+    <p class="doc__updated">最后更新：{{ updated | dateFormat }}</p>
+    {% endif %}
+  </header>
+
+  <div class="doc__content">
+    {{ content | safe }}
+  </div>
+</article>

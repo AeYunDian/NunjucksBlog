@@ -1,0 +1,31 @@
+{
+    "title": "韵典综合平台",
+    "titleSuffix": "AYP",
+    "author": "AeYunDian",
+    "workTime": "周一至周五 09:00-18:00",
+    "description": "一个用 Eleventy 搭建的兼容性博客",
+    "url": "https://undz.cn",
+    "ogImage": "",
+    "navigation": [
+        {
+            "title": "首页",
+            "url": "/"
+        },
+        {
+            "title": "文章",
+            "url": "/posts/"
+        },
+        {
+            "title": "标签",
+            "url": "/tags/"
+        },
+        {
+            "title": "归档",
+            "url": "/archive/"
+        },
+        {
+            "title": "关于",
+            "url": "/about/"
+        }
+    ]
+}

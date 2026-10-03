@@ -1,0 +1,33 @@
+---
+layout: layouts/base.njk
+title: 归档
+css:
+  - pages/archive
+description: 按年月归档
+permalink: /archive/
+---
+
+{% set postsByYear = collections.posts | groupPostsByYear %}
+
+<h1 class="title">归档</h1>
+
+{% if postsByYear | length %}
+  {% for year, posts in postsByYear %}
+  <section class="archive-year">
+    <h2>{{ year }}</h2>
+    <ul class="archive-list">
+      {% for post in posts %}
+      <li>
+        <time>{{ post.data.date | dateFormat }}</time>
+        <a href="{{ post.url }}">{{ post.data.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+{% else %}
+  <div class="empty-state">
+    <p>还没有文章可以归档。</p>
+    <p>发布第一篇文章后，这里会按年份自动分组。</p>
+  </div>
+{% endif %}

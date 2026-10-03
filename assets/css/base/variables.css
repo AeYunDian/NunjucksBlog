@@ -1,0 +1,9 @@
+:root {
+  --color-primary: #0066cc;
+  --color-text: #222;
+  --color-muted: #888;
+  --color-border: #e5e5e5;
+  --radius: 4px;
+  --space: 16px;
+}
+/* IE7 不支持 CSS 变量，所有组件里都用了具体的 fallback 值，所以 IE7 也能正常显示，只是不能换主题色。 */

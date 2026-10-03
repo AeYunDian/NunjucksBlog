@@ -1,0 +1,7 @@
+.tag-cloud {
+  margin: 24px 0;
+  line-height: 2;
+}
+.tag-cloud .tag {
+  margin: 0 6px 6px 0;
+}

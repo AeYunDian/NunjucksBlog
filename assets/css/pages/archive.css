@@ -1,0 +1,35 @@
+.archive-year {
+  margin: 32px 0;
+}
+.archive-year h2 {
+  font-size: 22px;
+  margin: 0 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #0066cc;
+  color: #0066cc;
+}
+.archive-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.archive-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  line-height: 1.6;
+}
+.archive-list li:last-child {
+  border-bottom: none;
+}
+.archive-list time {
+  display: inline-block;
+  width: 100px;
+  color: #888;
+  font-size: 13px;
+}
+.archive-list a {
+  color: #222;
+}
+.archive-list a:hover {
+  color: #0066cc;
+}

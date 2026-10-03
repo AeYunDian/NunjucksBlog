@@ -1,0 +1,420 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Linux 备忘录 - AYP</title><meta name="description" content="一个用 Eleventy 搭建的兼容性博客"><meta name="author" content="AeYunDian"><meta property="og:title" content="Linux 备忘录 - AYP"><meta property="og:description" content="一个用 Eleventy 搭建的兼容性博客"><meta property="og:url" content="https://undz.cn/posts/linux-memo-2026-09-25/"><meta property="og:site_name" content="韵典综合平台"><meta name="twitter:title" content="Linux 备忘录 - AYP"><meta name="twitter:description" content="一个用 Eleventy 搭建的兼容性博客"><link rel="canonical" href="https://undz.cn/posts/linux-memo-2026-09-25/"><link rel="alternate" type="application/atom+xml" title="韵典综合平台" href="https://undz.cn/feed.xml"><link rel="stylesheet" href="/assets/css/style.css"><script src="/assets/vendor/jquery-1.12.4.min.js"></script><noscript><style>.only-js { display: none !important; }</style></noscript><link rel="stylesheet" href="/assets/css/base/reset.css"><link rel="stylesheet" href="/assets/css/base/variables.css"><link rel="stylesheet" href="/assets/css/base/layout.css"><link rel="stylesheet" href="/assets/css/components/header.css"><link rel="stylesheet" href="/assets/css/components/footer.css"><link rel="stylesheet" href="/assets/css/components/tag.css"><link rel="stylesheet" href="/assets/css/components/breadcrumb.css"><link rel="stylesheet" href="/assets/css/pages/post.css"><link rel="stylesheet" href="/assets/css/components/tag.css"><link rel="stylesheet" href="/assets/css/components/breadcrumb.css"><link rel="stylesheet" href="/assets/css/pages/post.css"><!--[if lt IE 8]>
+<link rel="stylesheet" href="/assets/css/ie7.css">
+<![endif]--></head><body><header class="site-header"><div class="container"><a class="site-logo" href="/">韵典综合平台</a><nav class="site-nav" aria-label="主导航"><ul><li><a href="/">首页</a></li><li><a href="/posts/">文章</a></li><li><a href="/tags/">标签</a></li><li><a href="/archive/">归档</a></li><li><a href="/about/">关于</a></li></ul></nav></div></header><main class="main"><div class="container"><nav class="breadcrumb" aria-label="面包屑"><ol class="breadcrumb__list"><li class="breadcrumb__item"><a href="/">首页</a></li><li class="breadcrumb__item"><a href="/posts/">文章</a></li><li class="breadcrumb__item"><span>Linux 备忘录</span></li></ol></nav><article class="post"><header class="post__header"><h1 class="post__title">Linux 备忘录</h1><time class="post__date" datetime="2026-09-25">2026-09-25</time><div class="tag-list"><a href="/tags/linux/" class="tag tag--default tag--md">linux</a> <a href="/tags/yun4-wei2/" class="tag tag--default tag--md">运维</a> <a href="/tags/bei4-wang4-lu4/" class="tag tag--default tag--md">备忘录</a></div></header><div class="post__content"><p>国内环境下的高频命令。换源和镜像放在最前面。</p><h2>一、换源</h2><h3>1.1 apt（Debian / Ubuntu）</h3><p>先备份，再替换：</p><pre><code class="language-bash">sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+sudo sed -i 's|http://archive.ubuntu.com|https://mirrors.tuna.tsinghua.edu.cn|g' /etc/apt/sources.list
+sudo sed -i 's|http://security.ubuntu.com|https://mirrors.tuna.tsinghua.edu.cn|g' /etc/apt/sources.list
+sudo apt update
+</code></pre><p><strong>Ubuntu 24.04+</strong> 使用新格式 <code>/etc/apt/sources.list.d/ubuntu.sources</code>：</p><pre><code class="language-bash">sudo sed -i 's|http://archive.ubuntu.com|https://mirrors.tuna.tsinghua.edu.cn|g' \
+  /etc/apt/sources.list.d/ubuntu.sources
+</code></pre><p><strong>Debian 12+</strong> 使用 <code>/etc/apt/sources.list.d/debian.sources</code>，同理。</p><h3>1.2 常用 apt 镜像源</h3><table><thead><tr><th>源</th><th>URL</th></tr></thead><tbody><tr><td>清华</td><td><code>https://mirrors.tuna.tsinghua.edu.cn</code></td></tr><tr><td>阿里云</td><td><code>https://mirrors.aliyun.com</code></td></tr><tr><td>中科大</td><td><code>https://mirrors.ustc.edu.cn</code></td></tr><tr><td>华为云</td><td><code>https://mirrors.huaweicloud.com</code></td></tr><tr><td>网易</td><td><code>https://mirrors.163.com</code></td></tr></tbody></table><h3>1.3 yum / dnf（RHEL / CentOS / Fedora）</h3><pre><code class="language-bash"># 备份
+sudo cp -r /etc/yum.repos.d /etc/yum.repos.d.bak
+
+# CentOS 7 换阿里云
+sudo sed -i 's|mirrorlist=|#mirrorlist=|g' /etc/yum.repos.d/CentOS-*.repo
+sudo sed -i 's|#baseurl=http://mirror.centos.org|baseurl=https://mirrors.aliyun.com|g' \
+  /etc/yum.repos.d/CentOS-*.repo
+
+sudo yum clean all
+sudo yum makecache
+</code></pre><p><strong>CentOS 8 / Stream</strong> 需要先换 vault（官方源已下线）：</p><pre><code class="language-bash">sudo sed -i 's|mirror.centos.org|mirrors.aliyun.com|g' /etc/yum.repos.d/*.repo
+sudo sed -i 's|^#baseurl|baseurl|g' /etc/yum.repos.d/*.repo
+sudo sed -i 's|^mirrorlist|#mirrorlist|g' /etc/yum.repos.d/*.repo
+sudo dnf clean all &amp;&amp; sudo dnf makecache
+</code></pre><p><strong>Fedora</strong>：</p><pre><code class="language-bash">sudo sed -i 's|^metalink=|#metalink=|g' /etc/yum.repos.d/fedora*.repo
+sudo sed -i 's|^#baseurl=http://download.example/pub/fedora/linux|baseurl=https://mirrors.tuna.tsinghua.edu.cn/fedora|g' \
+  /etc/yum.repos.d/fedora*.repo
+</code></pre><h3>1.4 pacman（Arch）</h3><p>编辑 <code>/etc/pacman.d/mirrorlist</code>，把国内源放前面：</p><pre><code>Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
+Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
+</code></pre><p>或者一键：</p><pre><code class="language-bash">sudo pacman -S reflector
+sudo reflector --country China --latest 5 --sort rate --save /etc/pacman.d/mirrorlist
+sudo pacman -Syyu
+</code></pre><h3>1.5 pip 换源</h3><pre><code class="language-bash"># 永久
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+pip config set global.trusted-host pypi.tuna.tsinghua.edu.cn
+
+# 或写入 ~/.pip/pip.conf (Linux) / %APPDATA%\pip\pip.ini (Windows)
+# [global]
+# index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+# trusted-host = pypi.tuna.tsinghua.edu.cn
+
+# 一次性
+pip install &lt;pkg&gt; -i https://pypi.tuna.tsinghua.edu.cn/simple
+</code></pre><p>常用 pip 镜像：</p><table><thead><tr><th>源</th><th>URL</th></tr></thead><tbody><tr><td>清华</td><td><code>https://pypi.tuna.tsinghua.edu.cn/simple</code></td></tr><tr><td>阿里云</td><td><code>https://mirrors.aliyun.com/pypi/simple/</code></td></tr><tr><td>中科大</td><td><code>https://pypi.mirrors.ustc.edu.cn/simple/</code></td></tr><tr><td>豆瓣</td><td><code>https://pypi.douban.com/simple/</code></td></tr><tr><td>华为云</td><td><code>https://mirrors.huaweicloud.com/repository/pypi/simple/</code></td></tr></tbody></table><h3>1.6 Docker 镜像加速</h3><p>编辑 <code>/etc/docker/daemon.json</code>：</p><pre><code class="language-json">{
+  &quot;registry-mirrors&quot;: [
+    &quot;https://docker.m.daocloud.io&quot;,
+    &quot;https://dockerproxy.com&quot;,
+    &quot;https://mirror.baidubce.com&quot;,
+    &quot;https://ccr.ccs.tencentyun.com&quot;
+  ]
+}
+</code></pre><pre><code class="language-bash">sudo systemctl daemon-reload
+sudo systemctl restart docker
+docker info | grep -A 5 &quot;Registry Mirrors&quot;
+</code></pre><blockquote><p>2024 年后很多公共镜像源已停服，以上仅供参考。企业环境建议自建 Harbor 或使用阿里云/腾讯云容器镜像服务。</p></blockquote><h3>1.7 Go module 代理</h3><pre><code class="language-bash">go env -w GOPROXY=https://goproxy.cn,direct
+go env -w GOSUMDB=sum.golang.google.cn
+</code></pre><h3>1.8 Maven 换源</h3><p>编辑 <code>~/.m2/settings.xml</code>：</p><pre><code class="language-xml">&lt;mirrors&gt;
+  &lt;mirror&gt;
+    &lt;id&gt;aliyun&lt;/id&gt;
+    &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+    &lt;url&gt;https://maven.aliyun.com/repository/public&lt;/url&gt;
+  &lt;/mirror&gt;
+&lt;/mirrors&gt;
+</code></pre><h3>1.9 换源后必做</h3><pre><code class="language-bash"># apt
+sudo apt update
+
+# yum / dnf
+sudo yum clean all &amp;&amp; sudo yum makecache
+sudo dnf clean all &amp;&amp; sudo dnf makecache
+
+# pacman
+sudo pacman -Syyu
+</code></pre><h2>二、文件与目录</h2><pre><code class="language-bash">pwd                               # 当前目录
+ls -alh                           # 详细列表
+cd -                              # 上一个目录
+mkdir -p a/b/c                    # 递归创建
+rm -rf &lt;dir&gt;                      # 递归删除（危险）
+cp -r &lt;src&gt; &lt;dst&gt;                 # 递归复制
+mv &lt;src&gt; &lt;dst&gt;                    # 移动 / 重命名
+ln -s &lt;target&gt; &lt;link&gt;             # 软链接
+touch &lt;file&gt;
+stat &lt;file&gt;
+file &lt;file&gt;
+</code></pre><h3>查找</h3><pre><code class="language-bash">find . -name &quot;*.log&quot;                          # 按名
+find . -type f -size +100M                    # &gt;100M
+find . -mtime -7                              # 7 天内
+find . -name &quot;*.tmp&quot; -delete                  # 找到删除
+find . -type f -exec chmod 644 {} \;          # 批量执行
+
+which &lt;cmd&gt;                       # 命令路径
+whereis &lt;cmd&gt;
+locate &lt;file&gt;                     # 快速（需 updatedb）
+</code></pre><h2>三、文本处理</h2><pre><code class="language-bash">cat / less / head -n 20 / tail -n 20
+tail -f &lt;file&gt;                    # 实时跟踪日志
+tail -F &lt;file&gt;                    # rotate 后仍能跟踪
+
+grep &quot;p&quot; &lt;file&gt;                   # 基本
+grep -r -n -i &quot;p&quot; .               # 递归+行号+忽略大小写
+grep -v &quot;p&quot; &lt;file&gt;                # 反选
+grep -E &quot;a|b&quot; &lt;file&gt;              # 扩展正则
+rg &quot;p&quot;                            # ripgrep（快，推荐）
+
+sed 's/old/new/g' &lt;file&gt;          # 替换到 stdout
+sed -i 's/old/new/g' &lt;file&gt;       # 原地替换
+sed -i.bak 's/old/new/g' &lt;file&gt;   # 带备份
+sed -n '10,20p' &lt;file&gt;            # 打印范围
+
+awk '{print $1}' &lt;file&gt;           # 第一列
+awk -F: '{print $1}' /etc/passwd
+awk '$3 &gt; 100 {print $1}' &lt;file&gt;
+
+cut -d: -f1 /etc/passwd
+sort &lt;file&gt;
+sort -u &lt;file&gt;                    # 去重
+uniq -c                           # 统计相邻（先 sort）
+wc -l &lt;file&gt;
+tr 'a-z' 'A-Z'
+</code></pre><h3>管道组合</h3><pre><code class="language-bash">awk '{print $1}' access.log | sort | uniq -c | sort -rn | head -10
+du -sh */ | sort -rh | head -10
+</code></pre><h2>四、权限</h2><pre><code class="language-bash">chmod 755 &lt;file&gt;
+chmod +x &lt;file&gt;
+chmod -R 644 &lt;dir&gt;
+chown user:group &lt;file&gt;
+chown -R user &lt;dir&gt;
+chgrp group &lt;file&gt;
+umask
+</code></pre><p>数字权限：</p><table><thead><tr><th>数字</th><th>权限</th></tr></thead><tbody><tr><td>4</td><td>r--</td></tr><tr><td>5</td><td>r-x</td></tr><tr><td>6</td><td>rw-</td></tr><tr><td>7</td><td>rwx</td></tr></tbody></table><p>例：<code>755</code> = <code>rwxr-xr-x</code>，<code>644</code> = <code>rw-r--r--</code>。</p><p>特殊权限：</p><pre><code class="language-bash">chmod u+s &lt;file&gt;                  # SUID
+chmod g+s &lt;dir&gt;                   # SGID
+chmod +t &lt;dir&gt;                    # Sticky（如 /tmp）
+</code></pre><h2>五、进程管理</h2><pre><code class="language-bash">ps aux
+ps aux | grep nginx
+pgrep -f &quot;pattern&quot;
+pidof &lt;name&gt;
+
+top                               # P 按 CPU，M 按内存
+htop                              # 更友好
+
+kill &lt;pid&gt;                        # SIGTERM
+kill -9 &lt;pid&gt;                     # 强制
+pkill -f &quot;pattern&quot;
+killall &lt;name&gt;
+
+nice -n 10 &lt;cmd&gt;
+renice -n 5 -p &lt;pid&gt;
+
+Ctrl+Z                            # 挂起
+bg / fg / jobs
+</code></pre><p>信号：</p><table><thead><tr><th>信号</th><th>编号</th><th>说明</th></tr></thead><tbody><tr><td>SIGHUP</td><td>1</td><td>挂起 / 重载</td></tr><tr><td>SIGINT</td><td>2</td><td>Ctrl+C</td></tr><tr><td>SIGKILL</td><td>9</td><td>强杀，不可捕获</td></tr><tr><td>SIGTERM</td><td>15</td><td>优雅退出（默认）</td></tr></tbody></table><h2>六、网络</h2><pre><code class="language-bash">ip addr                           # 查看 IP
+ip route
+ss -tunlp                         # 监听端口（推荐）
+netstat -tunlp                    # 老命令
+lsof -i :8080                     # 谁占端口
+
+ping &lt;host&gt;
+ping -c 4 &lt;host&gt;
+traceroute &lt;host&gt;
+mtr &lt;host&gt;                        # 持续 traceroute
+
+curl -I &lt;url&gt;                     # 只看头
+curl -v &lt;url&gt;                     # 详细
+curl -o file.zip &lt;url&gt;            # 下载
+curl -X POST -d '{}' -H &quot;Content-Type: application/json&quot; &lt;url&gt;
+
+wget &lt;url&gt;
+wget -c &lt;url&gt;                     # 断点续传
+wget -r -np &lt;url&gt;                 # 递归
+
+dig &lt;domain&gt;
+dig +short &lt;domain&gt;
+nslookup &lt;domain&gt;
+host &lt;domain&gt;
+</code></pre><h3>防火墙</h3><pre><code class="language-bash"># ufw（Ubuntu）
+ufw status
+ufw allow 22
+ufw allow 80/tcp
+ufw delete allow 80
+ufw enable
+
+# firewalld（CentOS）
+firewall-cmd --list-all
+firewall-cmd --add-port=8080/tcp --permanent
+firewall-cmd --reload
+
+# iptables
+iptables -L -n -v
+iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
+</code></pre><h2>七、磁盘与内存</h2><pre><code class="language-bash">df -h                             # 磁盘
+df -i                             # inode
+du -sh &lt;dir&gt;
+du -sh * | sort -rh | head -10
+
+free -h                           # 内存
+vmstat 1
+iostat -x 1                       # 需 sysstat
+
+lsblk
+fdisk -l
+mount /dev/sdb1 /mnt
+umount /mnt
+</code></pre><p>找大文件：</p><pre><code class="language-bash">find / -type f -size +1G 2&gt;/dev/null
+du -ah / | sort -rh | head -20
+</code></pre><h2>八、压缩与归档</h2><pre><code class="language-bash">tar -czvf a.tar.gz &lt;dir&gt;          # 打包
+tar -xzvf a.tar.gz                # 解包
+tar -tzvf a.tar.gz                # 查看内容
+tar -xzvf a.tar.gz -C /tmp
+
+zip -r a.zip &lt;dir&gt;
+unzip a.zip
+unzip -l a.zip
+unzip a.zip -d /tmp
+
+gzip &lt;file&gt;
+gunzip &lt;file&gt;.gz
+
+zstd &lt;file&gt;                       # 快速压缩
+xz -9 &lt;file&gt;                      # 高压缩
+</code></pre><h2>九、用户与权限</h2><pre><code class="language-bash">whoami
+id
+who
+w
+last
+
+useradd -m -s /bin/bash &lt;user&gt;
+passwd &lt;user&gt;
+usermod -aG sudo &lt;user&gt;
+userdel -r &lt;user&gt;
+
+groupadd &lt;group&gt;
+groups &lt;user&gt;
+
+su - &lt;user&gt;
+sudo &lt;cmd&gt;
+sudo -i                           # 进 root shell
+sudo -u &lt;user&gt; &lt;cmd&gt;
+</code></pre><p>sudoers：</p><pre><code class="language-bash">visudo
+</code></pre><pre><code>alice ALL=(ALL:ALL) ALL
+%sudo ALL=(ALL:ALL) ALL
+alice ALL=(ALL) NOPASSWD: ALL     # 免密
+</code></pre><h2>十、systemd</h2><pre><code class="language-bash">systemctl start/stop/restart/reload/status &lt;svc&gt;
+systemctl enable/disable &lt;svc&gt;
+systemctl is-active &lt;svc&gt;
+systemctl list-units --type=service --state=running
+systemctl daemon-reload
+
+journalctl -u &lt;svc&gt;
+journalctl -u &lt;svc&gt; -f
+journalctl -u &lt;svc&gt; --since &quot;1 hour ago&quot;
+journalctl -xe                    # 最近错误
+journalctl -b                     # 本次启动
+journalctl --disk-usage
+journalctl --vacuum-size=500M     # 清理
+</code></pre><p>unit 文件示例 <code>/etc/systemd/system/myapp.service</code>：</p><pre><code class="language-ini">[Unit]
+Description=My App
+After=network.target
+
+[Service]
+Type=simple
+User=appuser
+WorkingDirectory=/opt/myapp
+ExecStart=/usr/bin/node /opt/myapp/index.js
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+</code></pre><pre><code class="language-bash">sudo systemctl daemon-reload
+sudo systemctl enable --now myapp
+</code></pre><h2>十一、SSH</h2><pre><code class="language-bash">ssh user@host
+ssh -p 2222 user@host
+ssh -i ~/.ssh/id_rsa user@host
+
+ssh-keygen -t ed25519 -C &quot;comment&quot;
+ssh-copy-id user@host
+
+ssh -L 8080:localhost:80 user@host   # 本地转发
+ssh -R 8080:localhost:80 user@host   # 远程转发
+ssh -D 1080 user@host                # SOCKS 代理
+</code></pre><p><code>~/.ssh/config</code>：</p><pre><code>Host myserver
+    HostName 1.2.3.4
+    User alice
+    Port 2222
+    IdentityFile ~/.ssh/id_ed25519
+</code></pre><p>之后 <code>ssh myserver</code> 即可。</p><h3>传输</h3><pre><code class="language-bash">scp &lt;file&gt; user@host:/path/
+scp user@host:/path/&lt;file&gt; .
+scp -r &lt;dir&gt; user@host:/path/
+
+rsync -avz --progress &lt;src&gt; user@host:&lt;dst&gt;   # 增量同步
+rsync -avz --delete &lt;src&gt; user@host:&lt;dst&gt;
+</code></pre><h2>十二、软件包管理</h2><h3>apt（Debian / Ubuntu）</h3><pre><code class="language-bash">sudo apt update                   # 更新索引
+sudo apt upgrade                  # 升级
+sudo apt full-upgrade             # 含依赖变化
+sudo apt install &lt;pkg&gt;
+sudo apt remove &lt;pkg&gt;             # 保留配置
+sudo apt purge &lt;pkg&gt;              # 含配置
+sudo apt autoremove               # 清理无用依赖
+sudo apt search &lt;kw&gt;
+sudo apt show &lt;pkg&gt;
+apt list --installed
+
+sudo dpkg -i &lt;pkg&gt;.deb
+dpkg -l | grep &lt;pkg&gt;
+</code></pre><h3>yum / dnf（RHEL / CentOS）</h3><pre><code class="language-bash">sudo yum install &lt;pkg&gt;
+sudo yum remove &lt;pkg&gt;
+sudo yum update
+sudo yum search &lt;kw&gt;
+sudo yum info &lt;pkg&gt;
+yum list installed
+yum clean all &amp;&amp; yum makecache
+
+sudo dnf install &lt;pkg&gt;            # 新一代
+dnf upgrade
+dnf clean all
+
+sudo rpm -ivh &lt;pkg&gt;.rpm
+rpm -qa | grep &lt;pkg&gt;
+sudo rpm -e &lt;pkg&gt;
+</code></pre><h3>pacman（Arch）</h3><pre><code class="language-bash">sudo pacman -Syu                  # 同步并升级
+sudo pacman -S &lt;pkg&gt;
+sudo pacman -Rns &lt;pkg&gt;            # 卸载含依赖配置
+pacman -Ss &lt;kw&gt;
+pacman -Qs &lt;pkg&gt;
+</code></pre><h2>十三、日志</h2><pre><code class="language-bash">journalctl -xe
+journalctl --since today
+journalctl -p err                 # 只错误
+
+tail -f /var/log/syslog           # Debian/Ubuntu
+tail -f /var/log/messages         # RHEL/CentOS
+tail -f /var/log/auth.log         # 认证
+tail -f /var/log/nginx/access.log
+tail -f /var/log/nginx/error.log
+
+dmesg
+dmesg -T                          # 人类可读时间
+dmesg | tail -20
+</code></pre><h2>十四、环境变量</h2><pre><code class="language-bash">env
+echo $PATH
+export FOO=bar
+unset FOO
+
+# 永久
+~/.bashrc                         # bash 交互式
+~/.bash_profile                   # bash 登录
+~/.profile                        # 通用
+/etc/profile                      # 全局
+
+source ~/.bashrc
+
+export PATH=&quot;$HOME/.local/bin:$PATH&quot;      # 前置
+export PATH=&quot;$PATH:/opt/tools/bin&quot;        # 后置
+</code></pre><h2>十五、性能排查</h2><pre><code class="language-bash">uptime                            # 负载
+top                               # 实时
+free -h                           # 内存
+df -h / df -i                     # 磁盘 / inode
+iostat -x 1                       # IO
+sar -u 1 5                        # CPU 历史
+</code></pre><p>通用排查顺序：</p><ol><li><code>uptime</code> + <code>top</code>：负载高不高、哪个进程占用。</li><li><code>free -h</code>：内存是否耗尽、是否 swap。</li><li><code>df -h</code> + <code>df -i</code>：空间 / inode 是否满。</li><li><code>iostat -x 1</code>：IO 是否瓶颈。</li><li><code>ss -s</code>：连接数是否异常。</li></ol><h3>定位细节</h3><pre><code class="language-bash">lsof -p &lt;pid&gt;                     # 进程打开的文件
+lsof -i :8080                     # 端口占用
+lsof /var/log/syslog
+
+top -H -p &lt;pid&gt;                   # 线程
+ps -T -p &lt;pid&gt;
+
+tcpdump -i eth0 -n
+tcpdump -i eth0 port 80
+tcpdump -i eth0 host 1.2.3.4
+tcpdump -i eth0 -w cap.pcap       # 存盘（Wireshark 打开）
+</code></pre><h2>十六、定时任务</h2><pre><code class="language-bash">crontab -e                        # 编辑
+crontab -l                        # 列出
+crontab -r                        # 删除
+</code></pre><p>格式：</p><pre><code>* * * * * &lt;command&gt;
+│ │ │ │ │
+│ │ │ │ └─ 星期（0-7，0/7 都是周日）
+│ │ │ └─── 月（1-12）
+│ │ └───── 日（1-31）
+│ └─────── 时（0-23）
+└───────── 分（0-59）
+</code></pre><p>例：</p><pre><code>0 3 * * * /opt/backup.sh              # 每天 3:00
+*/5 * * * * /usr/bin/check.sh         # 每 5 分钟
+0 9-18 * * 1-5 /opt/work.sh           # 工作日 9-18 整点
+</code></pre><p>注意事项：</p><ul><li>PATH 与登录 shell 不同，用绝对路径。</li><li>输出默认发邮件，重定向：<code>&gt;&gt; /var/log/job.log 2&gt;&amp;1</code>。</li><li>秒级任务用 systemd timer。</li></ul><h2>十七、实用技巧</h2><pre><code class="language-bash">history
+history | grep &lt;kw&gt;
+Ctrl+R                            # 反向搜索历史
+!!                                # 上一条
+!$                                # 上一条最后参数
+!123                              # 历史编号 123
+
+pushd /path / popd / dirs -v
+
+nohup &lt;cmd&gt; &gt; out.log 2&gt;&amp;1 &amp;
+disown
+
+openssl rand -base64 16           # 随机密码
+uuidgen
+md5sum &lt;file&gt;
+sha256sum &lt;file&gt;
+xxd &lt;file&gt;
+time &lt;cmd&gt;
+
+python3 -m http.server 8000       # 快速 HTTP 服务
+</code></pre><h3>命令组合</h3><pre><code class="language-bash">cmd1 &amp;&amp; cmd2                      # 成功才继续
+cmd1 || cmd2                      # 失败才继续
+cmd1 ; cmd2                       # 顺序
+cmd1 &amp;                            # 后台
+(cmd1; cmd2)                      # 子 shell
+</code></pre><h3>变量</h3><pre><code class="language-bash">name=&quot;world&quot;
+echo &quot;$name&quot;
+echo &quot;${name}&quot;
+echo &quot;$(date)&quot;
+echo '$name'                      # 不替换
+
+: ${VAR:=default}                 # 默认值
+
+str=&quot;hello.txt&quot;
+
+
+echo ${str%.txt}                  # hello
+echo ${str#hello.}                # txt
+echo ${str/txt/md}                # hello.md
+echo ${#str}                      # 9
+
+
+</code></pre><h2>十八、快捷键</h2><table><thead><tr><th>快捷键</th><th>作用</th></tr></thead><tbody><tr><td><code>Ctrl+C</code></td><td>中断</td></tr><tr><td><code>Ctrl+D</code></td><td>退出 shell</td></tr><tr><td><code>Ctrl+L</code></td><td>清屏</td></tr><tr><td><code>Ctrl+A</code> / <code>Ctrl+E</code></td><td>行首 / 行尾</td></tr><tr><td><code>Ctrl+U</code> / <code>Ctrl+K</code></td><td>删光标前 / 后</td></tr><tr><td><code>Ctrl+W</code></td><td>删前一个单词</td></tr><tr><td><code>Ctrl+R</code></td><td>搜索历史</td></tr><tr><td><code>Ctrl+Z</code></td><td>挂起</td></tr><tr><td><code>Tab</code> / <code>Tab Tab</code></td><td>补全 / 列候选</td></tr></tbody></table><hr><h2>参考</h2><ul><li>清华镜像站：https://mirrors.tuna.tsinghua.edu.cn/</li><li>中科大镜像站：https://mirrors.ustc.edu.cn/</li><li>阿里云镜像站：https://developer.aliyun.com/mirror/</li><li>npmmirror：https://npmmirror.com/</li><li>man 手册：<code>man &lt;command&gt;</code></li><li>tldr：<code>tldr &lt;command&gt;</code>（需安装）</li></ul></div></article></div></main><footer class="site-footer"><div class="container footer-inner" style="max-width: 900px;"><div class="footer-text"><p class="footer-links"><a href="/">网站首页</a> <span class="sep">|</span> <a href="/sitemap.xml">网站地图</a> <span class="sep">|</span> <a href="/feed.xml" target="_blank">RSS订阅</a> <span class="sep">|</span> <a href="http://console.undz.cn/console-panel/feedback-center" target="_blank" rel="noopener">我要反馈</a></p><p class="footer-links"><a href="/contact/">联系我</a> <span class="sep">|</span> <a href="/privacy/">隐私政策</a> <span class="sep">|</span> <a href="/cookies/">Cookie 政策</a> <span class="sep">|</span> <a href="/terms/">服务条款</a> <span class="sep">|</span> <a href="/about/">关于本站</a></p><p>主办单位：韵典综合平台运营中心</p><p>互联网违法不良信息举报电话：0712-5253195 互联网违法不良信息举报邮箱：aeyundian@163.com</p><p>亲爱的市民朋友，上海警方反诈劝阻电话“962110”系专门针对避免您财产被骗受损而设，请您一旦收到来电，立即接听</p><p><a href="http://icp.gov.moe/?keyword=20263044" target="_blank" rel="noopener" style="color: #aaa;">萌ICP备20263044号</a> 技术支持：韵典</p><p>Copyright © 2026 AeYunDian. All Rights Reserved.</p></div><div class="footer-badges"><a href="http://www.shjbzx.cn/" target="_blank" rel="noopener"><img src="/assets/images/footer-shfb.png" alt="上海市互联网违法和不良信息举报中心"> </a><a href="http://www.12377.cn/" target="_blank" rel="noopener"><img src="/assets/images/footer-jubao.png" alt="网上有害信息举报专区"> </a><img src="/assets/images/footer-962110.png" alt="962110 反诈劝阻电话"></div></div></footer><script src="/assets/js/main.js"></script></body></html>

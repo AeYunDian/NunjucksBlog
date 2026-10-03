@@ -1,0 +1,24 @@
+.breadcrumb {
+  margin: 16px 0;
+  font-size: 13px;
+  color: #888;
+}
+.breadcrumb__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.breadcrumb__item {
+  display: inline;
+}
+.breadcrumb__item + .breadcrumb__item::before {
+  content: " / ";
+  color: #ccc;
+  margin: 0 6px;
+}
+.breadcrumb__item a {
+  color: #888;
+}
+.breadcrumb__item a:hover {
+  color: #0066cc;
+}

@@ -1,0 +1,33 @@
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: #eef3f8;
+  color: #0066cc;
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 0 4px 4px 0;
+  white-space: nowrap;
+}
+.tag:hover {
+  text-decoration: none;
+  background: #dde8f2;
+}
+.tag--sm {
+  font-size: 11px;
+  padding: 1px 6px;
+}
+.tag--lg {
+  font-size: 14px;
+  padding: 4px 12px;
+}
+.tag__count {
+  color: #888;
+  font-size: 11px;
+  margin-left: 2px;
+}
+
+/* 标签组 */
+.tag-list {
+  margin: 8px 0;
+}

@@ -1,0 +1,42 @@
+.card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+.card__image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.card__body {
+  padding: 16px;
+}
+.card__title {
+  margin: 0 0 8px;
+  font-size: 18px;
+  line-height: 1.4;
+}
+.card__title a {
+  color: #222;
+}
+.card__title a:hover {
+  color: #0066cc;
+}
+.card__subtitle {
+  color: #888;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.card__content > :first-child {
+  margin-top: 0;
+}
+.card__content > :last-child {
+  margin-bottom: 0;
+}
+.card__footer {
+  padding: 12px 16px;
+  background: #fafafa;
+  border-top: 1px solid #eee;
+}

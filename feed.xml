@@ -1,0 +1,1982 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>韵典综合平台</title>
+  <subtitle>一个用 Eleventy 搭建的兼容性博客</subtitle>
+  <link href="https://undz.cn/feed.xml" rel="self"/>
+  <link href="https://undz.cn"/>
+  <updated>2026-10-03T00:00:00Z</updated>
+  <id>https://undz.cn/</id>
+  <author>
+    <name>AeYunDian</name>
+  </author>
+  <generator>Eleventy</generator>
+  <entry>
+    <title>第一篇文章</title>
+    <link href="https://undz.cn/posts/hello-world/"/>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <id>https://undz.cn/posts/hello-world/</id>
+    <content type="html">&lt;p&gt;这是用 Markdown 写的博客内容。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>关于本站对照国办发〔2017〕47号文开展设计规范调整的说明</title>
+    <link href="https://undz.cn/posts/site-design-compliance-2026-09-16/"/>
+    <updated>2026-09-16T00:00:00Z</updated>
+    <id>https://undz.cn/posts/site-design-compliance-2026-09-16/</id>
+    <content type="html">&lt;p&gt;为进一步规范本站页面展现形式，提升信息服务质量，根据《政府网站发展指引》（国办发〔2017〕47号）及其附件《网页设计规范》有关要求，结合《政府网站与政务新媒体检查指标》（国办秘函〔2019〕19号）有关考核标准，本站于2026年9月对整体设计进行系统性调整。现将调整依据及主要内容说明如下。&lt;/p&gt;
+&lt;h2&gt;一、调整依据&lt;/h2&gt;
+&lt;p&gt;（一）《政府网站发展指引》（国办发〔2017〕47号）。该文件由国务院办公厅印发，是全国政府网站建设的基本规范，其中附件《网页设计规范》对网站的展现布局、地址链接、网页标签等提出了明确要求。&lt;/p&gt;
+&lt;p&gt;（二）《政府网站与政务新媒体检查指标》（国办秘函〔2019〕19号）。该文件明确了政府网站考核的单项否决指标和扣分指标，其中涉及页面加载时长、栏目更新情况、内容发布规范等具体要求。&lt;/p&gt;
+&lt;p&gt;（三）《政府网站集约化试点工作方案》（国办函〔2018〕71号）。该方案要求实现&amp;quot;统一标准体系、统一技术平台、统一安全防护、统一运维监管&amp;quot;，对站点技术架构和设计模式具有指导意义。&lt;/p&gt;
+&lt;p&gt;（四）山西省地方标准《政府网站集约化平台 网页设计规范》（DB14/T 2544—2022）等行业性、地方性标准，作为本站在具体设计实施中的参考依据。&lt;/p&gt;
+&lt;h2&gt;二、调整主要内容&lt;/h2&gt;
+&lt;p&gt;（一）&lt;strong&gt;规范色调使用&lt;/strong&gt;。规范要求&amp;quot;确定1种主色调，总色调不宜超过3种&amp;quot;。本站原设计围绕蓝色系展开了多个派生色，色值数量偏多。经调整，确立以深蓝（#015293）为主色调、白色为辅助色、红色（#e4393c）为强调色的三色体系，其余派生色统一收归为主色调的透明度变体，不再作为独立色值维护。&lt;/p&gt;
+&lt;p&gt;（二）&lt;strong&gt;统一字体字号&lt;/strong&gt;。规范要求&amp;quot;同一类别的栏目和信息使用同一模板，统一字体、字号、行间距和布局&amp;quot;。经排查，原设计在 &lt;code&gt;GovPanel&lt;/code&gt; 标题、&lt;code&gt;markdown.css&lt;/code&gt; 的 &lt;code&gt;h2&lt;/code&gt;、&lt;code&gt;DocLayout&lt;/code&gt; 的 &lt;code&gt;h2&lt;/code&gt; 等位置存在字号不一致问题。本次调整将上述位置的字号统一为 &lt;code&gt;--gov-fs-lg&lt;/code&gt;，并清理了 &lt;code&gt;SiteFooter&lt;/code&gt;、&lt;code&gt;DocLayout&lt;/code&gt; 中重复定义的样式规则。&lt;/p&gt;
+&lt;p&gt;（三）&lt;strong&gt;优化加载性能&lt;/strong&gt;。规范要求&amp;quot;页面加载时长不宜超过3秒&amp;quot;，检查指标将&amp;quot;网站打不开次数累计占比超过5%&amp;quot;列为单项否决。本站原内容层采用构建时全量内联方式，随内容数量增长将影响首屏体积。本次调整改为按需异步加载，配合空闲时预加载后续路由组件的方式，兼顾首屏速度与导航体验。&lt;/p&gt;
+&lt;p&gt;（四）&lt;strong&gt;完善内容展示&lt;/strong&gt;。规范要求&amp;quot;网站内容要清晰显示发布时间，时间格式为YYYY—MM—DD HH:MM&amp;quot;。本站原列表项仅显示日期，本次调整在内容层增加 &lt;code&gt;time&lt;/code&gt; 字段，列表与详情页均按规范格式显示完整时间。&lt;/p&gt;
+&lt;p&gt;（五）&lt;strong&gt;健全栏目管理&lt;/strong&gt;。规范要求&amp;quot;栏目设置应科学合理，避免出现空白栏目&amp;quot;。本次调整新增&amp;quot;资源&amp;quot;栏目，统一收录开发工具、组件库等资源信息，并对文章列表、资源列表、搜索页的展示规则进行一致性梳理，明确各栏目数据来源，避免出现重复或空白栏目。&lt;/p&gt;
+&lt;p&gt;（六）&lt;strong&gt;扩展检索范围&lt;/strong&gt;。在原站内搜索仅覆盖文章的基础上，新增资源检索，统一为 &lt;code&gt;/search&lt;/code&gt; 页面，支持全部、文章、资源三类筛选，并可分享、可回退、可刷新，符合规范中&amp;quot;提供信息检索功能&amp;quot;的相关要求。&lt;/p&gt;
+&lt;h2&gt;三、调整后效果&lt;/h2&gt;
+&lt;p&gt;（一）&lt;strong&gt;色调统一&lt;/strong&gt;。全站主色调、辅助色、强调色使用规范，页面整体观感协调一致。&lt;/p&gt;
+&lt;p&gt;（二）&lt;strong&gt;字号规范&lt;/strong&gt;。同级标题字号一致，正文、辅助信息、数字等各级字号层级分明，符合用户阅读习惯。&lt;/p&gt;
+&lt;p&gt;（三）&lt;strong&gt;加载优化&lt;/strong&gt;。首屏体积得到控制，配合路由预加载，主流网络环境下页面加载时长稳定控制在规范要求以内。&lt;/p&gt;
+&lt;p&gt;（四）&lt;strong&gt;内容完整&lt;/strong&gt;。发布时间、信息来源、分类标签等要素展示完整，符合规范对内容展示的要求。&lt;/p&gt;
+&lt;p&gt;（五）&lt;strong&gt;结构清晰&lt;/strong&gt;。头部标识区、中部内容区、底部功能区划分明确，底部功能区列明网站名称、备案编号、联系方式等信息。&lt;/p&gt;
+&lt;h2&gt;四、后续工作&lt;/h2&gt;
+&lt;p&gt;（一）持续跟踪国家关于政府网站建设的相关文件更新情况，及时对照调整本站设计。&lt;/p&gt;
+&lt;p&gt;（二）定期对站点进行自查，重点检查栏目更新、内容发布、页面性能等考核指标涉及的内容。&lt;/p&gt;
+&lt;p&gt;（三）结合用户反馈，进一步优化站内检索、无障碍访问、移动端适配等体验。&lt;/p&gt;
+&lt;h2&gt;五、说明&lt;/h2&gt;
+&lt;p&gt;本站为个人技术项目，非政府网站，本站视觉设计参照政府网站规范进行，旨在为用户提供规范、清晰、易读的信息服务。所有内容仅代表个人观点，与任何机构无关。&lt;/p&gt;
+&lt;p&gt;特此说明。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;附：主要参考文件&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.gov.cn/zhengce/content/2017-06/08/content_5200760.htm&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;国务院办公厅关于印发政府网站发展指引的通知（国办发〔2017〕47号）&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.gov.cn/zhengce/content/2019-04/18/content_5384134.htm&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;国务院办公厅秘书局关于印发政府网站与政务新媒体检查指标、监管工作年度考核指标的通知（国办秘函〔2019〕19号）&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.gov.cn/gongbao/content/2018/content_5343741.htm&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;国务院办公厅关于印发《政府网站集约化试点工作方案》的通知（国办函〔2018〕71号）&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ba.sacinfo.org.cn/stdDetail/f0d57c3b3c953827ce262a46b434d20685261c7714f6a0060ce1c7467868eae2&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《政府网站集约化平台 网页设计规范》（DB14/T 2544—2022）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;简要说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;国办发〔2017〕47号&lt;/strong&gt;：国务院办公厅2017年5月15日成文，6月8日发布，附件含《网页设计规范》。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;国办秘函〔2019〕19号&lt;/strong&gt;：国务院办公厅秘书局2019年4月1日成文，4月18日发布，含单项否决指标和扣分、加分指标。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;国办函〔2018〕71号&lt;/strong&gt;：国务院办公厅2018年10月27日成文，11月9日发布，要求“统一标准体系、统一技术平台”等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DB14/T 2544—2022&lt;/strong&gt;：山西省地方标准，2022年9月30日发布，12月30日实施，技术归口为山西省电子政务信息标准化技术委员会。&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>关于在 Markdown 中嵌入 Vue 组件的说明</title>
+    <link href="https://undz.cn/posts/markdown-vue-usage-2026-09-18/"/>
+    <updated>2026-09-18T00:00:00Z</updated>
+    <id>https://undz.cn/posts/markdown-vue-usage-2026-09-18/</id>
+    <content type="html">&lt;blockquote&gt;
+&lt;p&gt;这篇文章已经过时，此描述的内容与现有架构不相同&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;script setup=&quot;&quot;&gt;
+import { ref } from &#39;vue&#39;
+import GovPanel from &#39;@/index/components/common/GovPanel.vue&#39;
+import GovButton from &#39;@/index/components/common/GovButton.vue&#39;
+import { showAlert } from &#39;@/index/components/common/dialog&#39;
+
+const count = ref(0)
+const showTip = ref(true)
+
+function increment() {
+    count.value += 1
+}
+
+function handleAlert() {
+    showAlert(&#39;来自文章内的事件&#39;)
+}
+&lt;/script&gt;
+&lt;p&gt;本站的 &lt;code&gt;.md&lt;/code&gt; 文件由 &lt;code&gt;unplugin-vue-markdown&lt;/code&gt; 在构建时编译为 Vue 单文件组件。正文中的 Vue 组件标签会被当作模板的一部分解析，&lt;code&gt;&amp;lt;script setup&amp;gt;&lt;/code&gt; 中的逻辑对正文完全可见。现将使用方法说明如下。&lt;/p&gt;
+&lt;h2&gt;一、基本用法&lt;/h2&gt;
+&lt;p&gt;在 frontmatter 之后、正文之前书写 &lt;code&gt;&amp;lt;script setup&amp;gt;&lt;/code&gt;，导入所需组件与响应式 API 即可。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-vue&quot;&gt;&amp;lt;script setup&amp;gt;
+import { ref } from &amp;quot;vue&amp;quot;;
+import GovButton from &amp;quot;@/index/components/common/GovButton.vue&amp;quot;;
+
+const count = ref(0);
+&amp;lt;/script&amp;gt;
+
+正文中可以像这样使用：
+&amp;lt;GovButton variant=&amp;quot;primary&amp;quot;&amp;gt;按钮&amp;lt;/GovButton&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;组件标签与 Markdown 语法可以混用。以下为实际渲染效果：&lt;/p&gt;
+&lt;GovPanel title=&quot;示例一：响应式计数器&quot;&gt;
+  &lt;p&gt;当前计数：&lt;b&gt;&lt;/b&gt;&lt;/p&gt;
+  &lt;GovButton variant=&quot;primary&quot; @click=&quot;increment&quot;&gt;
+    &lt;MyIcon icon=&quot;plus&quot;&gt;&lt;/MyIcon&gt;&amp;nbsp;增加
+  &lt;/GovButton&gt; &lt;br /&gt;&lt;br /&gt;
+  &lt;GovButton variant=&quot;default&quot; @click=&quot;count = 0&quot;&gt;重置&lt;/GovButton&gt;
+&lt;/GovPanel&gt;
+&lt;div class=&quot;md-alert md-alert--tip&quot;&gt;
+  文章内的 &lt;code&gt;ref&lt;/code&gt; 是独立的响应式状态，作用域限于当前文章的组件实例，不会与其他文章或站点状态相互影响。
+&lt;/div&gt;
+&lt;h2&gt;二、条件渲染与列表渲染&lt;/h2&gt;
+&lt;p&gt;Vue 的 &lt;code&gt;v-if&lt;/code&gt;、&lt;code&gt;v-for&lt;/code&gt; 等指令在正文中同样有效。&lt;/p&gt;
+&lt;GovPanel title=&quot;示例二：条件渲染&quot;&gt;
+  &lt;GovButton variant=&quot;primary&quot; @click=&quot;showTip = !showTip&quot;&gt;
+    &lt;MyIcon icon=&quot;eye&quot;&gt;&lt;/MyIcon&gt;&amp;nbsp;切换显示
+  &lt;/GovButton&gt;
+  &lt;p v-if=&quot;showTip&quot; style=&quot;margin-top: 12px;&quot;&gt;
+    这段文字由 &lt;code&gt;v-if&lt;/code&gt; 控制，当前可见。
+  &lt;/p&gt;
+  &lt;p v-else=&quot;&quot; style=&quot;margin-top: 12px; color: #999;&quot;&gt;
+    这段文字由 &lt;code&gt;v-else&lt;/code&gt; 控制，当前显示的是它。
+  &lt;/p&gt;
+&lt;/GovPanel&gt;
+&lt;p&gt;下面的列表由 &lt;code&gt;v-for&lt;/code&gt; 渲染，数据来自文章内的 &lt;code&gt;&amp;lt;script setup&amp;gt;&lt;/code&gt;：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li v-for=&quot;i in 3&quot; :key=&quot;i&quot;&gt;第  项，共 3 项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;三、嵌入组件&lt;/h2&gt;
+&lt;p&gt;本站提供的政务组件均可在正文中直接使用。&lt;/p&gt;
+&lt;GovPanel title=&quot;示例三：组件组合&quot; tone=&quot;red&quot;&gt;
+  &lt;p&gt;以下按钮均为 &lt;code&gt;GovButton&lt;/code&gt; 组件的不同 &lt;code&gt;variant&lt;/code&gt;：&lt;/p&gt;
+  &lt;div style=&quot;display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px;&quot;&gt;
+    &lt;GovButton variant=&quot;primary&quot;&gt;主要操作&lt;/GovButton&gt;
+    &lt;GovButton variant=&quot;danger&quot;&gt;危险操作&lt;/GovButton&gt;
+    &lt;GovButton variant=&quot;default&quot;&gt;次要操作&lt;/GovButton&gt;
+  &lt;/div&gt;
+&lt;/GovPanel&gt;
+&lt;GovPanel title=&quot;示例四：图标使用&quot;&gt;
+  &lt;p&gt;
+    &lt;MyIcon icon=&quot;download&quot;&gt;&lt;/MyIcon&gt; 下载
+    &lt;MyIcon icon=&quot;web&quot;&gt;&lt;/MyIcon&gt; 官网
+    &lt;MyIcon icon=&quot;code-tags&quot;&gt;&lt;/MyIcon&gt; 源码
+    &lt;MyIcon icon=&quot;file-document-outline&quot;&gt;&lt;/MyIcon&gt; 文档
+  &lt;/p&gt;
+&lt;/GovPanel&gt;
+&lt;h2&gt;四、事件绑定&lt;/h2&gt;
+&lt;p&gt;组件上的 &lt;code&gt;@click&lt;/code&gt; 等事件可以直接绑定到文章内的函数。&lt;/p&gt;
+&lt;GovPanel title=&quot;示例五：事件处理&quot;&gt;
+  &lt;GovButton variant=&quot;primary&quot; @click=&quot;handleAlert&quot;&gt;
+    点击弹出提示
+  &lt;/GovButton&gt;
+&lt;/GovPanel&gt;
+&lt;p&gt;实际写法如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-vue&quot;&gt;&amp;lt;script setup&amp;gt;
+function handleAlert() {
+  alert(&amp;quot;来自文章内的事件&amp;quot;);
+}
+&amp;lt;/script&amp;gt;
+
+&amp;lt;GovButton variant=&amp;quot;primary&amp;quot; @click=&amp;quot;handleAlert&amp;quot;&amp;gt;
+  点击弹出提示
+&amp;lt;/GovButton&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;五、注意事项&lt;/h2&gt;
+&lt;p&gt;（一）&lt;strong&gt;组件需要显式导入&lt;/strong&gt;。方案 B 下文章是独立的 Vue 组件，组件不会自动注册。必须在 &lt;code&gt;&amp;lt;script setup&amp;gt;&lt;/code&gt; 中 &lt;code&gt;import&lt;/code&gt;，不能依赖全局注册。&lt;/p&gt;
+&lt;p&gt;（二）&lt;strong&gt;自定义组件请显式闭合&lt;/strong&gt;。markdown-it 在处理块级 HTML 时，自闭合的自定义组件标签（&lt;code&gt;&amp;lt;MyIcon ... /&amp;gt;&lt;/code&gt;）容易丢失自闭合标志，导致 Vue 编译器报 &lt;code&gt;Element is missing end tag&lt;/code&gt;。建议所有自定义组件都写成 &lt;code&gt;&amp;lt;MyIcon ...&amp;gt;&amp;lt;/MyIcon&amp;gt;&lt;/code&gt;，HTML void 元素（&lt;code&gt;&amp;lt;br&amp;gt;&lt;/code&gt;、&lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt;）不受影响。&lt;/p&gt;
+&lt;p&gt;（三）&lt;strong&gt;旧版容器语法不再生效&lt;/strong&gt;。本站早期的 &lt;code&gt;::: tip&lt;/code&gt; / &lt;code&gt;::: warning&lt;/code&gt; / &lt;code&gt;::: tabs&lt;/code&gt; 等自定义容器已在迁移中移除，改用原生 HTML 类表达，例如 &lt;code&gt;&amp;lt;div class=&amp;quot;md-alert md-alert--tip&amp;quot;&amp;gt;…&amp;lt;/div&amp;gt;&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;（四）&lt;strong&gt;构建时编译&lt;/strong&gt;。正文中的组件在构建阶段编译为 render function，而非运行时解析。若组件名拼写错误，会在构建时或开发时控制台提示，而不会静默忽略。&lt;/p&gt;
+&lt;p&gt;（五）&lt;strong&gt;样式作用域&lt;/strong&gt;。文章内联写的 &lt;code&gt;style&lt;/code&gt; 属性作用于当前元素，Markdown 渲染出的标签样式由 &lt;code&gt;markdown.css&lt;/code&gt; 统一控制。若需要局部样式，建议在文章内使用内联 &lt;code&gt;style&lt;/code&gt;，或封装为独立组件。&lt;/p&gt;
+&lt;p&gt;（六）&lt;strong&gt;不要写 &lt;code&gt;&amp;lt;style&amp;gt;&lt;/code&gt; 块&lt;/strong&gt;。本站暂不支持在 Markdown 中书写 &lt;code&gt;&amp;lt;style&amp;gt;&lt;/code&gt;，会与 SFC 编译流程冲突。需要样式时优先使用已有 CSS 变量或内联样式。&lt;/p&gt;
+&lt;h2&gt;六、小结&lt;/h2&gt;
+&lt;p&gt;Markdown 与 Vue 的融合让静态内容具备了组件化的能力。文章不再只是纯文本，而是可以拥有响应式状态、可复用组件与事件交互的完整页面单元。这使得一些原本需要额外页面承载的功能，可以直接在文章内表达。&lt;/p&gt;
+&lt;p&gt;如需查看本站组件清单，可参阅&lt;a href=&quot;https://undz.cn/articles/site-design-compliance-2017-47&quot;&gt;《关于本站对照国办发〔2017〕47号文开展设计规范调整的说明》&lt;/a&gt;。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Node包管理器备忘录</title>
+    <link href="https://undz.cn/posts/node-package-managers-memo-2026-09-25/"/>
+    <updated>2026-09-25T00:00:00Z</updated>
+    <id>https://undz.cn/posts/node-package-managers-memo-2026-09-25/</id>
+    <content type="html">&lt;p&gt;日常高频命令 + 国内换源方案。命令对照无差异时只写 npm。&lt;/p&gt;
+&lt;h2&gt;一、换源&lt;/h2&gt;
+&lt;h3&gt;1.1 一键切换：nrm&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;npm install -g nrm
+
+nrm ls                            # 列出所有源
+nrm use taobao                    # 切到淘宝源
+nrm use npm                       # 切回官方
+nrm current                       # 查看当前
+nrm test                          # 测速
+nrm add company http://npm.company.com/    # 加私有源
+nrm del company
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;1.2 手动切换&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# npm
+npm config set registry https://registry.npmmirror.com
+npm config get registry
+npm config delete registry        # 恢复默认
+
+# yarn v1
+yarn config set registry https://registry.npmmirror.com
+yarn config get registry
+yarn config delete registry
+
+# pnpm
+pnpm config set registry https://registry.npmmirror.com
+pnpm config get registry
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;1.3 常用镜像源&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;源&lt;/th&gt;
+&lt;th&gt;URL&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;官方&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;https://registry.npmjs.org&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;淘宝 / npmmirror（推荐）&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;https://registry.npmmirror.com&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;腾讯云&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;https://mirrors.cloud.tencent.com/npm/&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;华为云&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;https://mirrors.huaweicloud.com/repository/npm/&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;cnpmjs&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;https://registry.cnpmjs.org&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;淘宝源域名 &lt;code&gt;registry.npm.taobao.org&lt;/code&gt; 已废弃，新域名为 &lt;code&gt;registry.npmmirror.com&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;1.4 一次性使用（不改配置）&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;npm install --registry=https://registry.npmmirror.com
+yarn add &amp;lt;pkg&amp;gt; --registry=https://registry.npmmirror.com
+pnpm add &amp;lt;pkg&amp;gt; --registry=https://registry.npmmirror.com
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;1.5 项目级 .npmrc&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;只在当前项目生效&lt;/strong&gt;，适合团队统一配置。放项目根目录：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ini&quot;&gt;# .npmrc
+registry=https://registry.npmmirror.com
+strict-ssl=true
+save-exact=true
+engine-strict=true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;提交到 Git&lt;/strong&gt;，让所有成员和 CI 用同一套源。&lt;/p&gt;
+&lt;h3&gt;1.6 私有源 + 公共源混用（scoped registry）&lt;/h3&gt;
+&lt;p&gt;公司包放私有源，公共包走镜像：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ini&quot;&gt;# .npmrc
+registry=https://registry.npmmirror.com
+@company:registry=https://npm.company.com/
+//npm.company.com/:_authToken=${NPM_TOKEN}
+//registry.npmmirror.com/:always-auth=false
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;@company&lt;/code&gt; 开头的包（如 &lt;code&gt;@company/ui&lt;/code&gt;）走私有源，其余走淘宝源。&lt;/p&gt;
+&lt;h3&gt;1.7 认证 Token 配置&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ini&quot;&gt;# ~/.npmrc
+//registry.npmjs.org/:_authToken=npm_xxxxxxxxxxxx
+//npm.pkg.github.com/:_authToken=ghp_xxxxxxxxxxxx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;或用环境变量（推荐 CI 使用）：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;export NPM_TOKEN=xxxxx
+# .npmrc 里写
+//registry.npmjs.org/:_authToken=${NPM_TOKEN}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;1.8 换源失败的排查&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# 1. 确认当前源
+npm config get registry
+
+# 2. 直接 curl 试
+curl -I https://registry.npmmirror.com/vue
+
+# 3. 清除 npm 缓存
+npm cache clean --force
+
+# 4. 检查是否有多个 .npmrc 冲突
+npm config list --show-origin
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;二、其他 binary 镜像（换源只改 npm 包，不改 binary）&lt;/h2&gt;
+&lt;p&gt;很多包在 &lt;code&gt;postinstall&lt;/code&gt; 阶段会下载&lt;strong&gt;非 npm 的二进制&lt;/strong&gt;，换 registry 没用。这些要单独配：&lt;/p&gt;
+&lt;h3&gt;2.1 Node 版本管理器镜像&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;nvm&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;export NVM_NODEJS_ORG_MIRROR=https://npmmirror.com/mirrors/node
+nvm install 20
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;写入 &lt;code&gt;~/.bashrc&lt;/code&gt; 或 &lt;code&gt;~/.zshrc&lt;/code&gt; 永久生效。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;fnm&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;export FNM_NODE_DIST_MIRROR=https://npmmirror.com/mirrors/node
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;2.2 Electron&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# 项目 .npmrc
+electron_mirror=https://npmmirror.com/mirrors/electron/
+electron_builder_binaries_mirror=https://npmmirror.com/mirrors/electron-builder-binaries/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;2.3 Puppeteer / Playwright&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# .npmrc 或环境变量
+puppeteer_download_host=https://npmmirror.com/mirrors
+PLAYWRIGHT_DOWNLOAD_HOST=https://npmmirror.com/mirrors/playwright
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;2.4 node-sass / sass-embedded&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# .npmrc
+sass_binary_site=https://npmmirror.com/mirrors/node-sass
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;现在多用 &lt;code&gt;sass&lt;/code&gt;（dart-sass 纯 JS 实现），无需 binary。&lt;/p&gt;
+&lt;h3&gt;2.5 sharp / canvas&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# .npmrc
+sharp_binary_host=https://npmmirror.com/mirrors/sharp
+sharp_libvips_binary_host=https://npmmirror.com/mirrors/sharp-libvips
+canvas_binary_host_mirror=https://npmmirror.com/mirrors/node-canvas-prebuilt/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;2.6 Cypress&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;export CYPRESS_DOWNLOAD_MIRROR=https://npmmirror.com/mirrors/cypress
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;2.7 全家桶模板&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ini&quot;&gt;# ~/.npmrc 一份全搞定
+registry=https://registry.npmmirror.com
+electron_mirror=https://npmmirror.com/mirrors/electron/
+electron_builder_binaries_mirror=https://npmmirror.com/mirrors/electron-builder-binaries/
+puppeteer_download_host=https://npmmirror.com/mirrors
+PLAYWRIGHT_DOWNLOAD_HOST=https://npmmirror.com/mirrors/playwright
+sass_binary_site=https://npmmirror.com/mirrors/node-sass
+sharp_binary_host=https://npmmirror.com/mirrors/sharp
+sharp_libvips_binary_host=https://npmmirror.com/mirrors/sharp-libvips
+canvas_binary_host_mirror=https://npmmirror.com/mirrors/node-canvas-prebuilt/
+CYPRESS_DOWNLOAD_MIRROR=https://npmmirror.com/mirrors/cypress
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;三、命令对照速查&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;操作&lt;/th&gt;
+&lt;th&gt;npm&lt;/th&gt;
+&lt;th&gt;yarn (v1)&lt;/th&gt;
+&lt;th&gt;pnpm&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;安装全部&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;npm install&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;yarn&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;pnpm install&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;安装生产依赖&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;npm i &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;yarn add &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;pnpm add &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;安装开发依赖&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;npm i -D &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;yarn add -D &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;pnpm add -D &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;安装全局&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;npm i -g &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;yarn global add &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;pnpm add -g &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;安装指定版本&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;npm i &amp;lt;pkg&amp;gt;@1.2.3&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;同&lt;/td&gt;
+&lt;td&gt;同&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;卸载&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;npm uninstall &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;yarn remove &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;pnpm remove &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;卸载全局&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;npm uninstall -g &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;yarn global remove &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;pnpm remove -g &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;更新全部&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;npm update&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;yarn upgrade&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;pnpm update&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;运行脚本&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;npm run &amp;lt;s&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;yarn &amp;lt;s&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;pnpm &amp;lt;s&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;执行本地二进制&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;npx &amp;lt;bin&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;yarn &amp;lt;bin&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;pnpm exec &amp;lt;bin&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;执行远程包&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;npx &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;—&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;pnpm dlx &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;查看顶层依赖&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;npm ls --depth=0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;yarn list --depth=0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;pnpm list --depth=0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;查过时依赖&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;npm outdated&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;yarn outdated&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;pnpm outdated&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;清缓存&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;npm cache clean --force&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;yarn cache clean&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;pnpm store prune&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;查看为什么装了某包&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;npm why &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;yarn why &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;pnpm why &amp;lt;pkg&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;四、锁文件&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;包管理器&lt;/th&gt;
+&lt;th&gt;锁文件&lt;/th&gt;
+&lt;th&gt;提交 Git&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;npm&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;package-lock.json&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;yarn v1&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;yarn.lock&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;pnpm&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;pnpm-lock.yaml&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;同一仓库只保留一种锁文件&lt;/strong&gt;。混用会导致依赖树不一致。&lt;/p&gt;
+&lt;h3&gt;清理重装&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# npm
+rm -rf node_modules package-lock.json &amp;amp;&amp;amp; npm install
+
+# yarn
+rm -rf node_modules yarn.lock &amp;amp;&amp;amp; yarn install
+
+# pnpm
+rm -rf node_modules pnpm-lock.yaml &amp;amp;&amp;amp; pnpm install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;CI 严格安装&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;npm ci                            # 严格按 lock 装，不更新
+pnpm install --frozen-lockfile
+yarn install --frozen-lockfile
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;npm ci&lt;/code&gt; 要求 &lt;code&gt;package-lock.json&lt;/code&gt; 与 &lt;code&gt;package.json&lt;/code&gt; 完全一致，否则直接报错退出。&lt;/p&gt;
+&lt;h2&gt;五、依赖版本语义&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;写法&lt;/th&gt;
+&lt;th&gt;允许升级范围&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;1.2.3&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;精确，不升级&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;~1.2.3&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&amp;gt;=1.2.3 &amp;lt;1.3.0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;^1.2.3&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&amp;gt;=1.2.3 &amp;lt;2.0.0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;^0.2.3&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&amp;gt;=0.2.3 &amp;lt;0.3.0&lt;/code&gt;（0.x 例外，锁次版本）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;*&lt;/code&gt; / &lt;code&gt;latest&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;不限（不推荐）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;六、脚本（scripts）&lt;/h2&gt;
+&lt;h3&gt;钩子&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;钩子&lt;/th&gt;
+&lt;th&gt;触发时机&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;preinstall&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;install 之前&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;postinstall&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;install 之后&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;prepare&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;install 和 publish 之前都触发（husky 常用）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;prepublishOnly&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;仅 &lt;code&gt;npm publish&lt;/code&gt; 之前&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;pre&amp;lt;script&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;npm run &amp;lt;script&amp;gt;&lt;/code&gt; 之前&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;post&amp;lt;script&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;执行之后&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;传参与环境变量&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;npm run build -- --mode production
+yarn build --mode production
+pnpm build --mode production
+
+# 跨平台环境变量
+npm i -D cross-env
+&amp;quot;build&amp;quot;: &amp;quot;cross-env NODE_ENV=production vite build&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;七、依赖管理&lt;/h2&gt;
+&lt;h3&gt;overrides / resolutions（强制覆盖版本）&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;npm (&amp;gt;= 8.3)&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-json&quot;&gt;{
+  &amp;quot;overrides&amp;quot;: {
+    &amp;quot;lodash&amp;quot;: &amp;quot;4.17.21&amp;quot;,
+    &amp;quot;some-pkg&amp;quot;: { &amp;quot;lodash&amp;quot;: &amp;quot;4.17.21&amp;quot; }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;yarn v1&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-json&quot;&gt;{
+  &amp;quot;resolutions&amp;quot;: {
+    &amp;quot;lodash&amp;quot;: &amp;quot;4.17.21&amp;quot;,
+    &amp;quot;**/lodash&amp;quot;: &amp;quot;4.17.21&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;pnpm&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-json&quot;&gt;{
+  &amp;quot;pnpm&amp;quot;: {
+    &amp;quot;overrides&amp;quot;: {
+      &amp;quot;lodash&amp;quot;: &amp;quot;4.17.21&amp;quot;
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;依赖分析&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;npm ls &amp;lt;pkg&amp;gt;                      # 谁依赖了它
+npm why &amp;lt;pkg&amp;gt;                     # 同上（npm 8+）
+pnpm why &amp;lt;pkg&amp;gt;
+yarn why &amp;lt;pkg&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;八、npm 专属&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;npm view &amp;lt;pkg&amp;gt;                    # 包信息
+npm view &amp;lt;pkg&amp;gt; versions           # 所有版本
+npm view &amp;lt;pkg&amp;gt; dist-tags          # 标签
+npm info &amp;lt;pkg&amp;gt; repository.url     # 仓库地址
+
+npm login
+npm publish                       # 发布
+npm publish --access public       # scoped 包首次发布
+npm publish --tag beta            # 打标签
+npm unpublish &amp;lt;pkg&amp;gt;@1.0.0         # 撤销（24h 内）
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;九、yarn v1 专属&lt;/h2&gt;
+&lt;h3&gt;workspaces&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-json&quot;&gt;{
+  &amp;quot;private&amp;quot;: true,
+  &amp;quot;workspaces&amp;quot;: [&amp;quot;packages/*&amp;quot;]
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;yarn workspace &amp;lt;pkg&amp;gt; add &amp;lt;dep&amp;gt;
+yarn workspaces info
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;常用&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;yarn licenses list                # 许可证
+yarn audit                        # 安全审计
+yarn autoclean --init
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;yarn v1 已停止新功能开发，长期建议迁移到 pnpm 或 yarn berry (v2+)。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;十、pnpm 专属&lt;/h2&gt;
+&lt;h3&gt;核心优势&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;硬链接 + 内容寻址存储&lt;/strong&gt;：磁盘只存一份包实体，多项目共享。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;非扁平化 node_modules&lt;/strong&gt;：只有直接依赖可见，杜绝幽灵依赖。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;严格 peerDependencies&lt;/strong&gt;：不隐式提升未声明依赖。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;常用&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;pnpm store path                   # store 位置
+pnpm store prune                  # 清缓存
+pnpm dedupe                       # 去重
+pnpm patch &amp;lt;pkg&amp;gt;                  # 打补丁
+pnpm patch-commit &amp;lt;path&amp;gt;
+
+pnpm add -O &amp;lt;pkg&amp;gt;                 # optionalDependencies
+pnpm add -P &amp;lt;pkg&amp;gt;                 # peerDependencies
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;工作区&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-yaml&quot;&gt;# pnpm-workspace.yaml
+packages:
+  - &amp;quot;packages/*&amp;quot;
+  - &amp;quot;apps/*&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;pnpm -r build                     # 递归所有包
+pnpm --filter web build           # 只跑 web
+pnpm --filter &amp;quot;web...&amp;quot; build      # web 及其依赖
+pnpm --filter &amp;quot;...web&amp;quot; build      # web 及其被依赖者
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;.npmrc 常用&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ini&quot;&gt;shamefully-hoist=true             # 兼容老包（临时用）
+strict-peer-dependencies=false
+auto-install-peers=true
+node-linker=hoisted               # 扁平常见兼容方案
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;十一、常见问题&lt;/h2&gt;
+&lt;h3&gt;1. &lt;code&gt;ERR_OSSL_EVP_UNSUPPORTED&lt;/code&gt;（Node 17+）&lt;/h3&gt;
+&lt;p&gt;老项目 + 新 Node，OpenSSL 3 引起。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;export NODE_OPTIONS=--openssl-legacy-provider
+# 或降级 Node 16
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;2. &lt;code&gt;EACCES&lt;/code&gt; 权限错误&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;别用 sudo&lt;/strong&gt;，改 npm 全局目录：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;mkdir -p ~/.npm-global
+npm config set prefix &#39;~/.npm-global&#39;
+echo &#39;export PATH=~/.npm-global/bin:$PATH&#39; &amp;gt;&amp;gt; ~/.bashrc
+source ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;3. &lt;code&gt;peer dep&lt;/code&gt; 冲突（npm 7+）&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;npm install --legacy-peer-deps    # 按 npm 6 行为忽略 peer 冲突
+npm install --force               # 强制（危险）
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;4. 安装慢&lt;/h3&gt;
+&lt;p&gt;先换源（见第一节）。如果还慢，看是不是在下载 binary：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;npm install --verbose 2&amp;gt;&amp;amp;1 | grep -i &amp;quot;http&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;看到下载 electron / puppeteer 之类的，就要配对应的 binary 镜像。&lt;/p&gt;
+&lt;h3&gt;5. 幽灵依赖&lt;/h3&gt;
+&lt;p&gt;代码用了没在 &lt;code&gt;package.json&lt;/code&gt; 里声明的包（因为被提升到顶层才碰巧能用）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;根治&lt;/strong&gt;：用 pnpm。&lt;strong&gt;缓解&lt;/strong&gt;：&lt;code&gt;npm ls --depth=0&lt;/code&gt; 核对，把用到的都显式声明。&lt;/p&gt;
+&lt;h3&gt;6. CI 报 lock 不一致&lt;/h3&gt;
+&lt;p&gt;用 &lt;code&gt;npm ci&lt;/code&gt; / &lt;code&gt;pnpm install --frozen-lockfile&lt;/code&gt; 时，&lt;code&gt;package.json&lt;/code&gt; 与 lock 必须同步。本地改完 &lt;code&gt;package.json&lt;/code&gt; 一定要重跑一次 &lt;code&gt;install&lt;/code&gt; 让 lock 更新，再提交。&lt;/p&gt;
+&lt;h3&gt;7. 强制项目使用某个包管理器&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-json&quot;&gt;{
+  &amp;quot;scripts&amp;quot;: {
+    &amp;quot;preinstall&amp;quot;: &amp;quot;npx only-allow pnpm&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;8. &lt;code&gt;npm audit fix --force&lt;/code&gt; 引入 breaking change&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;--force&lt;/code&gt; 会跨越主版本升级。先看不 force 能修多少：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;npm audit
+npm audit fix
+npm audit --production            # 只看生产依赖
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;十二、安全审计&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;npm audit
+yarn audit
+pnpm audit
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;参考&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;npm 文档：https://docs.npmjs.com/&lt;/li&gt;
+&lt;li&gt;yarn v1：https://classic.yarnpkg.com/&lt;/li&gt;
+&lt;li&gt;pnpm：https://pnpm.io/zh/&lt;/li&gt;
+&lt;li&gt;npmmirror：https://npmmirror.com/&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Linux 备忘录</title>
+    <link href="https://undz.cn/posts/linux-memo-2026-09-25/"/>
+    <updated>2026-09-25T00:00:00Z</updated>
+    <id>https://undz.cn/posts/linux-memo-2026-09-25/</id>
+    <content type="html">&lt;p&gt;国内环境下的高频命令。换源和镜像放在最前面。&lt;/p&gt;
+&lt;h2&gt;一、换源&lt;/h2&gt;
+&lt;h3&gt;1.1 apt（Debian / Ubuntu）&lt;/h3&gt;
+&lt;p&gt;先备份，再替换：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+sudo sed -i &#39;s|http://archive.ubuntu.com|https://mirrors.tuna.tsinghua.edu.cn|g&#39; /etc/apt/sources.list
+sudo sed -i &#39;s|http://security.ubuntu.com|https://mirrors.tuna.tsinghua.edu.cn|g&#39; /etc/apt/sources.list
+sudo apt update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Ubuntu 24.04+&lt;/strong&gt; 使用新格式 &lt;code&gt;/etc/apt/sources.list.d/ubuntu.sources&lt;/code&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;sudo sed -i &#39;s|http://archive.ubuntu.com|https://mirrors.tuna.tsinghua.edu.cn|g&#39; &#92;
+  /etc/apt/sources.list.d/ubuntu.sources
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Debian 12+&lt;/strong&gt; 使用 &lt;code&gt;/etc/apt/sources.list.d/debian.sources&lt;/code&gt;，同理。&lt;/p&gt;
+&lt;h3&gt;1.2 常用 apt 镜像源&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;源&lt;/th&gt;
+&lt;th&gt;URL&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;清华&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;https://mirrors.tuna.tsinghua.edu.cn&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;阿里云&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;https://mirrors.aliyun.com&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;中科大&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;https://mirrors.ustc.edu.cn&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;华为云&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;https://mirrors.huaweicloud.com&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;网易&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;https://mirrors.163.com&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;1.3 yum / dnf（RHEL / CentOS / Fedora）&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# 备份
+sudo cp -r /etc/yum.repos.d /etc/yum.repos.d.bak
+
+# CentOS 7 换阿里云
+sudo sed -i &#39;s|mirrorlist=|#mirrorlist=|g&#39; /etc/yum.repos.d/CentOS-*.repo
+sudo sed -i &#39;s|#baseurl=http://mirror.centos.org|baseurl=https://mirrors.aliyun.com|g&#39; &#92;
+  /etc/yum.repos.d/CentOS-*.repo
+
+sudo yum clean all
+sudo yum makecache
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;CentOS 8 / Stream&lt;/strong&gt; 需要先换 vault（官方源已下线）：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;sudo sed -i &#39;s|mirror.centos.org|mirrors.aliyun.com|g&#39; /etc/yum.repos.d/*.repo
+sudo sed -i &#39;s|^#baseurl|baseurl|g&#39; /etc/yum.repos.d/*.repo
+sudo sed -i &#39;s|^mirrorlist|#mirrorlist|g&#39; /etc/yum.repos.d/*.repo
+sudo dnf clean all &amp;amp;&amp;amp; sudo dnf makecache
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Fedora&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;sudo sed -i &#39;s|^metalink=|#metalink=|g&#39; /etc/yum.repos.d/fedora*.repo
+sudo sed -i &#39;s|^#baseurl=http://download.example/pub/fedora/linux|baseurl=https://mirrors.tuna.tsinghua.edu.cn/fedora|g&#39; &#92;
+  /etc/yum.repos.d/fedora*.repo
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;1.4 pacman（Arch）&lt;/h3&gt;
+&lt;p&gt;编辑 &lt;code&gt;/etc/pacman.d/mirrorlist&lt;/code&gt;，把国内源放前面：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
+Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;或者一键：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;sudo pacman -S reflector
+sudo reflector --country China --latest 5 --sort rate --save /etc/pacman.d/mirrorlist
+sudo pacman -Syyu
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;1.5 pip 换源&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# 永久
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+pip config set global.trusted-host pypi.tuna.tsinghua.edu.cn
+
+# 或写入 ~/.pip/pip.conf (Linux) / %APPDATA%&#92;pip&#92;pip.ini (Windows)
+# [global]
+# index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+# trusted-host = pypi.tuna.tsinghua.edu.cn
+
+# 一次性
+pip install &amp;lt;pkg&amp;gt; -i https://pypi.tuna.tsinghua.edu.cn/simple
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;常用 pip 镜像：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;源&lt;/th&gt;
+&lt;th&gt;URL&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;清华&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;https://pypi.tuna.tsinghua.edu.cn/simple&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;阿里云&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;https://mirrors.aliyun.com/pypi/simple/&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;中科大&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;https://pypi.mirrors.ustc.edu.cn/simple/&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;豆瓣&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;https://pypi.douban.com/simple/&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;华为云&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;https://mirrors.huaweicloud.com/repository/pypi/simple/&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;1.6 Docker 镜像加速&lt;/h3&gt;
+&lt;p&gt;编辑 &lt;code&gt;/etc/docker/daemon.json&lt;/code&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-json&quot;&gt;{
+  &amp;quot;registry-mirrors&amp;quot;: [
+    &amp;quot;https://docker.m.daocloud.io&amp;quot;,
+    &amp;quot;https://dockerproxy.com&amp;quot;,
+    &amp;quot;https://mirror.baidubce.com&amp;quot;,
+    &amp;quot;https://ccr.ccs.tencentyun.com&amp;quot;
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;sudo systemctl daemon-reload
+sudo systemctl restart docker
+docker info | grep -A 5 &amp;quot;Registry Mirrors&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;2024 年后很多公共镜像源已停服，以上仅供参考。企业环境建议自建 Harbor 或使用阿里云/腾讯云容器镜像服务。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;1.7 Go module 代理&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;go env -w GOPROXY=https://goproxy.cn,direct
+go env -w GOSUMDB=sum.golang.google.cn
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;1.8 Maven 换源&lt;/h3&gt;
+&lt;p&gt;编辑 &lt;code&gt;~/.m2/settings.xml&lt;/code&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-xml&quot;&gt;&amp;lt;mirrors&amp;gt;
+  &amp;lt;mirror&amp;gt;
+    &amp;lt;id&amp;gt;aliyun&amp;lt;/id&amp;gt;
+    &amp;lt;mirrorOf&amp;gt;central&amp;lt;/mirrorOf&amp;gt;
+    &amp;lt;url&amp;gt;https://maven.aliyun.com/repository/public&amp;lt;/url&amp;gt;
+  &amp;lt;/mirror&amp;gt;
+&amp;lt;/mirrors&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;1.9 换源后必做&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# apt
+sudo apt update
+
+# yum / dnf
+sudo yum clean all &amp;amp;&amp;amp; sudo yum makecache
+sudo dnf clean all &amp;amp;&amp;amp; sudo dnf makecache
+
+# pacman
+sudo pacman -Syyu
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;二、文件与目录&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;pwd                               # 当前目录
+ls -alh                           # 详细列表
+cd -                              # 上一个目录
+mkdir -p a/b/c                    # 递归创建
+rm -rf &amp;lt;dir&amp;gt;                      # 递归删除（危险）
+cp -r &amp;lt;src&amp;gt; &amp;lt;dst&amp;gt;                 # 递归复制
+mv &amp;lt;src&amp;gt; &amp;lt;dst&amp;gt;                    # 移动 / 重命名
+ln -s &amp;lt;target&amp;gt; &amp;lt;link&amp;gt;             # 软链接
+touch &amp;lt;file&amp;gt;
+stat &amp;lt;file&amp;gt;
+file &amp;lt;file&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;查找&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;find . -name &amp;quot;*.log&amp;quot;                          # 按名
+find . -type f -size +100M                    # &amp;gt;100M
+find . -mtime -7                              # 7 天内
+find . -name &amp;quot;*.tmp&amp;quot; -delete                  # 找到删除
+find . -type f -exec chmod 644 {} &#92;;          # 批量执行
+
+which &amp;lt;cmd&amp;gt;                       # 命令路径
+whereis &amp;lt;cmd&amp;gt;
+locate &amp;lt;file&amp;gt;                     # 快速（需 updatedb）
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;三、文本处理&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;cat / less / head -n 20 / tail -n 20
+tail -f &amp;lt;file&amp;gt;                    # 实时跟踪日志
+tail -F &amp;lt;file&amp;gt;                    # rotate 后仍能跟踪
+
+grep &amp;quot;p&amp;quot; &amp;lt;file&amp;gt;                   # 基本
+grep -r -n -i &amp;quot;p&amp;quot; .               # 递归+行号+忽略大小写
+grep -v &amp;quot;p&amp;quot; &amp;lt;file&amp;gt;                # 反选
+grep -E &amp;quot;a|b&amp;quot; &amp;lt;file&amp;gt;              # 扩展正则
+rg &amp;quot;p&amp;quot;                            # ripgrep（快，推荐）
+
+sed &#39;s/old/new/g&#39; &amp;lt;file&amp;gt;          # 替换到 stdout
+sed -i &#39;s/old/new/g&#39; &amp;lt;file&amp;gt;       # 原地替换
+sed -i.bak &#39;s/old/new/g&#39; &amp;lt;file&amp;gt;   # 带备份
+sed -n &#39;10,20p&#39; &amp;lt;file&amp;gt;            # 打印范围
+
+awk &#39;{print $1}&#39; &amp;lt;file&amp;gt;           # 第一列
+awk -F: &#39;{print $1}&#39; /etc/passwd
+awk &#39;$3 &amp;gt; 100 {print $1}&#39; &amp;lt;file&amp;gt;
+
+cut -d: -f1 /etc/passwd
+sort &amp;lt;file&amp;gt;
+sort -u &amp;lt;file&amp;gt;                    # 去重
+uniq -c                           # 统计相邻（先 sort）
+wc -l &amp;lt;file&amp;gt;
+tr &#39;a-z&#39; &#39;A-Z&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;管道组合&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;awk &#39;{print $1}&#39; access.log | sort | uniq -c | sort -rn | head -10
+du -sh */ | sort -rh | head -10
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;四、权限&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;chmod 755 &amp;lt;file&amp;gt;
+chmod +x &amp;lt;file&amp;gt;
+chmod -R 644 &amp;lt;dir&amp;gt;
+chown user:group &amp;lt;file&amp;gt;
+chown -R user &amp;lt;dir&amp;gt;
+chgrp group &amp;lt;file&amp;gt;
+umask
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;数字权限：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;数字&lt;/th&gt;
+&lt;th&gt;权限&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;r--&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;r-x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;rw-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;rwx&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例：&lt;code&gt;755&lt;/code&gt; = &lt;code&gt;rwxr-xr-x&lt;/code&gt;，&lt;code&gt;644&lt;/code&gt; = &lt;code&gt;rw-r--r--&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;特殊权限：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;chmod u+s &amp;lt;file&amp;gt;                  # SUID
+chmod g+s &amp;lt;dir&amp;gt;                   # SGID
+chmod +t &amp;lt;dir&amp;gt;                    # Sticky（如 /tmp）
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;五、进程管理&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;ps aux
+ps aux | grep nginx
+pgrep -f &amp;quot;pattern&amp;quot;
+pidof &amp;lt;name&amp;gt;
+
+top                               # P 按 CPU，M 按内存
+htop                              # 更友好
+
+kill &amp;lt;pid&amp;gt;                        # SIGTERM
+kill -9 &amp;lt;pid&amp;gt;                     # 强制
+pkill -f &amp;quot;pattern&amp;quot;
+killall &amp;lt;name&amp;gt;
+
+nice -n 10 &amp;lt;cmd&amp;gt;
+renice -n 5 -p &amp;lt;pid&amp;gt;
+
+Ctrl+Z                            # 挂起
+bg / fg / jobs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;信号：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;信号&lt;/th&gt;
+&lt;th&gt;编号&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;SIGHUP&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;挂起 / 重载&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SIGINT&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;Ctrl+C&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SIGKILL&lt;/td&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;强杀，不可捕获&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SIGTERM&lt;/td&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;优雅退出（默认）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;六、网络&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;ip addr                           # 查看 IP
+ip route
+ss -tunlp                         # 监听端口（推荐）
+netstat -tunlp                    # 老命令
+lsof -i :8080                     # 谁占端口
+
+ping &amp;lt;host&amp;gt;
+ping -c 4 &amp;lt;host&amp;gt;
+traceroute &amp;lt;host&amp;gt;
+mtr &amp;lt;host&amp;gt;                        # 持续 traceroute
+
+curl -I &amp;lt;url&amp;gt;                     # 只看头
+curl -v &amp;lt;url&amp;gt;                     # 详细
+curl -o file.zip &amp;lt;url&amp;gt;            # 下载
+curl -X POST -d &#39;{}&#39; -H &amp;quot;Content-Type: application/json&amp;quot; &amp;lt;url&amp;gt;
+
+wget &amp;lt;url&amp;gt;
+wget -c &amp;lt;url&amp;gt;                     # 断点续传
+wget -r -np &amp;lt;url&amp;gt;                 # 递归
+
+dig &amp;lt;domain&amp;gt;
+dig +short &amp;lt;domain&amp;gt;
+nslookup &amp;lt;domain&amp;gt;
+host &amp;lt;domain&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;防火墙&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# ufw（Ubuntu）
+ufw status
+ufw allow 22
+ufw allow 80/tcp
+ufw delete allow 80
+ufw enable
+
+# firewalld（CentOS）
+firewall-cmd --list-all
+firewall-cmd --add-port=8080/tcp --permanent
+firewall-cmd --reload
+
+# iptables
+iptables -L -n -v
+iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;七、磁盘与内存&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;df -h                             # 磁盘
+df -i                             # inode
+du -sh &amp;lt;dir&amp;gt;
+du -sh * | sort -rh | head -10
+
+free -h                           # 内存
+vmstat 1
+iostat -x 1                       # 需 sysstat
+
+lsblk
+fdisk -l
+mount /dev/sdb1 /mnt
+umount /mnt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;找大文件：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;find / -type f -size +1G 2&amp;gt;/dev/null
+du -ah / | sort -rh | head -20
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;八、压缩与归档&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;tar -czvf a.tar.gz &amp;lt;dir&amp;gt;          # 打包
+tar -xzvf a.tar.gz                # 解包
+tar -tzvf a.tar.gz                # 查看内容
+tar -xzvf a.tar.gz -C /tmp
+
+zip -r a.zip &amp;lt;dir&amp;gt;
+unzip a.zip
+unzip -l a.zip
+unzip a.zip -d /tmp
+
+gzip &amp;lt;file&amp;gt;
+gunzip &amp;lt;file&amp;gt;.gz
+
+zstd &amp;lt;file&amp;gt;                       # 快速压缩
+xz -9 &amp;lt;file&amp;gt;                      # 高压缩
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;九、用户与权限&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;whoami
+id
+who
+w
+last
+
+useradd -m -s /bin/bash &amp;lt;user&amp;gt;
+passwd &amp;lt;user&amp;gt;
+usermod -aG sudo &amp;lt;user&amp;gt;
+userdel -r &amp;lt;user&amp;gt;
+
+groupadd &amp;lt;group&amp;gt;
+groups &amp;lt;user&amp;gt;
+
+su - &amp;lt;user&amp;gt;
+sudo &amp;lt;cmd&amp;gt;
+sudo -i                           # 进 root shell
+sudo -u &amp;lt;user&amp;gt; &amp;lt;cmd&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;sudoers：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;visudo
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;alice ALL=(ALL:ALL) ALL
+%sudo ALL=(ALL:ALL) ALL
+alice ALL=(ALL) NOPASSWD: ALL     # 免密
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;十、systemd&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;systemctl start/stop/restart/reload/status &amp;lt;svc&amp;gt;
+systemctl enable/disable &amp;lt;svc&amp;gt;
+systemctl is-active &amp;lt;svc&amp;gt;
+systemctl list-units --type=service --state=running
+systemctl daemon-reload
+
+journalctl -u &amp;lt;svc&amp;gt;
+journalctl -u &amp;lt;svc&amp;gt; -f
+journalctl -u &amp;lt;svc&amp;gt; --since &amp;quot;1 hour ago&amp;quot;
+journalctl -xe                    # 最近错误
+journalctl -b                     # 本次启动
+journalctl --disk-usage
+journalctl --vacuum-size=500M     # 清理
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;unit 文件示例 &lt;code&gt;/etc/systemd/system/myapp.service&lt;/code&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ini&quot;&gt;[Unit]
+Description=My App
+After=network.target
+
+[Service]
+Type=simple
+User=appuser
+WorkingDirectory=/opt/myapp
+ExecStart=/usr/bin/node /opt/myapp/index.js
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;sudo systemctl daemon-reload
+sudo systemctl enable --now myapp
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;十一、SSH&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;ssh user@host
+ssh -p 2222 user@host
+ssh -i ~/.ssh/id_rsa user@host
+
+ssh-keygen -t ed25519 -C &amp;quot;comment&amp;quot;
+ssh-copy-id user@host
+
+ssh -L 8080:localhost:80 user@host   # 本地转发
+ssh -R 8080:localhost:80 user@host   # 远程转发
+ssh -D 1080 user@host                # SOCKS 代理
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;~/.ssh/config&lt;/code&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Host myserver
+    HostName 1.2.3.4
+    User alice
+    Port 2222
+    IdentityFile ~/.ssh/id_ed25519
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;之后 &lt;code&gt;ssh myserver&lt;/code&gt; 即可。&lt;/p&gt;
+&lt;h3&gt;传输&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;scp &amp;lt;file&amp;gt; user@host:/path/
+scp user@host:/path/&amp;lt;file&amp;gt; .
+scp -r &amp;lt;dir&amp;gt; user@host:/path/
+
+rsync -avz --progress &amp;lt;src&amp;gt; user@host:&amp;lt;dst&amp;gt;   # 增量同步
+rsync -avz --delete &amp;lt;src&amp;gt; user@host:&amp;lt;dst&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;十二、软件包管理&lt;/h2&gt;
+&lt;h3&gt;apt（Debian / Ubuntu）&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;sudo apt update                   # 更新索引
+sudo apt upgrade                  # 升级
+sudo apt full-upgrade             # 含依赖变化
+sudo apt install &amp;lt;pkg&amp;gt;
+sudo apt remove &amp;lt;pkg&amp;gt;             # 保留配置
+sudo apt purge &amp;lt;pkg&amp;gt;              # 含配置
+sudo apt autoremove               # 清理无用依赖
+sudo apt search &amp;lt;kw&amp;gt;
+sudo apt show &amp;lt;pkg&amp;gt;
+apt list --installed
+
+sudo dpkg -i &amp;lt;pkg&amp;gt;.deb
+dpkg -l | grep &amp;lt;pkg&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;yum / dnf（RHEL / CentOS）&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;sudo yum install &amp;lt;pkg&amp;gt;
+sudo yum remove &amp;lt;pkg&amp;gt;
+sudo yum update
+sudo yum search &amp;lt;kw&amp;gt;
+sudo yum info &amp;lt;pkg&amp;gt;
+yum list installed
+yum clean all &amp;amp;&amp;amp; yum makecache
+
+sudo dnf install &amp;lt;pkg&amp;gt;            # 新一代
+dnf upgrade
+dnf clean all
+
+sudo rpm -ivh &amp;lt;pkg&amp;gt;.rpm
+rpm -qa | grep &amp;lt;pkg&amp;gt;
+sudo rpm -e &amp;lt;pkg&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;pacman（Arch）&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;sudo pacman -Syu                  # 同步并升级
+sudo pacman -S &amp;lt;pkg&amp;gt;
+sudo pacman -Rns &amp;lt;pkg&amp;gt;            # 卸载含依赖配置
+pacman -Ss &amp;lt;kw&amp;gt;
+pacman -Qs &amp;lt;pkg&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;十三、日志&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;journalctl -xe
+journalctl --since today
+journalctl -p err                 # 只错误
+
+tail -f /var/log/syslog           # Debian/Ubuntu
+tail -f /var/log/messages         # RHEL/CentOS
+tail -f /var/log/auth.log         # 认证
+tail -f /var/log/nginx/access.log
+tail -f /var/log/nginx/error.log
+
+dmesg
+dmesg -T                          # 人类可读时间
+dmesg | tail -20
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;十四、环境变量&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;env
+echo $PATH
+export FOO=bar
+unset FOO
+
+# 永久
+~/.bashrc                         # bash 交互式
+~/.bash_profile                   # bash 登录
+~/.profile                        # 通用
+/etc/profile                      # 全局
+
+source ~/.bashrc
+
+export PATH=&amp;quot;$HOME/.local/bin:$PATH&amp;quot;      # 前置
+export PATH=&amp;quot;$PATH:/opt/tools/bin&amp;quot;        # 后置
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;十五、性能排查&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;uptime                            # 负载
+top                               # 实时
+free -h                           # 内存
+df -h / df -i                     # 磁盘 / inode
+iostat -x 1                       # IO
+sar -u 1 5                        # CPU 历史
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;通用排查顺序：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;uptime&lt;/code&gt; + &lt;code&gt;top&lt;/code&gt;：负载高不高、哪个进程占用。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;free -h&lt;/code&gt;：内存是否耗尽、是否 swap。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;df -h&lt;/code&gt; + &lt;code&gt;df -i&lt;/code&gt;：空间 / inode 是否满。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;iostat -x 1&lt;/code&gt;：IO 是否瓶颈。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ss -s&lt;/code&gt;：连接数是否异常。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;定位细节&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;lsof -p &amp;lt;pid&amp;gt;                     # 进程打开的文件
+lsof -i :8080                     # 端口占用
+lsof /var/log/syslog
+
+top -H -p &amp;lt;pid&amp;gt;                   # 线程
+ps -T -p &amp;lt;pid&amp;gt;
+
+tcpdump -i eth0 -n
+tcpdump -i eth0 port 80
+tcpdump -i eth0 host 1.2.3.4
+tcpdump -i eth0 -w cap.pcap       # 存盘（Wireshark 打开）
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;十六、定时任务&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;crontab -e                        # 编辑
+crontab -l                        # 列出
+crontab -r                        # 删除
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;格式：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;* * * * * &amp;lt;command&amp;gt;
+│ │ │ │ │
+│ │ │ │ └─ 星期（0-7，0/7 都是周日）
+│ │ │ └─── 月（1-12）
+│ │ └───── 日（1-31）
+│ └─────── 时（0-23）
+└───────── 分（0-59）
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;0 3 * * * /opt/backup.sh              # 每天 3:00
+*/5 * * * * /usr/bin/check.sh         # 每 5 分钟
+0 9-18 * * 1-5 /opt/work.sh           # 工作日 9-18 整点
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;注意事项：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PATH 与登录 shell 不同，用绝对路径。&lt;/li&gt;
+&lt;li&gt;输出默认发邮件，重定向：&lt;code&gt;&amp;gt;&amp;gt; /var/log/job.log 2&amp;gt;&amp;amp;1&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;秒级任务用 systemd timer。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;十七、实用技巧&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;history
+history | grep &amp;lt;kw&amp;gt;
+Ctrl+R                            # 反向搜索历史
+!!                                # 上一条
+!$                                # 上一条最后参数
+!123                              # 历史编号 123
+
+pushd /path / popd / dirs -v
+
+nohup &amp;lt;cmd&amp;gt; &amp;gt; out.log 2&amp;gt;&amp;amp;1 &amp;amp;
+disown
+
+openssl rand -base64 16           # 随机密码
+uuidgen
+md5sum &amp;lt;file&amp;gt;
+sha256sum &amp;lt;file&amp;gt;
+xxd &amp;lt;file&amp;gt;
+time &amp;lt;cmd&amp;gt;
+
+python3 -m http.server 8000       # 快速 HTTP 服务
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;命令组合&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;cmd1 &amp;amp;&amp;amp; cmd2                      # 成功才继续
+cmd1 || cmd2                      # 失败才继续
+cmd1 ; cmd2                       # 顺序
+cmd1 &amp;amp;                            # 后台
+(cmd1; cmd2)                      # 子 shell
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;变量&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;name=&amp;quot;world&amp;quot;
+echo &amp;quot;$name&amp;quot;
+echo &amp;quot;${name}&amp;quot;
+echo &amp;quot;$(date)&amp;quot;
+echo &#39;$name&#39;                      # 不替换
+
+: ${VAR:=default}                 # 默认值
+
+str=&amp;quot;hello.txt&amp;quot;
+
+
+echo ${str%.txt}                  # hello
+echo ${str#hello.}                # txt
+echo ${str/txt/md}                # hello.md
+echo ${#str}                      # 9
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;十八、快捷键&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;快捷键&lt;/th&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Ctrl+C&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;中断&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Ctrl+D&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;退出 shell&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Ctrl+L&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;清屏&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Ctrl+A&lt;/code&gt; / &lt;code&gt;Ctrl+E&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;行首 / 行尾&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Ctrl+U&lt;/code&gt; / &lt;code&gt;Ctrl+K&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;删光标前 / 后&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Ctrl+W&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;删前一个单词&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Ctrl+R&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;搜索历史&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Ctrl+Z&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;挂起&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Tab&lt;/code&gt; / &lt;code&gt;Tab Tab&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;补全 / 列候选&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr /&gt;
+&lt;h2&gt;参考&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;清华镜像站：https://mirrors.tuna.tsinghua.edu.cn/&lt;/li&gt;
+&lt;li&gt;中科大镜像站：https://mirrors.ustc.edu.cn/&lt;/li&gt;
+&lt;li&gt;阿里云镜像站：https://developer.aliyun.com/mirror/&lt;/li&gt;
+&lt;li&gt;npmmirror：https://npmmirror.com/&lt;/li&gt;
+&lt;li&gt;man 手册：&lt;code&gt;man &amp;lt;command&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;tldr：&lt;code&gt;tldr &amp;lt;command&amp;gt;&lt;/code&gt;（需安装）&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Git 备忘录</title>
+    <link href="https://undz.cn/posts/git-memo-2026-09-25/"/>
+    <updated>2026-09-25T00:00:00Z</updated>
+    <id>https://undz.cn/posts/git-memo-2026-09-25/</id>
+    <content type="html">&lt;p&gt;日常高频命令速查。按&amp;quot;场景&amp;quot;而非&amp;quot;命令字母&amp;quot;组织，便于出问题时直接翻。&lt;/p&gt;
+&lt;h2&gt;一、配置&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# 用户信息（全局）
+git config --global user.name &amp;quot;Your Name&amp;quot;
+git config --global user.email &amp;quot;you@example.com&amp;quot;
+
+# 换行符（Windows 推荐）
+git config --global core.autocrlf true
+
+# 中文文件名不乱码
+git config --global core.quotepath false
+
+# 默认分支名
+git config --global init.defaultBranch main
+
+# 常用别名
+git config --global alias.st status
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.lg &amp;quot;log --oneline --graph --decorate --all&amp;quot;
+
+# 查看所有配置
+git config --list --show-origin
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;二、基础工作流&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git status                    # 查看工作区状态
+git add &amp;lt;file&amp;gt;                # 暂存指定文件
+git add .                     # 暂存所有改动（不含删除）
+git add -A                    # 暂存所有改动（含删除）
+git commit -m &amp;quot;message&amp;quot;       # 提交
+git commit -am &amp;quot;message&amp;quot;      # 跳过 add，直接提交已跟踪文件
+git push                      # 推送
+git pull                      # 拉取并合并
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;查看差异&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git diff                      # 工作区 vs 暂存区
+git diff --staged             # 暂存区 vs 最新提交
+git diff HEAD                 # 工作区 + 暂存区 vs 最新提交
+git diff &amp;lt;branch1&amp;gt;..&amp;lt;branch2&amp;gt; # 两分支差异
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;三、分支&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git branch                    # 查看本地分支
+git branch -a                 # 查看所有分支（含远程）
+git branch -vv                # 查看分支及跟踪关系
+git branch &amp;lt;name&amp;gt;             # 创建分支
+git switch &amp;lt;name&amp;gt;             # 切换分支（新版推荐）
+git switch -c &amp;lt;name&amp;gt;          # 创建并切换
+git checkout -b &amp;lt;name&amp;gt;        # 同上（旧版写法）
+git branch -d &amp;lt;name&amp;gt;          # 删除已合并分支
+git branch -D &amp;lt;name&amp;gt;          # 强制删除
+git branch -m &amp;lt;old&amp;gt; &amp;lt;new&amp;gt;     # 重命名分支
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;合并与变基&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git merge &amp;lt;branch&amp;gt;            # 合并到当前分支（保留历史）
+git merge --no-ff &amp;lt;branch&amp;gt;    # 强制生成合并提交
+git rebase &amp;lt;branch&amp;gt;           # 变基（线性历史）
+git rebase -i HEAD~3          # 交互式变基，重写最近 3 条提交
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;原则&lt;/strong&gt;：已推送到共享远程的分支不要 rebase；只在本地分支上用。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;四、撤销与回退&lt;/h2&gt;
+&lt;p&gt;这是最容易踩坑的地方，先分清三种&amp;quot;撤销&amp;quot;：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;作用范围&lt;/th&gt;
+&lt;th&gt;是否修改历史&lt;/th&gt;
+&lt;th&gt;使用场景&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;git restore&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;工作区 / 暂存区&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;td&gt;丢弃未提交的修改&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;git reset&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;暂存区 / 提交历史&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;td&gt;撤销提交（未推送）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;git revert&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;提交历史&lt;/td&gt;
+&lt;td&gt;否（新增反向提交）&lt;/td&gt;
+&lt;td&gt;撤销已推送的提交&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;丢弃工作区修改&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git restore &amp;lt;file&amp;gt;            # 丢弃单个文件的未暂存修改
+git restore .                 # 丢弃所有未暂存修改（危险）
+git checkout -- &amp;lt;file&amp;gt;        # 旧版写法
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;取消暂存&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git restore --staged &amp;lt;file&amp;gt;   # 从暂存区移回工作区
+git reset HEAD &amp;lt;file&amp;gt;         # 旧版写法
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;撤销提交&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# 保留改动在工作区
+git reset --soft HEAD~1
+
+# 保留改动在暂存区
+git reset --mixed HEAD~1      # 默认
+
+# 彻底丢弃改动（危险）
+git reset --hard HEAD~1
+
+# 撤销已推送的提交（安全）
+git revert &amp;lt;commit-hash&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;找回丢失的提交&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git reflog                    # 查看 HEAD 移动历史
+git reset --hard &amp;lt;hash&amp;gt;       # 回到某个历史位置
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;reset --hard&lt;/code&gt; 后如果后悔，&lt;code&gt;reflog&lt;/code&gt; 通常能救回来，除非已经 GC。&lt;/p&gt;
+&lt;h2&gt;五、贮藏（stash）&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git stash                     # 贮藏当前改动
+git stash -u                  # 含未跟踪文件
+git stash list                # 查看贮藏列表
+git stash pop                 # 弹出最近贮藏并删除
+git stash apply stash@{0}     # 应用指定贮藏（保留）
+git stash drop stash@{0}      # 删除指定贮藏
+git stash clear               # 清空所有贮藏
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;常见场景：改了一半，突然要切分支修 bug。&lt;/p&gt;
+&lt;h2&gt;六、远程&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git remote -v                 # 查看远程仓库
+git remote add origin &amp;lt;url&amp;gt;   # 添加远程
+git remote set-url origin &amp;lt;url&amp;gt; # 修改远程地址
+git remote remove origin      # 删除远程
+
+git fetch                     # 拉取远程信息，不合并
+git pull                      # fetch + merge
+git pull --rebase             # fetch + rebase
+git push                      # 推送
+git push -u origin &amp;lt;branch&amp;gt;   # 首次推送并建立跟踪
+git push --force-with-lease   # 安全强推（推荐）
+git push --force              # 强推（危险）
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;强推原则&lt;/strong&gt;：永远用 &lt;code&gt;--force-with-lease&lt;/code&gt;，它会检查远程是否有人推过新提交，避免误覆盖别人的工作。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;七、标签&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git tag                       # 查看标签
+git tag v1.0.0                # 轻量标签
+git tag -a v1.0.0 -m &amp;quot;msg&amp;quot;    # 附注标签（推荐）
+git push origin v1.0.0        # 推送单个标签
+git push --tags               # 推送所有标签
+git tag -d v1.0.0             # 删除本地标签
+git push origin :refs/tags/v1.0.0  # 删除远程标签
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;八、查看历史&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git log                       # 完整日志
+git log --oneline             # 单行
+git log --oneline --graph     # 图形化
+git log -p &amp;lt;file&amp;gt;             # 查看某文件历史
+git log --author=&amp;quot;name&amp;quot;       # 按作者过滤
+git log --since=&amp;quot;2 weeks ago&amp;quot; # 按时间过滤
+git log -S &amp;quot;keyword&amp;quot;          # 按内容变化搜索（pickaxe）
+git blame &amp;lt;file&amp;gt;              # 逐行查看最后修改者
+git show &amp;lt;commit&amp;gt;             # 查看某次提交详情
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;九、常见问题&lt;/h2&gt;
+&lt;h3&gt;1. 提交信息写错了（未推送）&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git commit --amend -m &amp;quot;new message&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果只是想补充文件：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git add forgotten.txt
+git commit --amend --no-edit
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;2. 提交到了错误的分支&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# 假设应该提交到 feature 分支，却提交到了 main
+git branch feature                # 在当前位置创建分支
+git reset --hard HEAD~1           # main 回退
+git switch feature                # 切到 feature
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;3. 本地分支落后，想同步远程&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git fetch origin
+git rebase origin/main
+# 或者
+git pull --rebase origin main
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;4. 合并冲突&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git status                        # 查看冲突文件
+# 手动编辑冲突文件，删除 &amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt; ======= &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 标记
+git add &amp;lt;resolved-file&amp;gt;
+git commit                        # 或 git rebase --continue
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;放弃合并：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git merge --abort
+git rebase --abort
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;5. 不小心提交了敏感信息&lt;/h3&gt;
+&lt;p&gt;如果还没推送，&lt;code&gt;git reset --hard&lt;/code&gt; 即可。&lt;br /&gt;
+如果已推送，必须改写历史：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git filter-repo --path secrets.txt --invert-paths
+git push --force-with-lease
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;同时立即更换泄露的密钥，因为 Git 服务器可能仍留有副本。&lt;/p&gt;
+&lt;h3&gt;6. 忽略文件不生效&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git rm -r --cached .
+git add .
+git commit -m &amp;quot;fix gitignore&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;.gitignore&lt;/code&gt; 只对未跟踪文件生效，已跟踪的文件需要先 &lt;code&gt;rm --cached&lt;/code&gt;。&lt;/p&gt;
+&lt;h2&gt;十、提交规范（Conventional Commits）&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;type&amp;gt;(&amp;lt;scope&amp;gt;): &amp;lt;subject&amp;gt;
+
+&amp;lt;body&amp;gt;
+
+&amp;lt;footer&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;常用 type：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;type&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;feat&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;新功能&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;fix&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;修复 bug&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;docs&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;文档变更&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;style&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;格式调整（不影响代码逻辑）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;refactor&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;重构&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;perf&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;性能优化&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;test&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;测试相关&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;chore&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;构建 / 工具 / 依赖变更&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;feat(auth): 支持 OAuth 2.0 登录
+
+- 新增 GitHub / Google 登录入口
+- 补充 token 刷新逻辑
+
+Closes #123
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;十一、实用技巧&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# 快速查看某文件的最后一次修改
+git log -1 --stat &amp;lt;file&amp;gt;
+
+# 查找是哪次提交引入了某个字符串
+git log -S &amp;quot;search-string&amp;quot; --source --all
+
+# 查看两个分支的共同祖先
+git merge-base main feature
+
+# 比较工作区和某个提交
+git diff &amp;lt;commit&amp;gt;
+
+# 临时切换到某个提交查看，不切分支
+git switch --detach &amp;lt;commit&amp;gt;
+
+# 查看暂存区的具体内容
+git diff --staged
+
+# 统计每个作者的提交数
+git shortlog -sn
+
+# 找出未被合并的分支
+git branch --no-merged
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;十二、配置文件位置&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;级别&lt;/th&gt;
+&lt;th&gt;路径&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;系统&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/etc/gitconfig&lt;/code&gt;（Linux）/ &lt;code&gt;C:&#92;Program Files&#92;Git&#92;etc&#92;gitconfig&lt;/code&gt;（Windows）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;全局&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;~/.gitconfig&lt;/code&gt; / &lt;code&gt;%USERPROFILE%&#92;.gitconfig&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;仓库&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&amp;lt;repo&amp;gt;/.git/config&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;优先级：仓库 &amp;gt; 全局 &amp;gt; 系统。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;参考&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;官方文档：https://git-scm.com/docs&lt;/li&gt;
+&lt;li&gt;Pro Git（中文版）：https://git-scm.com/book/zh/v2&lt;/li&gt;
+&lt;li&gt;Conventional Commits：https://www.conventionalcommits.org/zh-hans/&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>关于本站开展技术架构迁移的说明</title>
+    <link href="https://undz.cn/posts/site-migration-compliance-2026-10-03/"/>
+    <updated>2026-10-03T00:00:00Z</updated>
+    <id>https://undz.cn/posts/site-migration-compliance-2026-10-03/</id>
+    <content type="html">&lt;p&gt;为进一步降低站点运行成本、提升内容可维护性、扩大浏览器兼容范围，本站于2026年9月至10月对底层技术架构进行系统性迁移。本次迁移不涉及内容层与视觉层的整体改版，但涉及渲染方式、组件体系、样式组织、URL 规范、构建流程等基础机制的全面调整。现将迁移背景、主要内容及后续安排说明如下。&lt;/p&gt;
+&lt;h2&gt;一、迁移背景&lt;/h2&gt;
+&lt;p&gt;（一）&lt;strong&gt;原架构的局限&lt;/strong&gt;。本站原采用 Vue 3 单页应用方案，构建产物依赖客户端 JavaScript 渲染。该方案在交互密集的应用中具有优势，但对以内容发布为主要目的的站点而言存在以下局限：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;首屏渲染依赖脚本执行，禁用脚本的浏览器无法获取内容；&lt;/li&gt;
+&lt;li&gt;对早期浏览器（如 Internet Explorer 系列）兼容成本极高；&lt;/li&gt;
+&lt;li&gt;内容以组件形式组织，写作需要掌握 Vue 模板语法，创作门槛较高；&lt;/li&gt;
+&lt;li&gt;每次内容更新均需重新打包全量资源，发布流程偏重。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;（二）&lt;strong&gt;本站定位的变化&lt;/strong&gt;。随着本站内容以&amp;quot;备忘录&amp;quot;&amp;quot;规范说明&amp;quot;&amp;quot;公告&amp;quot;等长文为主，交互需求趋弱，静态内容发布需求趋强。原架构与站点定位之间的适配度下降。&lt;/p&gt;
+&lt;p&gt;（三）&lt;strong&gt;兼容性要求&lt;/strong&gt;。本站明确将浏览器兼容范围扩展至 Internet Explorer 7 及以上的所有浏览器，原架构基于现代 JavaScript 特性，无法覆盖该范围。&lt;/p&gt;
+&lt;p&gt;基于以上三点，本站决定对技术架构进行调整。&lt;/p&gt;
+&lt;h2&gt;二、迁移主要内容&lt;/h2&gt;
+&lt;p&gt;（一）&lt;strong&gt;构建体系迁移&lt;/strong&gt;。由 Vue 3 + Vite 方案调整为 Eleventy 3 + Nunjucks 方案。Eleventy 为静态站点生成器，在构建阶段完成全部页面渲染，输出纯 HTML、CSS 与少量辅助脚本。迁移后：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;所有页面均为预渲染的静态 HTML；&lt;/li&gt;
+&lt;li&gt;站点可部署于任意静态托管服务；&lt;/li&gt;
+&lt;li&gt;构建产物不含应用级 JavaScript 框架代码；&lt;/li&gt;
+&lt;li&gt;内容更新仅重新生成对应页面。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;（二）&lt;strong&gt;组件体系迁移&lt;/strong&gt;。由 Vue 单文件组件调整为 Nunjucks macro。原 &lt;code&gt;.vue&lt;/code&gt; 文件中以 &lt;code&gt;props&lt;/code&gt; 传参、以 &lt;code&gt;slot&lt;/code&gt; 分发内容的方式，统一改为 Nunjucks 的宏调用，参数以字典形式传入。以按钮组件为例，原写法为：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-vue&quot;&gt;&amp;lt;GovButton variant=&amp;quot;primary&amp;quot;&amp;gt;提交&amp;lt;/GovButton&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;迁移后写法为：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-njk&quot;&gt;{{ button({ text: &amp;quot;提交&amp;quot;, type: &amp;quot;primary&amp;quot; }) }}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;两种方式在职责上等价：均实现&amp;quot;一处定义、多处引用&amp;quot;。差异在于前者运行于客户端，后者运行于构建时。&lt;/p&gt;
+&lt;p&gt;（三）&lt;strong&gt;样式体系重组&lt;/strong&gt;。原样式以 Vue 单文件组件内的 &lt;code&gt;&amp;lt;style scoped&amp;gt;&lt;/code&gt; 形式就近维护，存在重复定义、难以全局复用的问题。本次调整将样式按用途分为三类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;基础样式&lt;/strong&gt;：重置、变量、布局，全站始终加载；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;组件样式&lt;/strong&gt;：按组件粒度拆分独立文件，如 &lt;code&gt;button.css&lt;/code&gt;、&lt;code&gt;tag.css&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;页面样式&lt;/strong&gt;：按页面粒度独立维护，如 &lt;code&gt;post.css&lt;/code&gt;、&lt;code&gt;archive.css&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;每个页面在 frontmatter 中声明所需样式文件，构建时按需拼装 &lt;code&gt;&amp;lt;link&amp;gt;&lt;/code&gt; 标签，避免全站加载无关样式。&lt;/p&gt;
+&lt;p&gt;（四）&lt;strong&gt;URL 规范调整&lt;/strong&gt;。原标签页 URL 使用原始中文字符，存在编码歧义、跨平台兼容性差的问题。本次调整引入拼音转换规则，将中文标签统一转换为带声调数字的拼音形式，例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;原 URL：&lt;code&gt;/tags/文章/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;新 URL：&lt;code&gt;/tags/wen2-zhang1/&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;针对拼音重名（如&amp;quot;文章&amp;quot;与&amp;quot;纹章&amp;quot;拼音相同）的情况，采用构建时预计算映射表的方式，按标签字典序为冲突项添加数字后缀，确保每条 URL 唯一。&lt;/p&gt;
+&lt;p&gt;（五）&lt;strong&gt;浏览器兼容扩展&lt;/strong&gt;。本次迁移明确将兼容范围扩展至 Internet Explorer 7 及以上版本。主要策略包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;输出产物不含 ES6+ 语法，脚本以 ES5 形式书写；&lt;/li&gt;
+&lt;li&gt;使用 jQuery 1.12.4 作为 DOM 操作与 AJAX 的兼容层；&lt;/li&gt;
+&lt;li&gt;补充 &lt;code&gt;ie7.css&lt;/code&gt; 专用补丁样式，通过条件注释仅向 IE7 及以下加载；&lt;/li&gt;
+&lt;li&gt;布局以 &lt;code&gt;float&lt;/code&gt; + &lt;code&gt;inline-block&lt;/code&gt; 为基准，&lt;code&gt;flex&lt;/code&gt; 仅作现代浏览器增强；&lt;/li&gt;
+&lt;li&gt;不使用 CSS 变量作为唯一值来源，均带 fallback。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;需要说明的是，IE7 用户仅能获得静态内容阅读能力，动态功能（如评论、检索、发布后台）不在此兼容范围内。&lt;/p&gt;
+&lt;p&gt;（六）&lt;strong&gt;工程化完善&lt;/strong&gt;。新增构建前清理步骤，每次构建均先删除旧产物目录，避免历史文件残留。同时补充：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;站点地图（&lt;code&gt;sitemap.xml&lt;/code&gt;）；&lt;/li&gt;
+&lt;li&gt;内容订阅（&lt;code&gt;feed.xml&lt;/code&gt;）；&lt;/li&gt;
+&lt;li&gt;搜索引擎规则（&lt;code&gt;robots.txt&lt;/code&gt;）；&lt;/li&gt;
+&lt;li&gt;自定义 404 页面。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;（七）&lt;strong&gt;内容创作方式调整&lt;/strong&gt;。文章由 Vue 组件形式调整为标准 Markdown 文件，正文中可直接引用 Nunjucks 宏、读取站点全局数据，无需编写脚本逻辑。组件调用与 Markdown 语法可混用，写作门槛降低。&lt;/p&gt;
+&lt;h2&gt;三、迁移后效果&lt;/h2&gt;
+&lt;p&gt;（一）&lt;strong&gt;内容为先&lt;/strong&gt;。页面以纯 HTML 交付，禁用脚本的浏览器、早期浏览器、文本浏览器均可正常阅读。&lt;/p&gt;
+&lt;p&gt;（二）&lt;strong&gt;构建轻量&lt;/strong&gt;。站点不再包含应用级 JavaScript 框架，构建产物体积显著下降，构建时间缩短。&lt;/p&gt;
+&lt;p&gt;（三）&lt;strong&gt;样式可控&lt;/strong&gt;。样式按页面按需加载，避免了全站样式的冗余加载，也便于后续按组件粒度调整。&lt;/p&gt;
+&lt;p&gt;（四）&lt;strong&gt;URL 稳定&lt;/strong&gt;。标签、归档、文章等各类页面 URL 规范统一，便于分享、收藏与搜索引擎收录。&lt;/p&gt;
+&lt;p&gt;（五）&lt;strong&gt;维护便利&lt;/strong&gt;。新增文章仅需添加 Markdown 文件，无需改动路由、组件或构建脚本。&lt;/p&gt;
+&lt;h2&gt;四、后续工作&lt;/h2&gt;
+&lt;p&gt;（一）逐步将原站其他栏目内容迁移至新架构，保持 URL 结构一致性。&lt;/p&gt;
+&lt;p&gt;（二）针对现代浏览器补充增强功能，例如评论、检索、阅读进度指示等，以渐进增强方式提供，不影响基础阅读。&lt;/p&gt;
+&lt;p&gt;（三）持续监测 IE7 等早期浏览器下的可读性，发现问题及时在 &lt;code&gt;ie7.css&lt;/code&gt; 中补充补丁。&lt;/p&gt;
+&lt;p&gt;（四）完善发布流程，探索基于 Cloudflare Workers 与 GitHub API 的在线发布方案，降低内容维护的技术门槛。&lt;/p&gt;
+&lt;h2&gt;五、说明&lt;/h2&gt;
+&lt;p&gt;本站为个人技术项目，本次迁移属技术架构调整，不涉及任何机构或组织的立场表达。视觉设计仍参照政府网站规范进行，旨在为用户提供规范、清晰、易读的信息服务。所有内容仅代表个人观点，与任何机构无关。&lt;/p&gt;
+&lt;p&gt;特此说明。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;附：主要参考文件&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.11ty.dev/docs/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Eleventy 官方文档&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mozilla.github.io/nunjucks/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Nunjucks 模板引擎文档&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://api.jquery.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;jQuery 1.12.4 API 文档&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/HTML/Conditional_comments&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;MDN：条件注释（Conditional comments）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;简要说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Eleventy&lt;/strong&gt;：静态站点生成器，构建时渲染全部页面，输出纯 HTML。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Nunjucks&lt;/strong&gt;：Mozilla 开发的 JavaScript 模板引擎，本站用于组件化与数据渲染。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;jQuery 1.12.4&lt;/strong&gt;：jQuery 1.x 系列末版，兼容 IE6 及以上浏览器。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;条件注释&lt;/strong&gt;：Internet Explorer 专属的 HTML 注释语法，用于向特定版本 IE 加载专用资源。&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>关于在 Markdown 中嵌入 Nunjucks 组件的说明</title>
+    <link href="https://undz.cn/posts/markdown-nunjucks-usage-2026-09-18/"/>
+    <updated>2026-10-03T00:00:00Z</updated>
+    <id>https://undz.cn/posts/markdown-nunjucks-usage-2026-09-18/</id>
+    <content type="html">&lt;p&gt;本站的 &lt;code&gt;.md&lt;/code&gt; 文件由 Eleventy 的 Nunjucks 引擎在构建时编译。正文中的 Nunjucks 模板语法会被解析执行，组件以 macro 的形式调用。现将使用方法说明如下。&lt;/p&gt;
+&lt;h2&gt;一、基本用法&lt;/h2&gt;
+&lt;p&gt;在 frontmatter 之后，正文中直接书写 Nunjucks 语法即可。使用组件前，需要先从组件文件导入对应的 macro：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-njk&quot;&gt;{% from &amp;quot;components/button.njk&amp;quot; import button %}
+
+{{ button({ text: &amp;quot;阅读全文&amp;quot;, href: &amp;quot;/posts/hello/&amp;quot;, type: &amp;quot;primary&amp;quot; }) }}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;渲染结果是一个带样式的按钮链接。正文中的 Nunjucks 语法与 Markdown 可以混用，不会相互干扰。&lt;/p&gt;
+&lt;h2&gt;二、条件渲染&lt;/h2&gt;
+&lt;p&gt;Nunjucks 的 if 标签用于根据 frontmatter 或站点数据决定是否输出某段内容。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-njk&quot;&gt;{% if description %}
+&amp;lt;p&amp;gt;本文摘要：{{ description }}&amp;lt;/p&amp;gt;
+{% endif %}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;实际效果：本页的 &lt;code&gt;description&lt;/code&gt; 有值，所以下面的摘要会显示出来。&lt;/p&gt;
+&lt;p&gt;本文摘要：本站 Markdown 文件由 Nunjucks 编译，正文中可直接调用组件 macro、条件渲染与循环。&lt;/p&gt;
+&lt;h2&gt;三、循环渲染&lt;/h2&gt;
+&lt;p&gt;for 标签用于遍历数组，比如站点导航、文章标签。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-njk&quot;&gt;&amp;lt;ul&amp;gt;
+{% for item in site.navigation %}
+  &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;{{ item.url }}&amp;quot;&amp;gt;{{ item.title }}&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+{% endfor %}
+&amp;lt;/ul&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出为：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://undz.cn/&quot;&gt;首页&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://undz.cn/posts/&quot;&gt;文章&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://undz.cn/tags/&quot;&gt;标签&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://undz.cn/archive/&quot;&gt;归档&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://undz.cn/about/&quot;&gt;关于&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;四、嵌入组件&lt;/h2&gt;
+&lt;p&gt;本站提供的组件均可在正文中直接调用。先导入，再调用：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-njk&quot;&gt;{% from &amp;quot;components/alert.njk&amp;quot; import alert %}
+
+{{ alert({ type: &amp;quot;info&amp;quot;, title: &amp;quot;提示&amp;quot;, content: &amp;quot;这是一条信息。&amp;quot; }) }}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;实际渲染效果：&lt;/p&gt;
+&lt;div class=&quot;alert alert--info&quot; role=&quot;alert&quot;&gt;
+  &lt;div class=&quot;alert__title&quot;&gt;提示&lt;/div&gt;
+  &lt;div class=&quot;alert__content&quot;&gt;这是一条信息。&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;标签组件同理：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-njk&quot;&gt;{% from &amp;quot;components/tag.njk&amp;quot; import tag %}
+
+{{ tag({ text: &amp;quot;Eleventy&amp;quot;, href: &amp;quot;/tags/eleventy/&amp;quot;, color: &amp;quot;default&amp;quot; }) }}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a href=&quot;https://undz.cn/tags/eleventy/&quot; class=&quot;tag tag--default tag--md&quot;&gt;Eleventy&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;五、组件参数&lt;/h2&gt;
+&lt;p&gt;所有组件都以&lt;strong&gt;字典&lt;/strong&gt;形式传参，可选的键取决于组件定义。以 &lt;code&gt;button&lt;/code&gt; 为例：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-njk&quot;&gt;{{ button({
+  text: &amp;quot;提交&amp;quot;,
+  type: &amp;quot;primary&amp;quot;,
+  size: &amp;quot;lg&amp;quot;,
+  block: true,
+  disabled: false
+}) }}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;text&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;按钮文字&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;href&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;有值时渲染为 &lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt;，否则为 &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;type&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;primary&lt;/code&gt; / &lt;code&gt;secondary&lt;/code&gt; / &lt;code&gt;success&lt;/code&gt; / &lt;code&gt;danger&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;size&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;sm&lt;/code&gt; / &lt;code&gt;md&lt;/code&gt; / &lt;code&gt;lg&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;block&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;boolean&lt;/td&gt;
+&lt;td&gt;是否占满整行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;disabled&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;boolean&lt;/td&gt;
+&lt;td&gt;是否禁用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;六、注意事项&lt;/h2&gt;
+&lt;p&gt;（一）&lt;strong&gt;组件需要显式导入&lt;/strong&gt;。Nunjucks 的 macro 不像 Vue 组件那样自动注册，必须在文章里用 &lt;code&gt;from ... import ...&lt;/code&gt; 后再调用。&lt;/p&gt;
+&lt;p&gt;（二）&lt;strong&gt;字典里不能嵌套双花括号&lt;/strong&gt;。以下写法是错的——字典内部不能再写模板表达式，需要先 set 再引用：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-njk&quot;&gt;{% set href = &amp;quot;/tags/&amp;quot; + (t | tagSlug) + &amp;quot;/&amp;quot; %}
+{{ tag({ text: t, href: href }) }}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;（三）&lt;strong&gt;Markdown 里的 shell 语法可能被误解析&lt;/strong&gt;。Nunjucks 会把花括号加井号当作注释开始标记，shell 脚本里取字符串长度的那种写法会触发 &lt;code&gt;expected end of comment&lt;/code&gt; 错误。解决办法是用 `` 包裹那一行，或者改用等价的 shell 命令，例如 &lt;code&gt;expr length &amp;quot;$str&amp;quot;&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;（四）&lt;strong&gt;构建时编译&lt;/strong&gt;。正文中的 Nunjucks 在构建阶段执行，输出纯 HTML。若 macro 名或参数拼写错误，会在构建时报错，而不是静默忽略。&lt;/p&gt;
+&lt;p&gt;（五）&lt;strong&gt;没有运行时状态&lt;/strong&gt;。本站是静态站点，正文里不存在 Vue 那样的响应式状态。需要交互（比如切换显示）时，要借助 jQuery 或原生 JS，且只在现代浏览器中执行，IE7 只保证静态内容的可读性。&lt;/p&gt;
+&lt;p&gt;（六）&lt;strong&gt;不要写 style 块&lt;/strong&gt;。文章内的样式用已有 CSS 类或内联 &lt;code&gt;style&lt;/code&gt; 属性，不推荐在 Markdown 里写 &lt;code&gt;&amp;lt;style&amp;gt;&lt;/code&gt;。&lt;/p&gt;
+&lt;h2&gt;七、小结&lt;/h2&gt;
+&lt;p&gt;Markdown 与 Nunjucks 的融合让静态内容具备了组件化能力。文章可以引用全局数据、复用 UI 组件、按条件或循环渲染结构化内容，同时保持构建产物是纯静态 HTML，兼容到 IE7。这使得一批需要在多篇文章里重复出现的结构，可以被抽成组件统一维护。&lt;/p&gt;
+</content>
+  </entry>
+</feed>

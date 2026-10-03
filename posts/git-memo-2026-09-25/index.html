@@ -1,0 +1,159 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Git 备忘录 - AYP</title><meta name="description" content="一个用 Eleventy 搭建的兼容性博客"><meta name="author" content="AeYunDian"><meta property="og:title" content="Git 备忘录 - AYP"><meta property="og:description" content="一个用 Eleventy 搭建的兼容性博客"><meta property="og:url" content="https://undz.cn/posts/git-memo-2026-09-25/"><meta property="og:site_name" content="韵典综合平台"><meta name="twitter:title" content="Git 备忘录 - AYP"><meta name="twitter:description" content="一个用 Eleventy 搭建的兼容性博客"><link rel="canonical" href="https://undz.cn/posts/git-memo-2026-09-25/"><link rel="alternate" type="application/atom+xml" title="韵典综合平台" href="https://undz.cn/feed.xml"><link rel="stylesheet" href="/assets/css/style.css"><script src="/assets/vendor/jquery-1.12.4.min.js"></script><noscript><style>.only-js { display: none !important; }</style></noscript><link rel="stylesheet" href="/assets/css/base/reset.css"><link rel="stylesheet" href="/assets/css/base/variables.css"><link rel="stylesheet" href="/assets/css/base/layout.css"><link rel="stylesheet" href="/assets/css/components/header.css"><link rel="stylesheet" href="/assets/css/components/footer.css"><link rel="stylesheet" href="/assets/css/components/tag.css"><link rel="stylesheet" href="/assets/css/components/breadcrumb.css"><link rel="stylesheet" href="/assets/css/pages/post.css"><link rel="stylesheet" href="/assets/css/components/tag.css"><link rel="stylesheet" href="/assets/css/components/breadcrumb.css"><link rel="stylesheet" href="/assets/css/pages/post.css"><!--[if lt IE 8]>
+<link rel="stylesheet" href="/assets/css/ie7.css">
+<![endif]--></head><body><header class="site-header"><div class="container"><a class="site-logo" href="/">韵典综合平台</a><nav class="site-nav" aria-label="主导航"><ul><li><a href="/">首页</a></li><li><a href="/posts/">文章</a></li><li><a href="/tags/">标签</a></li><li><a href="/archive/">归档</a></li><li><a href="/about/">关于</a></li></ul></nav></div></header><main class="main"><div class="container"><nav class="breadcrumb" aria-label="面包屑"><ol class="breadcrumb__list"><li class="breadcrumb__item"><a href="/">首页</a></li><li class="breadcrumb__item"><a href="/posts/">文章</a></li><li class="breadcrumb__item"><span>Git 备忘录</span></li></ol></nav><article class="post"><header class="post__header"><h1 class="post__title">Git 备忘录</h1><time class="post__date" datetime="2026-09-25">2026-09-25</time><div class="tag-list"><a href="/tags/git/" class="tag tag--default tag--md">Git</a> <a href="/tags/bei4-wang4-lu4/" class="tag tag--default tag--md">备忘录</a></div></header><div class="post__content"><p>日常高频命令速查。按&quot;场景&quot;而非&quot;命令字母&quot;组织，便于出问题时直接翻。</p><h2>一、配置</h2><pre><code class="language-bash"># 用户信息（全局）
+git config --global user.name &quot;Your Name&quot;
+git config --global user.email &quot;you@example.com&quot;
+
+# 换行符（Windows 推荐）
+git config --global core.autocrlf true
+
+# 中文文件名不乱码
+git config --global core.quotepath false
+
+# 默认分支名
+git config --global init.defaultBranch main
+
+# 常用别名
+git config --global alias.st status
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.lg &quot;log --oneline --graph --decorate --all&quot;
+
+# 查看所有配置
+git config --list --show-origin
+</code></pre><h2>二、基础工作流</h2><pre><code class="language-bash">git status                    # 查看工作区状态
+git add &lt;file&gt;                # 暂存指定文件
+git add .                     # 暂存所有改动（不含删除）
+git add -A                    # 暂存所有改动（含删除）
+git commit -m &quot;message&quot;       # 提交
+git commit -am &quot;message&quot;      # 跳过 add，直接提交已跟踪文件
+git push                      # 推送
+git pull                      # 拉取并合并
+</code></pre><h3>查看差异</h3><pre><code class="language-bash">git diff                      # 工作区 vs 暂存区
+git diff --staged             # 暂存区 vs 最新提交
+git diff HEAD                 # 工作区 + 暂存区 vs 最新提交
+git diff &lt;branch1&gt;..&lt;branch2&gt; # 两分支差异
+</code></pre><h2>三、分支</h2><pre><code class="language-bash">git branch                    # 查看本地分支
+git branch -a                 # 查看所有分支（含远程）
+git branch -vv                # 查看分支及跟踪关系
+git branch &lt;name&gt;             # 创建分支
+git switch &lt;name&gt;             # 切换分支（新版推荐）
+git switch -c &lt;name&gt;          # 创建并切换
+git checkout -b &lt;name&gt;        # 同上（旧版写法）
+git branch -d &lt;name&gt;          # 删除已合并分支
+git branch -D &lt;name&gt;          # 强制删除
+git branch -m &lt;old&gt; &lt;new&gt;     # 重命名分支
+</code></pre><h3>合并与变基</h3><pre><code class="language-bash">git merge &lt;branch&gt;            # 合并到当前分支（保留历史）
+git merge --no-ff &lt;branch&gt;    # 强制生成合并提交
+git rebase &lt;branch&gt;           # 变基（线性历史）
+git rebase -i HEAD~3          # 交互式变基，重写最近 3 条提交
+</code></pre><blockquote><p><strong>原则</strong>：已推送到共享远程的分支不要 rebase；只在本地分支上用。</p></blockquote><h2>四、撤销与回退</h2><p>这是最容易踩坑的地方，先分清三种&quot;撤销&quot;：</p><table><thead><tr><th>命令</th><th>作用范围</th><th>是否修改历史</th><th>使用场景</th></tr></thead><tbody><tr><td><code>git restore</code></td><td>工作区 / 暂存区</td><td>否</td><td>丢弃未提交的修改</td></tr><tr><td><code>git reset</code></td><td>暂存区 / 提交历史</td><td>是</td><td>撤销提交（未推送）</td></tr><tr><td><code>git revert</code></td><td>提交历史</td><td>否（新增反向提交）</td><td>撤销已推送的提交</td></tr></tbody></table><h3>丢弃工作区修改</h3><pre><code class="language-bash">git restore &lt;file&gt;            # 丢弃单个文件的未暂存修改
+git restore .                 # 丢弃所有未暂存修改（危险）
+git checkout -- &lt;file&gt;        # 旧版写法
+</code></pre><h3>取消暂存</h3><pre><code class="language-bash">git restore --staged &lt;file&gt;   # 从暂存区移回工作区
+git reset HEAD &lt;file&gt;         # 旧版写法
+</code></pre><h3>撤销提交</h3><pre><code class="language-bash"># 保留改动在工作区
+git reset --soft HEAD~1
+
+# 保留改动在暂存区
+git reset --mixed HEAD~1      # 默认
+
+# 彻底丢弃改动（危险）
+git reset --hard HEAD~1
+
+# 撤销已推送的提交（安全）
+git revert &lt;commit-hash&gt;
+</code></pre><h3>找回丢失的提交</h3><pre><code class="language-bash">git reflog                    # 查看 HEAD 移动历史
+git reset --hard &lt;hash&gt;       # 回到某个历史位置
+</code></pre><p><code>reset --hard</code> 后如果后悔，<code>reflog</code> 通常能救回来，除非已经 GC。</p><h2>五、贮藏（stash）</h2><pre><code class="language-bash">git stash                     # 贮藏当前改动
+git stash -u                  # 含未跟踪文件
+git stash list                # 查看贮藏列表
+git stash pop                 # 弹出最近贮藏并删除
+git stash apply stash@{0}     # 应用指定贮藏（保留）
+git stash drop stash@{0}      # 删除指定贮藏
+git stash clear               # 清空所有贮藏
+</code></pre><p>常见场景：改了一半，突然要切分支修 bug。</p><h2>六、远程</h2><pre><code class="language-bash">git remote -v                 # 查看远程仓库
+git remote add origin &lt;url&gt;   # 添加远程
+git remote set-url origin &lt;url&gt; # 修改远程地址
+git remote remove origin      # 删除远程
+
+git fetch                     # 拉取远程信息，不合并
+git pull                      # fetch + merge
+git pull --rebase             # fetch + rebase
+git push                      # 推送
+git push -u origin &lt;branch&gt;   # 首次推送并建立跟踪
+git push --force-with-lease   # 安全强推（推荐）
+git push --force              # 强推（危险）
+</code></pre><blockquote><p><strong>强推原则</strong>：永远用 <code>--force-with-lease</code>，它会检查远程是否有人推过新提交，避免误覆盖别人的工作。</p></blockquote><h2>七、标签</h2><pre><code class="language-bash">git tag                       # 查看标签
+git tag v1.0.0                # 轻量标签
+git tag -a v1.0.0 -m &quot;msg&quot;    # 附注标签（推荐）
+git push origin v1.0.0        # 推送单个标签
+git push --tags               # 推送所有标签
+git tag -d v1.0.0             # 删除本地标签
+git push origin :refs/tags/v1.0.0  # 删除远程标签
+</code></pre><h2>八、查看历史</h2><pre><code class="language-bash">git log                       # 完整日志
+git log --oneline             # 单行
+git log --oneline --graph     # 图形化
+git log -p &lt;file&gt;             # 查看某文件历史
+git log --author=&quot;name&quot;       # 按作者过滤
+git log --since=&quot;2 weeks ago&quot; # 按时间过滤
+git log -S &quot;keyword&quot;          # 按内容变化搜索（pickaxe）
+git blame &lt;file&gt;              # 逐行查看最后修改者
+git show &lt;commit&gt;             # 查看某次提交详情
+</code></pre><h2>九、常见问题</h2><h3>1. 提交信息写错了（未推送）</h3><pre><code class="language-bash">git commit --amend -m &quot;new message&quot;
+</code></pre><p>如果只是想补充文件：</p><pre><code class="language-bash">git add forgotten.txt
+git commit --amend --no-edit
+</code></pre><h3>2. 提交到了错误的分支</h3><pre><code class="language-bash"># 假设应该提交到 feature 分支，却提交到了 main
+git branch feature                # 在当前位置创建分支
+git reset --hard HEAD~1           # main 回退
+git switch feature                # 切到 feature
+</code></pre><h3>3. 本地分支落后，想同步远程</h3><pre><code class="language-bash">git fetch origin
+git rebase origin/main
+# 或者
+git pull --rebase origin main
+</code></pre><h3>4. 合并冲突</h3><pre><code class="language-bash">git status                        # 查看冲突文件
+# 手动编辑冲突文件，删除 &lt;&lt;&lt;&lt;&lt;&lt;&lt; ======= &gt;&gt;&gt;&gt;&gt;&gt;&gt; 标记
+git add &lt;resolved-file&gt;
+git commit                        # 或 git rebase --continue
+</code></pre><p>放弃合并：</p><pre><code class="language-bash">git merge --abort
+git rebase --abort
+</code></pre><h3>5. 不小心提交了敏感信息</h3><p>如果还没推送，<code>git reset --hard</code> 即可。<br>如果已推送，必须改写历史：</p><pre><code class="language-bash">git filter-repo --path secrets.txt --invert-paths
+git push --force-with-lease
+</code></pre><p>同时立即更换泄露的密钥，因为 Git 服务器可能仍留有副本。</p><h3>6. 忽略文件不生效</h3><pre><code class="language-bash">git rm -r --cached .
+git add .
+git commit -m &quot;fix gitignore&quot;
+</code></pre><p><code>.gitignore</code> 只对未跟踪文件生效，已跟踪的文件需要先 <code>rm --cached</code>。</p><h2>十、提交规范（Conventional Commits）</h2><pre><code>&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+
+&lt;body&gt;
+
+&lt;footer&gt;
+</code></pre><p>常用 type：</p><table><thead><tr><th>type</th><th>说明</th></tr></thead><tbody><tr><td><code>feat</code></td><td>新功能</td></tr><tr><td><code>fix</code></td><td>修复 bug</td></tr><tr><td><code>docs</code></td><td>文档变更</td></tr><tr><td><code>style</code></td><td>格式调整（不影响代码逻辑）</td></tr><tr><td><code>refactor</code></td><td>重构</td></tr><tr><td><code>perf</code></td><td>性能优化</td></tr><tr><td><code>test</code></td><td>测试相关</td></tr><tr><td><code>chore</code></td><td>构建 / 工具 / 依赖变更</td></tr></tbody></table><p>示例：</p><pre><code>feat(auth): 支持 OAuth 2.0 登录
+
+- 新增 GitHub / Google 登录入口
+- 补充 token 刷新逻辑
+
+Closes #123
+</code></pre><h2>十一、实用技巧</h2><pre><code class="language-bash"># 快速查看某文件的最后一次修改
+git log -1 --stat &lt;file&gt;
+
+# 查找是哪次提交引入了某个字符串
+git log -S &quot;search-string&quot; --source --all
+
+# 查看两个分支的共同祖先
+git merge-base main feature
+
+# 比较工作区和某个提交
+git diff &lt;commit&gt;
+
+# 临时切换到某个提交查看，不切分支
+git switch --detach &lt;commit&gt;
+
+# 查看暂存区的具体内容
+git diff --staged
+
+# 统计每个作者的提交数
+git shortlog -sn
+
+# 找出未被合并的分支
+git branch --no-merged
+</code></pre><h2>十二、配置文件位置</h2><table><thead><tr><th>级别</th><th>路径</th></tr></thead><tbody><tr><td>系统</td><td><code>/etc/gitconfig</code>（Linux）/ <code>C:\Program Files\Git\etc\gitconfig</code>（Windows）</td></tr><tr><td>全局</td><td><code>~/.gitconfig</code> / <code>%USERPROFILE%\.gitconfig</code></td></tr><tr><td>仓库</td><td><code>&lt;repo&gt;/.git/config</code></td></tr></tbody></table><p>优先级：仓库 &gt; 全局 &gt; 系统。</p><hr><h2>参考</h2><ul><li>官方文档：https://git-scm.com/docs</li><li>Pro Git（中文版）：https://git-scm.com/book/zh/v2</li><li>Conventional Commits：https://www.conventionalcommits.org/zh-hans/</li></ul></div></article></div></main><footer class="site-footer"><div class="container footer-inner" style="max-width: 900px;"><div class="footer-text"><p class="footer-links"><a href="/">网站首页</a> <span class="sep">|</span> <a href="/sitemap.xml">网站地图</a> <span class="sep">|</span> <a href="/feed.xml" target="_blank">RSS订阅</a> <span class="sep">|</span> <a href="http://console.undz.cn/console-panel/feedback-center" target="_blank" rel="noopener">我要反馈</a></p><p class="footer-links"><a href="/contact/">联系我</a> <span class="sep">|</span> <a href="/privacy/">隐私政策</a> <span class="sep">|</span> <a href="/cookies/">Cookie 政策</a> <span class="sep">|</span> <a href="/terms/">服务条款</a> <span class="sep">|</span> <a href="/about/">关于本站</a></p><p>主办单位：韵典综合平台运营中心</p><p>互联网违法不良信息举报电话：0712-5253195 互联网违法不良信息举报邮箱：aeyundian@163.com</p><p>亲爱的市民朋友，上海警方反诈劝阻电话“962110”系专门针对避免您财产被骗受损而设，请您一旦收到来电，立即接听</p><p><a href="http://icp.gov.moe/?keyword=20263044" target="_blank" rel="noopener" style="color: #aaa;">萌ICP备20263044号</a> 技术支持：韵典</p><p>Copyright © 2026 AeYunDian. All Rights Reserved.</p></div><div class="footer-badges"><a href="http://www.shjbzx.cn/" target="_blank" rel="noopener"><img src="/assets/images/footer-shfb.png" alt="上海市互联网违法和不良信息举报中心"> </a><a href="http://www.12377.cn/" target="_blank" rel="noopener"><img src="/assets/images/footer-jubao.png" alt="网上有害信息举报专区"> </a><img src="/assets/images/footer-962110.png" alt="962110 反诈劝阻电话"></div></div></footer><script src="/assets/js/main.js"></script></body></html>

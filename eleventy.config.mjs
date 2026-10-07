@@ -85,7 +85,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets/images": "assets/images" });
   eleventyConfig.addPassthroughCopy({ "src/assets/vendor": "assets/vendor" });
   eleventyConfig.addPassthroughCopy({ "src/assets/fonts": "assets/fonts" });
-
+  eleventyConfig.addPassthroughCopy({ "src/public": "/" });
   // 让 Eleventy 把 .css 文件当作模板处理
   eleventyConfig.addTemplateFormats("css");
   eleventyConfig.addExtension("css", {

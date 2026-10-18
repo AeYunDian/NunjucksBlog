@@ -106,5 +106,11 @@
     },
     "doc": {
         "updated": "最後更新"
+    },
+    "browser": {
+        "title": "瀏覽器版本過低",
+        "desc": "本站最低需要 Internet Explorer 10；建議改用最新版的 Chrome、Edge、Firefox 或 Safari。",
+        "hint": "升級瀏覽器後，即可看到完整的排版、動效、響應式佈局與無障礙支援。",
+        "noscript": "您未開啟 JavaScript，部分功能（導覽抽屜、回到頂端、複製連結）可能無法使用。"
     }
 }

@@ -106,5 +106,11 @@
     },
     "doc": {
         "updated": "Last updated"
+    },
+    "browser": {
+        "title": "Your browser is out of date",
+        "desc": "This site needs Internet Explorer 10 or later. Please switch to the latest Chrome, Edge, Firefox, or Safari.",
+        "hint": "After upgrading you will get the full layout, motion, responsive design, and accessibility support.",
+        "noscript": "JavaScript is turned off, so some features (navigation drawer, back to top, copy link) may not work."
     }
 }

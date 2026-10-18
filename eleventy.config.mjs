@@ -97,7 +97,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("posts", (api) =>
     api
       .getFilteredByGlob("src/posts/**/*.md")
-      .sort((a, b) => new Date(b.data.date) - new Date(a.data.date))
+      .sort((a, b) => new Date(b.data.date) - new Date(a.data.date)),
   );
 
   eleventyConfig.addCollection("tagList", (api) => {
@@ -184,11 +184,12 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("dateToISO", (date) => new Date(date).toISOString());
 
   eleventyConfig.addFilter("filterByTag", (posts, tag) =>
-    posts.filter((post) => (post.data.tags || []).includes(tag))
+    posts.filter((post) => (post.data.tags || []).includes(tag)),
   );
 
-  eleventyConfig.addFilter("tagSlug", (tag) =>
-    tagSlugMap[tag] || baseSlug(tag)
+  eleventyConfig.addFilter(
+    "tagSlug",
+    (tag) => tagSlugMap[tag] || baseSlug(tag),
   );
 
   eleventyConfig.addFilter("addOne", (n) => Number(n) + 1);
@@ -238,13 +239,13 @@ export default function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter("localeUrl", (url, locale) =>
-    withLocale(url, locale)
+    withLocale(url, locale),
   );
 
   eleventyConfig.addFilter("absoluteUrl", (url) => siteData.url + url);
 
   eleventyConfig.addFilter("navActive", (url, itemUrl) =>
-    itemUrl === "/" ? url === "/" : url.indexOf(itemUrl) === 0
+    itemUrl === "/" ? url === "/" : url.indexOf(itemUrl) === 0,
   );
 
   /* ---------- JSON-LD ---------- */
@@ -261,11 +262,13 @@ export default function (eleventyConfig) {
       description: opts.description,
       inLanguage: opts.lang,
       publisher: { "@type": "Organization", name: opts.name, url: opts.url },
-    })
+    }),
   );
 
   eleventyConfig.addNunjucksGlobal("jsonldPost", (opts) => {
-    const authors = (Array.isArray(opts.authors) ? opts.authors : [opts.authors])
+    const authors = (
+      Array.isArray(opts.authors) ? opts.authors : [opts.authors]
+    )
       .filter(Boolean)
       .map((name) => ({ "@type": "Person", name }));
     const image = absUrl(opts.image, opts.siteUrl);
@@ -302,15 +305,14 @@ export default function (eleventyConfig) {
         name: item.name,
         item: item.url,
       })),
-    })
+    }),
   );
 
   eleventyConfig.addFilter("relatedPosts", (posts, tags, url, limit = 3) => {
     const set = new Set(tags || []);
     return posts
       .filter(
-        (p) =>
-          p.url !== url && (p.data.tags || []).some((t) => set.has(t))
+        (p) => p.url !== url && (p.data.tags || []).some((t) => set.has(t)),
       )
       .slice(0, limit);
   });
@@ -345,6 +347,7 @@ export default function (eleventyConfig) {
 
   /* ---------- 复制 ---------- */
   eleventyConfig.addPassthroughCopy({ "src/assets/images": "assets/images" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/aquery": "assets/aquery" });
   eleventyConfig.addPassthroughCopy({ "src/assets/js": "assets/js" });
   eleventyConfig.addPassthroughCopy({ "src/assets/vendor": "assets/vendor" });
   eleventyConfig.addPassthroughCopy({ "src/public": "/" });

@@ -4,9 +4,13 @@
     "description": "韵典综合平台 · Eleventy 静态站点",
     "scripts": {
         "clean": "rimraf dist",
+        "predev": "npm run build:aquery",
         "dev": "rimraf dist && cross-env ELEVENTY_ENV=development eleventy --serve",
+        "prebuild": "npm run build:aquery",
         "build": "rimraf dist && cross-env ELEVENTY_ENV=production eleventy",
+        "prebuild:prod": "npm run build:aquery",
         "build:prod": "rimraf dist && cross-env ELEVENTY_ENV=production eleventy",
+        "build:aquery": "node scripts/build-aquery.mjs",
         "verify": "npm run build:prod"
     },
     "browserslist": [

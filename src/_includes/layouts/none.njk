@@ -4,6 +4,20 @@
   {% include "partials/head.njk" %}
 </head>
 <body>
+  <!--[if lt IE 10]>
+  <div class="ie-fallback" lang="zh-CN">
+    <h1>{{ 'browser.title' | t('zh-CN') }}</h1>
+    <p>{{ 'browser.desc' | t('zh-CN') }}</p>
+    <p>{{ 'browser.hint' | t('zh-CN') }}</p>
+  </div>
+  <style>
+    .main { display: none !important; }
+    .ie-fallback { display: block !important; max-width: 640px; margin: 80px auto; padding: 0 24px; font-family: "Segoe UI", "Microsoft YaHei", sans-serif; color: #1F1F1F; }
+    .ie-fallback h1 { font-size: 24px; line-height: 1.4; margin: 0 0 12px; font-weight: 500; }
+    .ie-fallback p { font-size: 15px; line-height: 1.75; color: #5F6368; margin: 0 0 8px; }
+  </style>
+  <![endif]-->
+
   <main class="main">
     <div class="container">
       {{ content | safe }}

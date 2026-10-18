@@ -21,59 +21,7 @@ css:
 </div>
 
 {% onlyJS %}
-<script src="/assets/vendor/jquery-1.12.4.min.js"></script>
-<script src="/assets/vendor/jquery.qrcode.min.js"></script>
-<script>
-$(function () {
-  var ALLOWED = ["undz.cn", "yzhyzxy.cn", "gov.cn", "edu.cn"];
-
-  function isAllowedHost(hostname) {
-    hostname = (hostname || "").toLowerCase();
-    for (var i = 0; i < ALLOWED.length; i++) {
-      var d = ALLOWED[i];
-      if (hostname === d || hostname.slice(-(d.length + 1)) === "." + d) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  var $codeBox = $("#wxshare-code");
-
-  var m = window.location.search.match(/[?&]url=([^&]*)/);
-  var url = m ? decodeURIComponent(m[1]) : "";
-
-  function fail(msg) {
-    $codeBox.html('<p class="wxshare__err">' + msg + '</p>');
-  }
-
-  if (!/^https?:\/\//i.test(url)) {
-    $(".wxshare").remove();
-    return;
-  }
-
-  var hostname = "";
-  try {
-    var a = document.createElement("a");
-    a.href = url;
-    hostname = a.hostname;
-  } catch (e) {
-    fail("链接格式不正确。");
-    return;
-  }
-
-  if (!isAllowedHost(hostname)) {
-    $(".wxshare").remove();
-    return;
-  }
-
-
-  $codeBox.qrcode({
-    render: "table",
-    width: 200,
-    height: 200,
-    text: url
-  });
-});
-</script>
+<script src="/assets/aquery/aquery.min.js" defer></script>
+<script src="/assets/aquery/aquery.qrcode.min.js" defer></script>
+<script src="/assets/js/share-wechat.js" defer></script>
 {% endonlyJS %}

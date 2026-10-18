@@ -1,0 +1,3 @@
+# 文档不参与模板渲染（README 里有 {{key}} 之类的示例，会被 Nunjucks 当模板解析）
+src/assets/**/*.md
+docs/**/*.md

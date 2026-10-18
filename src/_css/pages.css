@@ -378,6 +378,10 @@
 }
 
 /* ---------- Tags ---------- */
+.tag-back {
+  margin-top: 24px;
+}
+
 .tag-cloud {
   display: flex;
   flex-wrap: wrap;
@@ -492,6 +496,7 @@
 }
 
 .wxshare__code img,
+.wxshare__code canvas,
 .wxshare__code table {
   display: block;
 }

@@ -48,11 +48,9 @@
 <link rel="alternate" type="application/atom+xml" title="{{ ui.site.name }}" href="{{ site.url }}/feed.xml">
 
 {# ---- 字体 / 样式 ---- #}
+{# Roboto 由 main.js 异步注入，避免 CSS 阻塞首屏渲染（约 500ms）；IE10 等不支持 woff2 的浏览器自动回退系统字体 #}
 <link rel="preconnect" href="https://cdn.undz.cn" crossorigin>
-<link rel="stylesheet" href="https://cdn.undz.cn/css2?family=Roboto:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="/assets/css/main.css">
-
-<noscript><style>.only-js { display: none !important; }</style></noscript>
 
 {% if page.url == ('/' | localeUrl(locale)) %}
 <script type="application/ld+json">{{ jsonldWebsite({ name: ui.site.name, url: site.url, description: ui.site.description, lang: locale.htmlLang }) | safe }}</script>

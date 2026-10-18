@@ -93,16 +93,7 @@ css:
 {{ button({
   text: "重新设置 Cookie 授权",
   type: "secondary",
-  id: "reset-consent"
+  id: "reset-consent",
+  attrs: 'data-action="reset-consent"'
 }) }}
-<script>
-  $(function () {
-    $("#reset-consent").on("click", function () {
-      try {
-        localStorage.removeItem("gov_cookie_consent");
-      } catch (e) {}
-      location.reload();
-    });
-  });
-</script>
 {% endonlyJS %}

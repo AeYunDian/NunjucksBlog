@@ -181,8 +181,12 @@ h4,
   margin-top: 16px;
 }
 
-.visually-hidden {
-  position: absolute !important;
+/* 无 JS 时隐藏只给 JS 用的区块（替代内联 noscript 样式） */
+.no-js .only-js {
+  display: none !important;
+}
+
+.visually-hidden {  position: absolute !important;
   width: 1px;
   height: 1px;
   padding: 0;

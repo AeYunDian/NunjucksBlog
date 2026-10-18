@@ -21,7 +21,9 @@ ogType: article
 {% set dateIso = date | dateToISO %}
 {% set postImage = cover or ogImage or site.ogImage %}
 
-{% set related = collections.posts | relatedPosts(tags, page.url, 3) %}
+{# 本地化文章页复用了中文原文，relatedPosts 要用原文 URL 去重 #}
+{% set canonicalUrl = (post.url if post else page.url) %}
+{% set related = collections.posts | relatedPosts(tags, canonicalUrl, 3) %}
 
 <div class="post-layout">
   <div class="post-main">
@@ -31,7 +33,7 @@ ogType: article
       { text: title }
     ], locale) }}
 
-    <article class="post">
+    <article class="post" lang="zh-CN">
     <header class="post__header">
       <h1 class="post__title">{{ title }}</h1>
 
@@ -71,7 +73,7 @@ ogType: article
     </div>
     </article>
 
-    <script type="application/ld+json">{{ jsonldPost({ title: title, description: description, date: dateIso, lang: locale.htmlLang, url: site.url + page.url, siteName: ui.site.name, siteUrl: site.url, image: postImage, authors: postAuthors, tags: tags }) | safe }}</script>
+    <script type="application/ld+json">{{ jsonldPost({ title: title, description: description, date: dateIso, lang: 'zh-CN', url: site.url + page.url, siteName: ui.site.name, siteUrl: site.url, image: postImage, authors: postAuthors, tags: tags }) | safe }}</script>
     <script type="application/ld+json">{{ jsonldBreadcrumb([{ name: ui.nav.home, url: site.url + homeUrl }, { name: ui.nav.posts, url: site.url + postsUrl }, { name: title, url: site.url + page.url }]) | safe }}</script>
   </div>
   {% if related.length %}
@@ -80,7 +82,7 @@ ogType: article
       <h2>{{ 'post.related' | t(locale.id) }}</h2>
       <ul class="related__list">
         {% for post in related %}
-        <li><a href="{{ post.url }}">{{ post.data.title }}</a></li>
+        <li><a href="{{ post.url | localeUrl(locale) }}">{{ post.data.title }}</a></li>
         {% endfor %}
       </ul>
     </section>

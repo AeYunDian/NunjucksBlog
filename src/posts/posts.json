@@ -1,10 +1,6 @@
 {
     "layout": "layouts/post.njk",
-    "css": [
-        "components/tag",
-        "components/breadcrumb",
-        "pages/post"
-    ],
+    "i18nPage": true,
     "eleventyNavigation": {
         "hide": true
     }

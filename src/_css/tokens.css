@@ -1,41 +1,63 @@
 /* ==========================================================================
-   Design tokens — Material Design 2 形体 + Google/Monet 蓝
-   NOTE: 构建期会被 postcss-custom-properties 展开成字面量，IE10 可用。
+   Design tokens — Material Design 2 + Monet 蓝（Google Blue 600 作种子）
+   NOTE: 构建期由 postcss-custom-properties 展开为字面量，IE10 可用。
+   规则：颜色只走语义 token；圆角 4px（MD2 标准）；阴影用 MD2 官方 elevation。
    ========================================================================== */
 :root {
-  /* brand */
-  --md-primary: #1A73E8;
-  --md-primary-dark: #1557B0;
+  /* brand —— Monet 蓝 */
+  --md-primary: #0B57D0;
+  --md-primary-dark: #0842A0;
   --md-primary-light: #8AB4F8;
-  --md-primary-50: #E8F1FD;
-  --md-primary-100: #D2E3FC;
+  --md-primary-50: #E8F0FE;
+  --md-primary-100: #D3E3FD;
+  --md-primary-200: #A8C7FA;
   --md-on-primary: #FFFFFF;
+  --md-on-primary-container: #041E49;
 
   /* surfaces */
-  --md-bg: #F8F9FA;
+  --md-bg: #F7F9FC;
   --md-surface: #FFFFFF;
   --md-surface-2: #F1F3F4;
+  --md-surface-3: #E8EAED;
 
   /* text */
-  --md-text: #202124;
+  --md-text: #1F1F1F;
   --md-text-2: #5F6368;
   --md-text-3: #9AA0A6;
-  --md-divider: #DADCE0;
-  --md-error: #B00020;
+  --md-divider: #E0E3E7;
+  --md-error: #B3261E;
 
-  /* shape */
+  /* state layers —— MD2 的 4% / 12% 叠加，代替 hover 换色 */
+  --md-state-hover: rgba(11, 87, 208, 0.04);
+  --md-state-focus: rgba(11, 87, 208, 0.12);
+  --md-state-pressed: rgba(11, 87, 208, 0.12);
+  --md-state-hover-neutral: rgba(60, 64, 67, 0.04);
+  --md-state-focus-neutral: rgba(60, 64, 67, 0.12);
+  --md-state-selected: rgba(11, 87, 208, 0.12);
+  --md-state-disabled: rgba(0, 0, 0, 0.12);
+  --md-text-disabled: rgba(0, 0, 0, 0.38);
+
+  /* shape —— MD2：2px 用于小元素，4px 用于按钮/卡片/容器 */
+  --md-radius-sm: 2px;
   --md-radius: 4px;
   --md-radius-pill: 16px;
   --md-radius-circle: 50%;
 
-  /* elevation */
-  --md-z1: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-  --md-z2: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
-  --md-z3: 0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
-  --md-z4: 0 2px 3px 0 rgba(60, 64, 67, 0.3), 0 6px 10px 4px rgba(60, 64, 67, 0.15);
-  --md-z8: 0 4px 4px 0 rgba(60, 64, 67, 0.3), 0 8px 12px 6px rgba(60, 64, 67, 0.15);
-  --md-z16: 0 8px 12px 6px rgba(60, 64, 67, 0.15),
-    0 4px 4px 0 rgba(60, 64, 67, 0.3);
+  /* elevation —— MD2 官方 dp 阴影 */
+  --md-z1: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12),
+    0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  --md-z2: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12),
+    0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  --md-z4: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
+    0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --md-z6: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12),
+    0 3px 5px -1px rgba(0, 0, 0, 0.2);
+  --md-z8: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12),
+    0 5px 5px -3px rgba(0, 0, 0, 0.2);
+  --md-z16: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
+    0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  --md-z24: 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+    0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
 
   /* type */
   --md-font: Roboto, "Noto Sans SC", "Noto Sans TC", "Noto Sans", system-ui,
@@ -44,10 +66,27 @@
   --md-mono: ui-monospace, "Roboto Mono", Consolas, Menlo, "Courier New",
     monospace;
 
-  /* motion */
-  --md-ease: cubic-bezier(0.2, 0, 0, 1);
+  /* type scale —— MD2 的 H4 / H5 / H6 / subtitle1 / body2 / caption */
+  --md-h4-size: 34px;
+  --md-h4-line: 40px;
+  --md-h5-size: 24px;
+  --md-h5-line: 32px;
+  --md-h6-size: 20px;
+  --md-h6-line: 32px;
+  --md-subtitle1-size: 16px;
+  --md-subtitle1-line: 24px;
+  --md-body2-size: 14px;
+  --md-body2-line: 20px;
+  --md-caption-size: 12px;
+  --md-caption-line: 16px;
+
+  /* motion —— MD2 standard / decelerate 曲线 */
+  --md-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --md-ease-decel: cubic-bezier(0, 0, 0.2, 1);
+  --md-ease-accel: cubic-bezier(0.4, 0, 1, 1);
   --md-fast: 120ms;
   --md-normal: 200ms;
+  --md-slow: 250ms;
 
   /* layout */
   --md-container: 1120px;

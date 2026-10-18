@@ -19,7 +19,8 @@ body {
   color: var(--md-text);
   font-family: var(--md-font);
   font-size: 16px;
-  line-height: 1.75;
+  line-height: 24px; /* MD2 body1 */
+  letter-spacing: 0.25px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -57,6 +58,7 @@ h6 {
   margin: 0;
   font-weight: 500;
   line-height: 1.3;
+  letter-spacing: 0;
   color: var(--md-text);
 }
 
@@ -96,18 +98,19 @@ table {
   outline-offset: 2px;
 }
 
-/* typography scale（MD2 + 中文行高） */
+/* typography scale —— 按 MD2 的 H3/H4/H5/H6、subtitle1、body2、caption 对齐 */
 .display {
-  font-size: 40px;
-  line-height: 48px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-size: 48px;
+  line-height: 52px;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 h1,
 .h1 {
-  font-size: 32px;
+  font-size: 34px;
   line-height: 40px;
+  letter-spacing: 0.25px;
 }
 
 h2,
@@ -119,24 +122,44 @@ h2,
 h3,
 .h3 {
   font-size: 20px;
-  line-height: 28px;
+  line-height: 32px;
+  letter-spacing: 0.15px;
+}
+
+h4,
+.h4 {
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
 }
 
 .lead {
   font-size: 16px;
-  line-height: 28px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
   color: var(--md-text-2);
 }
 
 .meta {
   font-size: 14px;
-  line-height: 24px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
   color: var(--md-text-2);
 }
 
 .caption {
   font-size: 12px;
   line-height: 16px;
+  letter-spacing: 0.4px;
+  color: var(--md-text-2);
+}
+
+.overline {
+  font-size: 10px;
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   color: var(--md-text-2);
 }
 

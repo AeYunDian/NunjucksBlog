@@ -73,6 +73,20 @@
     }
   });
 
+  /* MD2 top app bar：滚动后加 4dp 阴影 */
+  var $bar = $(".app-bar");
+  if ($bar.length) {
+    var onBarScroll = function () {
+      if (window.pageYOffset > 4) {
+        $bar.addClass("is-scrolled");
+      } else {
+        $bar.removeClass("is-scrolled");
+      }
+    };
+    $(window).on("scroll", onBarScroll);
+    onBarScroll();
+  }
+
   /* 打印 */
   $('[data-action="print"]').on("click", function () {
     window.print();

@@ -3,25 +3,30 @@
    ========================================================================== */
 
 /* ---------- Home ---------- */
+/* MD2 的 "primary container"：Monet 蓝浅底 + 4px 圆角 */
 .home-hero {
-  padding: 8px 0 24px;
-  border-bottom: 1px solid var(--md-divider);
-  margin-bottom: 24px;
+  padding: 32px 24px;
+  margin-bottom: 32px;
+  border: 0;
+  border-radius: var(--md-radius);
+  background: var(--md-primary-50);
 }
 
 .home-hero__title {
   margin: 0 0 8px;
-  font-size: 40px;
-  line-height: 48px;
+  font-size: 34px;
+  line-height: 40px;
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.25px;
+  color: var(--md-text);
 }
 
 .home-hero__lead {
   max-width: 36em;
   margin: 0 0 24px;
   font-size: 16px;
-  line-height: 28px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
   color: var(--md-text-2);
 }
 
@@ -36,15 +41,17 @@
 
 .page-head__title {
   margin: 0 0 4px;
-  font-size: 32px;
+  font-size: 34px;
   line-height: 40px;
   font-weight: 500;
+  letter-spacing: 0.25px;
 }
 
 .page-head__desc {
   margin: 0;
   font-size: 14px;
-  line-height: 24px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
   color: var(--md-text-2);
 }
 
@@ -62,9 +69,10 @@
 
 .post__title {
   margin: 0 0 8px;
-  font-size: 32px;
+  font-size: 34px;
   line-height: 40px;
   font-weight: 500;
+  letter-spacing: 0.25px;
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
@@ -74,7 +82,8 @@
   flex-wrap: wrap;
   align-items: center;
   font-size: 14px;
-  line-height: 24px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
   color: var(--md-text-2);
 }
 
@@ -101,9 +110,11 @@
   margin-left: 4px;
 }
 
+/* 正文：CJK 长文行高按 1.75，比 MD2 body1 的 1.5 更适合中文阅读 */
 .post__content {
   font-size: 16px;
-  line-height: 1.8;
+  line-height: 1.75;
+  letter-spacing: 0.25px;
   color: var(--md-text);
   min-width: 0;
   overflow-wrap: break-word;
@@ -114,12 +125,14 @@
   margin: 40px 0 12px;
   font-size: 24px;
   line-height: 32px;
+  letter-spacing: 0;
 }
 
 .post__content h3 {
   margin: 32px 0 10px;
   font-size: 20px;
-  line-height: 28px;
+  line-height: 32px;
+  letter-spacing: 0.15px;
 }
 
 .post__content ul,
@@ -164,7 +177,7 @@
 
 .post__content code {
   padding: 2px 5px;
-  border-radius: 2px;
+  border-radius: var(--md-radius-sm);
   background: var(--md-surface-2);
   font-size: 0.9em;
 }
@@ -215,7 +228,8 @@
   justify-content: space-between;
   margin-top: 24px;
   font-size: 14px;
-  line-height: 24px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
 }
 
 .post-nav a {
@@ -237,8 +251,9 @@
 
 .related h2 {
   margin-bottom: 8px;
-  font-size: 18px;
-  line-height: 26px;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: 0.15px;
 }
 
 /* 相关文章：默认在正文下方，宽屏且支持 flex 时放到右侧 */
@@ -307,7 +322,8 @@
 .related__list li {
   padding: 8px 0;
   border-bottom: 1px solid var(--md-divider);
-  font-size: 15px;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .related__list li:last-child {
@@ -336,7 +352,8 @@
 .archive-list li {
   position: relative;
   padding: 8px 0 8px 20px;
-  font-size: 15px;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .archive-list li::before {
@@ -354,7 +371,9 @@
   display: inline-block;
   min-width: 96px;
   color: var(--md-text-2);
-  font-size: 13px;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
   font-variant-numeric: tabular-nums;
 }
 
@@ -367,8 +386,6 @@
 
 .tag-cloud .chip {
   margin: 4px;
-  height: 36px;
-  line-height: 36px;
 }
 
 /* ---------- Doc (关于 / 联系 / 法律页) ---------- */
@@ -385,25 +402,30 @@
 
 .doc__title {
   margin: 0 0 4px;
-  font-size: 32px;
+  font-size: 34px;
   line-height: 40px;
+  letter-spacing: 0.25px;
 }
 
 .doc__updated {
   margin: 0;
-  font-size: 13px;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
   color: var(--md-text-2);
 }
 
 .doc__content h2 {
   margin: 32px 0 12px;
-  font-size: 22px;
-  line-height: 30px;
+  font-size: 24px;
+  line-height: 32px;
 }
 
 .doc__content h3 {
   margin: 24px 0 8px;
-  font-size: 18px;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: 0.15px;
 }
 
 .doc__content table {
@@ -434,9 +456,10 @@
 
 .error-page__code {
   margin: 0;
-  font-size: 72px;
-  line-height: 1;
-  font-weight: 500;
+  font-size: 96px;
+  line-height: 96px;
+  font-weight: 400;
+  letter-spacing: -1.5px;
   color: var(--md-primary);
 }
 
@@ -456,6 +479,8 @@
 .wxshare__title {
   margin-bottom: 16px;
   font-size: 20px;
+  line-height: 32px;
+  letter-spacing: 0.15px;
 }
 
 .wxshare__code {
@@ -483,19 +508,7 @@
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 599px) {
-  .home-hero__title {
-    font-size: 32px;
-    line-height: 40px;
-  }
-}
-
-@media (min-width: 905px) {
-  .post__title {
-    font-size: 40px;
-    line-height: 50px;
-  }
-}
+/* 标题统一停在 MD2 H4（34/40），不跨档缩放，避免出现非规范字号 */
 
 /* ---------- Home services ---------- */
 .home-services {
@@ -516,11 +529,13 @@
   border: 1px solid var(--md-divider);
   border-radius: var(--md-radius);
   background: var(--md-surface);
-  transition: border-color var(--md-fast) var(--md-ease);
+  transition: border-color var(--md-fast) var(--md-ease),
+    background-color var(--md-fast) var(--md-ease);
 }
 
 .service-card:hover {
-  border-color: var(--md-primary);
+  border-color: rgba(11, 87, 208, 0.24);
+  background: var(--md-state-hover);
   text-decoration: none;
 }
 
@@ -530,13 +545,15 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
+  letter-spacing: 0.15px;
 }
 
 .service-card__desc {
   display: block;
   color: var(--md-text-2);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 20px;
+  letter-spacing: 0.25px;
 }
 
 @media (min-width: 600px) {
@@ -561,8 +578,9 @@
 
 .links-intro h2 {
   margin-bottom: 8px;
-  font-size: 18px;
-  line-height: 26px;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: 0.15px;
 }
 
 .links-intro ul {
@@ -570,7 +588,8 @@
   padding-left: 20px;
   color: var(--md-text-2);
   font-size: 14px;
-  line-height: 26px;
+  line-height: 24px;
+  letter-spacing: 0.25px;
 }
 
 .link-grid {
@@ -588,6 +607,7 @@
   background: var(--md-surface);
   box-shadow: var(--md-z1);
   animation: md-enter 320ms var(--md-ease) both;
+  transition: box-shadow var(--md-normal) var(--md-ease);
 }
 
 .link-card:nth-child(2) {
@@ -611,7 +631,7 @@
 }
 
 .link-card:hover {
-  box-shadow: var(--md-z1);
+  box-shadow: var(--md-z2);
   text-decoration: none;
 }
 
@@ -661,14 +681,17 @@
   display: block;
   margin: 2px 0;
   color: var(--md-text-2);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 20px;
+  letter-spacing: 0.25px;
 }
 
 .link-card__host {
   display: block;
   color: var(--md-text-3);
   font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
 }
 
 @media (min-width: 600px) {
@@ -688,8 +711,10 @@
 
 .rss-box__label {
   margin: 0 0 4px;
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--md-text-2);
 }
@@ -704,6 +729,7 @@
 .rss-steps {
   padding-left: 20px;
   color: var(--md-text-2);
-  font-size: 15px;
-  line-height: 28px;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.25px;
 }

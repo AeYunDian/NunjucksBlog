@@ -115,10 +115,22 @@
       if (timer) window.clearTimeout(timer);
 
       if (!custom) {
-        try {
-          delete window[name];
-        } catch (e) {
-          window[name] = undefined;
+        if (ok) {
+          try {
+            delete window[name];
+          } catch (e) {
+            window[name] = undefined;
+          }
+        } else {
+          /* 超时/出错时脚本可能已经入队，先留 noop，避免执行时报 ReferenceError */
+          window[name] = $a.noop;
+          window.setTimeout(function () {
+            try {
+              delete window[name];
+            } catch (e) {
+              window[name] = undefined;
+            }
+          }, 30000);
         }
       }
       if (script.parentNode) script.parentNode.removeChild(script);
@@ -312,7 +324,16 @@
       }
     }
 
-    x.send(body);
+    try {
+      x.send(body);
+    } catch (e) {
+      /* 同步请求在网络错误 / CORS 拒绝 / file:// 下会直接抛 */
+      if (!finished) {
+        finished = true;
+        deferred.reject(x, "error", e);
+      }
+      return x;
+    }
 
     /* 同步请求在部分浏览器不触发 load，补一次兜底 */
     if (opts.async === false && !finished) complete();
@@ -388,11 +409,13 @@
     var successFns = opts.success;
     var errorFns = opts.error;
     var completeFns = opts.complete;
+    var lastStatus = "complete";
 
     opts.type = String(opts.type || "GET").toUpperCase();
     opts.url = opts.url || window.location.href;
 
     d.done(function (data, status, x) {
+      lastStatus = status || "success";
       withGlobal(opts, function () {
         $a(document).trigger("ajaxSuccess", [x, opts, data]);
       });
@@ -400,6 +423,7 @@
     });
 
     d.fail(function (x, status, err) {
+      lastStatus = status || "error";
       withGlobal(opts, function () {
         $a(document).trigger("ajaxError", [x, opts, err]);
       });
@@ -412,7 +436,7 @@
         $a(document).trigger("ajaxComplete", [x, opts]);
         if (activeCount === 0) $a(document).trigger("ajaxStop");
       });
-      if (completeFns) completeFns.call(ctx, x, "complete");
+      if (completeFns) completeFns.call(ctx, x, lastStatus);
     });
 
     withGlobal(opts, function () {

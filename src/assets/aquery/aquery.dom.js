@@ -6,7 +6,6 @@
   "use strict";
 
   var fn = $a.fn;
-  var CUSTOM_SEL = /:(first|last|eq|even|odd|gt|lt|visible|hidden|contains|has)\b/i;
 
   function make(nodes) {
     return $a(nodes);
@@ -98,7 +97,7 @@
     this.each(function () {
       var el = this, hit;
 
-      if (el.closest && !CUSTOM_SEL.test(selector)) {
+      if (el.closest && !$a._internal.hasCustom(selector)) {
         hit = el.closest(selector);
         if (hit) out.push(hit);
         return;
@@ -239,6 +238,14 @@
 
   fn.empty = function () {
     return this.each(function () {
+      /* 先清后代的事件与 data，避免节点脱离 DOM 后残留 */
+      if ($a._cleanData && this.childNodes) {
+        var kids = Array.prototype.slice.call(this.childNodes);
+        for (var i = 0; i < kids.length; i++) {
+          if (kids[i].nodeType === 1) $a._cleanData(kids[i]);
+        }
+      }
+
       if (this.textContent !== undefined) {
         this.textContent = "";
       } else {
@@ -319,7 +326,9 @@
       return el.value;
     }
 
-    var values = $a.isArray(value) ? $a.map(value, function (v) { return String(v); }) : null;
+    var values = $a.isArray(value)
+      ? $a.map(value, function (v) { return v == null ? null : String(v); })
+      : null;
 
     return this.each(function (i) {
       var node = this;
@@ -361,6 +370,13 @@
     }
 
     if (value === undefined) return this[0] ? this[0].getAttribute(name) : undefined;
+
+    /* attr(name, null) 等于移除属性，而不是写入字符串 "null" */
+    if (value === null) {
+      return this.each(function () {
+        this.removeAttribute(name);
+      });
+    }
 
     /* 函数值：(index, oldValue) => newValue，每个元素单独求值 */
     if (typeof value === "function") {
@@ -447,7 +463,17 @@
       return s ? (s.getPropertyValue ? s.getPropertyValue(dash(name)) : s[camel(name)]) : undefined;
     }
 
+    var propName = String(name);
+    var isCustom = propName.indexOf("--") === 0;
+
     return this.each(function () {
+      if (isCustom) {
+        /* CSS 自定义属性不能走 style[camelName]，必须 setProperty */
+        if (value == null || value === "") this.style.removeProperty(propName);
+        else this.style.setProperty(propName, String(value));
+        return;
+      }
+
       this.style[camel(name)] = UNITLESS.test(camel(name)) ? value : px(value);
     });
   };
@@ -772,7 +798,15 @@
 
     function check() {
       if (stopped) return;
-      var nodes = $a(selector, root), i;
+
+      var nodes = $a(selector, root), i, j;
+
+      /* 清掉已离开文档的引用：既防 seen 无限增长，也让「移除后重新插入」能再次命中 */
+      for (j = seen.length - 1; j >= 0; j--) {
+        var docEl = (seen[j].ownerDocument || document).documentElement;
+        if (!docEl.contains(seen[j])) seen.splice(j, 1);
+      }
+
       for (i = 0; i < nodes.length; i++) {
         if ($a.inArray(nodes[i], seen) < 0) {
           seen.push(nodes[i]);

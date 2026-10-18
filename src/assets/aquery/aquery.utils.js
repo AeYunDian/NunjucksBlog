@@ -59,15 +59,13 @@
   };
 
   $a.isPlainObject = function (obj) {
-    var key;
+    var proto;
+
     if (!obj || toString.call(obj) !== "[object Object]") return false;
     if (obj.nodeType || $a.isWindow(obj)) return false;
-    if (obj.constructor && !obj.hasOwnProperty("constructor") &&
-        !obj.constructor.prototype.hasOwnProperty("isPrototypeOf")) {
-      return false;
-    }
-    for (key in obj) { /* 只为取到最后一个 key */ }
-    return key === undefined || obj.hasOwnProperty(key);
+
+    proto = Object.getPrototypeOf ? Object.getPrototypeOf(obj) : obj.__proto__;
+    return proto === null || proto === Object.prototype;
   };
 
   $a.type = function (obj) {
@@ -160,6 +158,11 @@
 
     function build(prefix, value) {
       var i, k;
+
+      if (value instanceof Date) {
+        add(prefix, value.toISOString ? value.toISOString() : String(value));
+        return;
+      }
 
       if ($a.isArray(value)) {
         for (i = 0; i < value.length; i++) build(prefix + "[]", value[i]);
@@ -412,8 +415,8 @@
     if (!(P.prototype.finally && Object.getOwnPropertyDescriptors)) return 2017;
     if (!(Array.prototype.flat && Object.fromEntries)) return 2018;
     if (!(window.BigInt && String.prototype.matchAll && window.globalThis)) return 2019;
-    if (!(String.prototype.replaceAll && P.any)) return 2020;
-    if (!(Array.prototype.at && Object.hasOwn)) return 2021;
+    if (!String.prototype.replaceAll) return 2020;
+    if (!(P.any && Array.prototype.at && Object.hasOwn)) return 2021;
     if (!(Array.prototype.findLast && Array.prototype.toSorted)) return 2022;
     if (!(Object.groupBy && window.Map.groupBy)) return 2023;
     return 2024;

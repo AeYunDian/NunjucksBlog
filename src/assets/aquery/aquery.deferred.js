@@ -1,6 +1,6 @@
 /*!
  * aQuery.deferred.js — Deferred / when
- * 依赖：aquery.core.js、aquery.utils.js、aquery.dom.js（$a.wait 用到 $a.watch）
+ * 依赖：aquery.core.js、aquery.utils.js；运行时依赖 aquery.dom.js（$a.wait 调用 $a.watch）
  */
 (function (window, $a) {
   "use strict";

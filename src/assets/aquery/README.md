@@ -5,7 +5,7 @@
 站内自用的轻量 DOM / 请求库。ES5 写法，IE9+ 可运行，无依赖，全局变量 `$a`。
 
 > 命名：aQuery = a + Query，`a` 既是 Ay 项目前缀的首字母，也取「一个」之意。
-> 当前版本：`0.2.2`
+> 当前版本：`0.2.3`
 
 ## 文件与加载顺序
 
@@ -62,11 +62,11 @@ $a(function () {
 
 ```js
 $a("ul > li:first"); // 第一个 li
-$a("tr:even td:eq(1)"); // 偶数行的第 2 个单元格
-$a("div.card:has(> img)"); // 含图片的卡片
+$a("tr:even td:eq(1)"); // 注意：:eq(1) 取的是整段候选集里的第 2 个 td，不是每行第 2 个
+$a("div.card:has(> img)"); // 含图片的卡片（支持以组合符开头的相对选择器）
 $a("p:not(:visible)"); // 不可见的段落
 $a("li:contains(公告)"); // 文本包含「公告」
-$a("li:nth-child(2n+1)"); // 原生 nth-child
+$a("li:nth-child(2n+1)"); // 原生 nth-child：每行第 1/3/5… 个
 $a(":hidden"); // 全站隐藏元素
 ```
 
@@ -79,7 +79,7 @@ $a(":hidden"); // 全站隐藏元素
 | `:not(selector)`                                           | 原生支持；内部含自定义伪类时由引擎接管         |
 | `:nth-child()` 等原生伪类                                  | 交给 `matches()` / `querySelectorAll`          |
 
-> 不含自定义伪类时走 `querySelectorAll` 快路径；含自定义伪类时按组合符分段求值，位置伪类只影响所在那一段。
+> 不含自定义伪类时走 `querySelectorAll` 快路径；含自定义伪类、或以 `>`/`+`/`~` 开头时走分段求值。位置伪类（`:first`/`:eq`/…）作用在**整段展开后的候选集**上，不是每个父元素内单独计数。
 
 ### 集合
 
@@ -94,6 +94,7 @@ $a(":hidden"); // 全站隐藏元素
 `append(x)`、`prepend(x)`、`before(x)`、`after(x)`、`remove()`、`detach()`、`empty()`、`replaceWith(x)`
 
 - `remove()`：摘除并清掉自身及**全部后代**的事件与 `data`
+- `empty()`：清空子节点前，同样清理后代的事件与 `data`
 - `detach()`：只摘除，**保留**事件与 `data`，之后可以原样插回去
 
 ### 内容 / 属性 / 数据
@@ -103,6 +104,7 @@ $a(":hidden"); // 全站隐藏元素
 `data(key[, v])`、`removeData([key])`
 
 - `attr(name, fn)` / `val(fn)` / `val(array)`：函数收到 `(index, oldValue)`；数组用于多选 `select` 与 `checkbox`
+- `attr(name, null)` 等于 `removeAttr(name)`
 - `html(v)` 设置后会**执行其中的 `<script>`**（外部 `src` 与内联都支持）
 - `$a("<tr>")` / `$a("<li>")` / `$a("<option>")` 会自动补上 `<table>/<ul>/<select>` 包裹，不会丢节点
 - `data()` 存在元素上的 `__aData` 缓存里，`remove()` 时一并清理
@@ -111,13 +113,15 @@ $a(":hidden"); // 全站隐藏元素
 
 `css(name[, v])`、`addClass(name)`、`removeClass(name)`、`toggleClass(name[, state])`、`hasClass(name)`
 
+- 自定义属性直接写：`$a(el).css("--brand", "#0B57D0")`（走 `setProperty`，传 `null` 或空串即移除）
+
 ### 事件
 
 `on(types[, selector][, data], fn)`、`off([types][, selector][, fn])`、`bind` / `unbind`、`delegate(selector, types, fn)`、`undelegate(selector, types[, fn])`、`one(types[, selector][, data], fn)`、`trigger(type[, data])`
 
 - 命名空间：`on("click.nav")`、`off(".nav")`
 - 传 `selector` 即为委托
-- `trigger()` **会向上冒泡**，沿途的委托与命名空间都生效
+- `trigger(type[, data])` **会向上冒泡**，沿途的委托与命名空间都生效；`data` 挂到 `ev.data`，绑定时的 data 优先于 trigger 传入的 data
 - 回调返回 `false` 等于 `preventDefault()` + `stopPropagation()`
 - 事件对象：`preventDefault()`、`stopPropagation()`、`stopImmediatePropagation()`，以及 `target`、`currentTarget`、`delegateTarget`、`data`、`namespace`
 
@@ -184,7 +188,9 @@ var qr = $a.qrcode.matrix("https://undz.cn/", "L"); // { size, version, mask, mo
 | `timeout` `cache` `headers` `xhrFields` | 超时、缓存、请求头、XHR 字段；`timeout` 对 XHR / XDR / JSONP / script 都生效 |
 | `beforeSend(xhr, opts)`                 | 发送前钩子，返回 `false` 终止请求                                |
 | `context` `global`                      | 回调 this、是否触发全局事件                                      |
-| `success` `error` `complete`            | 回调式写法；`data` 支持 `FormData`（自动跳过 Content-Type）      |
+| `success` `error` `complete`            | 回调式写法；`complete(xhr, status)` 的 `status` 为真实结果（`success` / `error` / `timeout` / `abort` / `parsererror`） |
+
+`data` 传 `FormData` 时会自动跳过 `Content-Type`，保留浏览器生成的 boundary。
 
 `$a.ajaxSetup(opts)` 深度合并进默认设置。
 
@@ -216,6 +222,17 @@ $a("#box").load("/partial.html", function (html, status, xhr) {
 ```
 
 全局事件（挂在 `document` 上）：`ajaxStart`、`ajaxSend`、`ajaxSuccess`、`ajaxError`、`ajaxComplete`、`ajaxStop`
+
+监听器签名是 `function (e)`，参数在 `e.data` 里：
+
+| 事件 | `e.data` |
+| --- | --- |
+| `ajaxSuccess` | `[xhr, opts, data]` |
+| `ajaxError` | `[xhr, opts, err]` |
+| `ajaxSend` / `ajaxComplete` | `[xhr, opts]` |
+| `ajaxStart` / `ajaxStop` | `undefined` |
+
+`$a.getScript(url, cb)` 的回调是 `cb(undefined, "success", scriptEl)`——`data` 恒为 `undefined`。
 
 ### 工具
 
@@ -273,7 +290,7 @@ $a.check("(chrome >= 100 || firefox >= 90) && !ie"); // 组合表达式
 | ---- | ---------------- | ---------------------------------------------------------------------------------------------------- |
 | `$a` | `_version`       | 版本号副本                                                                                           |
 | `$a` | `_uid()`         | 生成自增集合 id                                                                                      |
-| `$a` | `_internal`      | 内部工具（indexOf/toArray/merge/unique/sort/matches/isVisible/select/parseHTML/splitTop/parseGroup） |
+| `$a` | `_internal`      | 内部工具（indexOf/toArray/merge/unique/sort/matches/isVisible/select/parseHTML/splitTop/parseGroup/hasCustom） |
 | `$a` | `_eventKey`      | 事件表挂在元素上的属性名                                                                             |
 | `$a` | `_eventCount`    | 预留的监听计数                                                                                       |
 | `$a` | `_cleanData(el)` | 清理元素事件与 data                                                                                  |
@@ -334,6 +351,7 @@ terser 可用时走 terser（ES5 输出），不可用时退回到「去注释 +
 | `trigger()` 的边界 | 只派发已注册的处理器并向上冒泡；**不会**触发原生 `addEventListener` 注册的监听器，也不模拟浏览器默认行为                                               |
 | `then()` 的形状    | 只有 `then(onOk, onFail)`；没有 `catch` / `finally`，失败分支用 `then(null, fn)` 或 `.fail()`                                                          |
 | `watch()` 的频率   | 不节流：有 `MutationObserver` 就用，没有就 400ms 轮询；高频 DOM 变更时自行控制回调成本                                                                 |
+| `watch()` 的回调   | 同一元素只回调一次；元素离开文档后会从去重表剔除，重新插入时再次回调                                                                                    |
 | 选择器转义         | 支持引号与括号，但**不支持反斜杠转义**（`\.` 之类按字面处理）                                                                                          |
 | `data()` 存储位置  | 存在元素的 `__aData` 属性上，不读写 `data-*` 特性                                                                                                      |
 | `css()` 单位       | 数字自动补 `px`；`opacity`、`zIndex`、`fontWeight`、`lineHeight`、`zoom`、`order`、`flex`、`flexGrow`、`flexShrink` 不加单位（`z-index` 与 `zIndex` 写法都认） |

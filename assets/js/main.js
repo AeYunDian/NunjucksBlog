@@ -1,67 +1,73 @@
-/* global jQuery */
-(function ($) {
+/* 站点交互：全部基于 aQuery（全局 $a），无其他依赖 */
+(function () {
   "use strict";
 
-  if (typeof window === "undefined") return;
+  if (!window.$a) return;
 
-  var $body = $("body");
-  var $drawer = $("#drawer");
-  var $scrim = $("#drawer-scrim");
-  var $open = $("#menu-open");
-  var $close = $("#menu-close");
-  var lastFocus = null;
+  var root = document.documentElement;
 
-  /* 键盘用户保留焦点框，鼠标点击不显示（IE10 没有 :focus-visible） */
-  $body.on("keydown", function (e) {
-    if (e.key === "Tab" || e.keyCode === 9) {
-      $("html").addClass("keyboard-focus");
-    }
-  });
-  $body.on("mousedown", function () {
-    $("html").removeClass("keyboard-focus");
-  });
+  /* 有 JS 就去掉 no-js；.only-js 由 CSS 控制显隐 */
+  $a(root).removeClass("no-js");
 
-  function focusables() {
-    return $drawer
-      .find('a[href], button:not([disabled])')
-      .filter(":visible");
-  }
+  $a(function () {
+    /* ---------------- 键盘焦点 ---------------- */
+    $a(document)
+      .on("keydown", function (e) {
+        if (e.keyCode === 9) $a(root).addClass("keyboard-focus");
+      })
+      .on("mousedown", function () {
+        $a(root).removeClass("keyboard-focus");
+      });
 
-  function openDrawer() {
-    lastFocus = document.activeElement;
-    $drawer.addClass("is-open").attr("aria-hidden", "false");
-    $scrim.addClass("is-open");
-    $body.addClass("is-locked");
-    $open.attr("aria-expanded", "true");
-    var $first = $drawer.find("#menu-close");
-    if ($first.length) $first.trigger("focus");
-  }
+    /* ---------------- 抽屉 ---------------- */
+    var $drawer = $a("#drawer");
+    var $scrim = $a("#drawer-scrim");
+    var $open = $a("#menu-open");
+    var $close = $a("#menu-close");
+    var $body = $a("body");
+    var lastFocus = null;
 
-  function closeDrawer() {
-    $drawer.removeClass("is-open").attr("aria-hidden", "true");
-    $scrim.removeClass("is-open");
-    $body.removeClass("is-locked");
-    $open.attr("aria-expanded", "false");
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
-  }
-
-  $open.on("click", openDrawer);
-  $close.on("click", closeDrawer);
-  $scrim.on("click", closeDrawer);
-
-  $(document).on("keydown", function (e) {
-    if (!$drawer.hasClass("is-open")) return;
-
-    if (e.key === "Escape" || e.keyCode === 27) {
-      closeDrawer();
-      return;
+    function focusables() {
+      return $drawer.find('a[href], button:not([disabled])').filter(function () {
+        return !!(this.offsetWidth || this.offsetHeight);
+      });
     }
 
-    if (e.key === "Tab" || e.keyCode === 9) {
-      var $items = focusables();
-      if (!$items.length) return;
-      var first = $items[0];
-      var last = $items[$items.length - 1];
+    function openDrawer() {
+      lastFocus = document.activeElement;
+      $drawer.addClass("is-open").attr("aria-hidden", "false");
+      $scrim.addClass("is-open");
+      $body.addClass("is-locked");
+      $open.attr("aria-expanded", "true");
+      $close.focus();
+    }
+
+    function closeDrawer() {
+      $drawer.removeClass("is-open").attr("aria-hidden", "true");
+      $scrim.removeClass("is-open");
+      $body.removeClass("is-locked");
+      $open.attr("aria-expanded", "false");
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    $open.on("click", openDrawer);
+    $close.on("click", closeDrawer);
+    $scrim.on("click", closeDrawer);
+
+    $a(document).on("keydown", function (e) {
+      if (!$drawer.hasClass("is-open")) return;
+
+      if (e.keyCode === 27) {
+        closeDrawer();
+        return;
+      }
+      if (e.keyCode !== 9) return;
+
+      var items = focusables();
+      if (!items.length) return;
+
+      var first = items[0];
+      var last = items[items.length - 1];
 
       if (e.shiftKey && document.activeElement === first) {
         e.preventDefault();
@@ -70,67 +76,65 @@
         e.preventDefault();
         first.focus();
       }
-    }
-  });
+    });
 
-  /* MD2 top app bar：滚动后加 4dp 阴影 */
-  var $bar = $(".app-bar");
-  if ($bar.length) {
-    var onBarScroll = function () {
-      if (window.pageYOffset > 4) {
-        $bar.addClass("is-scrolled");
-      } else {
-        $bar.removeClass("is-scrolled");
-      }
-    };
-    $(window).on("scroll", onBarScroll);
-    onBarScroll();
-  }
+    /* ---------------- 打印 ---------------- */
+    $a('[data-action="print"]').on("click", function () {
+      window.print();
+    });
 
-  /* 打印 */
-  $('[data-action="print"]').on("click", function () {
-    window.print();
-  });
-
-  /* 复制地址（RSS 页） */
-  $('[data-action="copy"]').on("click", function () {
-    var $btn = $(this);
-    var text = $btn.attr("data-copy") || "";
-    var done = function () {
+    /* ---------------- 复制 ---------------- */
+    $a('[data-action="copy"]').on("click", function () {
+      var $btn = $a(this);
+      var text = $btn.attr("data-copy") || "";
       var label = $btn.text();
-      $btn.text("已复制");
-      window.setTimeout(function () {
-        $btn.text(label);
-      }, 1500);
-    };
 
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(done, function () {});
-      return;
-    }
+      $a.copy(text).done(function () {
+        $btn.text("✓");
+        window.setTimeout(function () {
+          $btn.text(label);
+        }, 1500);
+      });
+    });
 
-    var $tmp = $("<textarea>").val(text).appendTo("body").select();
-    try {
-      document.execCommand("copy");
-      done();
-    } catch (e) {
-      /* 忽略 */
-    }
-    $tmp.remove();
-  });
-
-  /* 回到顶部：滚动超过 600px 才出现 */
-  var $top = $("#to-top");
-  if ($top.length) {
-    var onScroll = function () {
-      if (window.pageYOffset > 600) {
-        $top.addClass("is-visible");
-      } else {
-        $top.removeClass("is-visible");
+    /* ---------------- 重新授权 ---------------- */
+    $a('[data-action="reset-consent"]').on("click", function () {
+      try {
+        localStorage.removeItem("gov_cookie_consent");
+      } catch (e) {
+        /* 忽略 */
       }
-    };
-    $(window).on("scroll", onScroll);
-    onScroll();
+      window.location.reload();
+    });
+
+    /* ---------------- 顶栏滚动阴影 ---------------- */
+    var $bar = $a(".app-bar");
+    var barTick = false;
+
+    function syncBar() {
+      $bar.toggleClass("is-scrolled", window.pageYOffset > 4);
+    }
+
+    $a(window).on("scroll", function () {
+      if (barTick) return;
+      barTick = true;
+      window.requestAnimationFrame(function () {
+        barTick = false;
+        syncBar();
+      });
+    });
+
+    syncBar();
+
+    /* ---------------- 回到顶部 ---------------- */
+    var $top = $a("#to-top");
+
+    function syncTop() {
+      $top.toggleClass("is-visible", window.pageYOffset > 600);
+    }
+
+    $a(window).on("scroll", syncTop);
+    syncTop();
 
     $top.on("click", function () {
       var reduce =
@@ -144,11 +148,10 @@
 
       var start = window.pageYOffset;
       var from = null;
-      var duration = 320;
 
       var step = function (ts) {
         if (from === null) from = ts;
-        var p = Math.min(1, (ts - from) / duration);
+        var p = Math.min(1, (ts - from) / 320);
         var eased = 1 - Math.pow(1 - p, 3);
         window.scrollTo(0, Math.round(start * (1 - eased)));
         if (p < 1) window.requestAnimationFrame(step);
@@ -156,5 +159,11 @@
 
       window.requestAnimationFrame(step);
     });
-  }
-})(window.jQuery);
+
+    /* ---------------- Roboto（非阻塞） ---------------- */
+    var fontLink = document.createElement("link");
+    fontLink.rel = "stylesheet";
+    fontLink.href = "https://cdn.undz.cn/css2?family=Roboto:wght@400;500;700&display=swap";
+    $a(document.head || document.documentElement).append(fontLink);
+  });
+})();

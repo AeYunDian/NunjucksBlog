@@ -6,7 +6,7 @@
 (function (window, document) {
   "use strict";
 
-  var VERSION = "0.2.2";
+  var VERSION = "0.2.3";
   var rtrim = /^\s+|\s+$/g;
   var uid = 0;
 
@@ -157,12 +157,26 @@
     return obj;
   };
 
-  /* 去重（保持文档顺序） */
+  /* 去重（保持顺序）：用临时 expando 做 O(n) 标记，避免 O(n²) */
+  var uniqueSeq = 0;
+  var UNIQUE_KEY = "__aqUnique";
+
   A.unique = function (nodes) {
-    var out = [], i;
+    var out = [], seen = {}, i, el, id;
+
     for (i = 0; i < nodes.length; i++) {
-      if (A.indexOf(out, nodes[i]) < 0) out.push(nodes[i]);
+      el = nodes[i];
+      if (!el) continue;
+
+      id = el[UNIQUE_KEY];
+      if (!id) id = el[UNIQUE_KEY] = ++uniqueSeq;
+
+      if (!seen[id]) {
+        seen[id] = 1;
+        out.push(el);
+      }
     }
+
     return out;
   };
 
@@ -195,11 +209,12 @@
     return !!(el.offsetWidth || el.offsetHeight || (el.getClientRects && el.getClientRects().length));
   };
 
-  /* 支持自定义伪类的 matches（filter/not/is/closest/委托都用它） */
-  A.matchesAny = function (el, selector) {
+  /* 支持自定义伪类的 matches（filter/not/is/closest/委托都用它）
+   * context 可选：委托时传委托节点，把扫描范围收窄到它的子树 */
+  A.matchesAny = function (el, selector, context) {
     if (typeof selector !== "string") return false;
     if (!hasCustom(selector)) return A.matches(el, selector);
-    return A.indexOf(A.select(selector, el.ownerDocument || document), el) > -1;
+    return A.indexOf(A.select(selector, context || el.ownerDocument || document), el) > -1;
   };
 
   /* ==================================================================
@@ -321,7 +336,7 @@
     return steps;
   }
 
-  var rCompound = /^([a-zA-Z][\w-]*|\*)|#([\w-]+)|\.([\w-]+)|\[([^\]]+)\]|:([\w-]+)(?:\(([^)]*)\))?/;
+  var rCompound = /^(?:([a-zA-Z][\w-]*|\*)|#([\w-]+)|\.([\w-]+)|\[([^\]]+)\]|:([\w-]+)(?:\(([^)]*)\))?)/;
 
   function parseCompound(text) {
     var parts = { tag: "", id: "", classes: [], attrs: [], pseudos: [] };
@@ -538,15 +553,28 @@
     return cur;
   }
 
+  var LEADING = /^\s*[>+~]/;
+
+  /* 任意逗号分组以组合符开头都要走慢路径 */
+  function hasLeadingCombinator(selector) {
+    var groups = splitTop(selector, ",");
+    for (var i = 0; i < groups.length; i++) {
+      if (LEADING.test(groups[i])) return true;
+    }
+    return false;
+  }
+
   A.select = function (selector, context) {
     context = context || document;
 
-    /* 快路径 */
-    if (!hasCustom(selector)) {
-      return A.unique(qsa(selector, context));
+    var text = String(selector);
+
+    /* 快路径：不含自定义伪类，也没有以组合符开头的分组（qSA 不接受 "> img"） */
+    if (!hasCustom(text) && !hasLeadingCombinator(text)) {
+      return qsa(text, context);
     }
 
-    var groups = splitTop(selector, ",");
+    var groups = splitTop(text, ",");
     var out = [], i;
 
     for (i = 0; i < groups.length; i++) {
@@ -649,7 +677,8 @@
     select: A.select,
     parseHTML: A.parseHTML,
     splitTop: splitTop,
-    parseGroup: parseGroup
+    parseGroup: parseGroup,
+    hasCustom: hasCustom
   };
 
   A.fn.init.prototype = A.fn;

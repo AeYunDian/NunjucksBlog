@@ -101,10 +101,13 @@
 
       /* 委托：从 target 往上找最近的匹配元素 */
       if (h.selector) {
+        /* IE 下 target 可能是文本节点，先上溯到元素 */
         node = ev.target;
+        while (node && node.nodeType !== 1) node = node.parentNode;
+
         ctx = null;
         while (node && node !== el && node.nodeType === 1) {
-          if ($a.matchesAny(node, h.selector)) {
+          if ($a.matchesAny(node, h.selector, el)) {
             ctx = node;
             break;
           }
@@ -136,6 +139,8 @@
       selector = null;
       dataArg = null;
     } else if (selector && typeof selector === "object") {
+      /* on(types, data, fn)：selector 位置传的是 data，原 handler 不能丢 */
+      if (handler === undefined && typeof dataArg === "function") handler = dataArg;
       dataArg = selector;
       selector = null;
     }
@@ -245,6 +250,7 @@
       selector = null;
       dataArg = null;
     } else if (selector && typeof selector === "object") {
+      if (handler === undefined && typeof dataArg === "function") handler = dataArg;
       dataArg = selector;
       selector = null;
     }
@@ -285,8 +291,9 @@
         if (h.selector) {
           ctx = null;
           cur = el;
+          while (cur && cur.nodeType !== 1) cur = cur.parentNode;
           while (cur && cur !== node && cur.nodeType === 1) {
-            if ($a.matchesAny(cur, h.selector)) {
+            if ($a.matchesAny(cur, h.selector, node)) {
               ctx = cur;
               break;
             }

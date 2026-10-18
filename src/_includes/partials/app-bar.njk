@@ -1,0 +1,53 @@
+{% from "components/icon.njk" import icon %}
+
+<header class="app-bar">
+  <div class="app-bar__inner">
+    <button class="icon-btn app-bar__menu" type="button" id="menu-open"
+            aria-label="{{ ui.a11y.menu }}" aria-controls="drawer" aria-expanded="false">
+      {{ icon("menu") }}
+    </button>
+
+    <a class="app-bar__brand" href="{{ '/' | localeUrl(locale) }}">
+      <span class="app-bar__logo">
+        <picture>
+          <source srcset="/logo.avif" type="image/avif">
+          <source srcset="/logo.webp" type="image/webp">
+          <img src="/logo.png" alt="" width="32" height="32">
+        </picture>
+      </span>
+      <span class="app-bar__name">{{ ui.site.name }}</span>
+    </a>
+
+    <nav class="app-bar__nav" aria-label="{{ ui.footer.nav }}">
+      {% for item in site.navigation %}
+        {% if item.url == '/' %}
+          {% set itemUrl = '/' | localeUrl(locale) %}
+          {% set isActive = page.url == itemUrl %}
+        {% else %}
+          {% set itemUrl = item.url | localeUrl(locale) %}
+          {% set isActive = page.url | navActive(itemUrl) %}
+        {% endif %}
+        <a href="{{ itemUrl }}"{% if isActive %} aria-current="page"{% endif %}>{{ ui.nav[item.key] }}</a>
+      {% endfor %}
+    </nav>
+
+    <span class="app-bar__spacer"></span>
+
+    {% if site.i18nReady %}
+    <div class="lang-switch" aria-label="{{ ui.a11y.langSwitch }}">
+      {% for l in locales %}
+        {% if l.id == locale.id %}
+        <span aria-current="true" lang="{{ l.htmlLang }}">{{ l.short }}</span>
+        {% else %}
+        {% if i18nPage %}
+          {% set switchUrl = page.url | localeUrl(l) %}
+        {% else %}
+          {% set switchUrl = '/' | localeUrl(l) %}
+        {% endif %}
+        <a href="{{ switchUrl }}" hreflang="{{ l.hreflang }}" lang="{{ l.htmlLang }}">{{ l.short }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</header>

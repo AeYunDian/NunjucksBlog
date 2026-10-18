@@ -1,0 +1,24 @@
+{% set postsByYear = collections.posts | groupPostsByYear %}
+
+<header class="page-head">
+  <h1 class="page-head__title">{{ 'archive.title' | t(locale.id) }}</h1>
+  <p class="page-head__desc">{{ 'archive.description' | t(locale.id) }}</p>
+</header>
+
+{% if postsByYear | length %}
+  {% for year, posts in postsByYear %}
+  <section class="archive-year">
+    <h2>{{ year }}</h2>
+    <ul class="archive-list">
+      {% for post in posts %}
+      <li>
+        <time datetime="{{ post.date | dateToISO }}">{{ post.date | dateFormat(locale.id) }}</time>
+        <a href="{{ post.url }}">{{ post.data.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+{% else %}
+<div class="empty-state"><p>{{ 'archive.empty' | t(locale.id) }}</p></div>
+{% endif %}

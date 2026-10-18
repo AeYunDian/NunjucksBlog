@@ -1,34 +1,27 @@
-{% macro postCard(post, opts) %}
-{% set options = opts or {} %}
-{% set showExcerpt = options.showExcerpt if options.showExcerpt is defined else true %}
-{% set showDate = options.showDate if options.showDate is defined else true %}
-{% set showTags = options.showTags if options.showTags is defined else true %}
-{% set showCover = options.showCover if options.showCover is defined else true %}
 {% from "components/tag.njk" import tagList %}
-<article class="post-card">
-  {% if showCover and post.data.cover %}
-  <a class="post-card__cover" href="{{ post.url }}">
-    <img src="{{ post.data.cover }}" alt="{{ post.data.title }}">
+
+{% macro postCard(post, locale, index) %}
+{% set delay = (index or 0) * 40 %}
+<article class="post-card" style="animation-delay: {{ delay }}ms">
+  {% if post.data.cover %}
+  <a class="post-card__cover" href="{{ post.url }}" tabindex="-1" aria-hidden="true">
+    <img src="{{ post.data.cover }}" alt="" width="640" height="360" loading="lazy" decoding="async">
   </a>
   {% endif %}
 
   <div class="post-card__body">
-    <h2 class="post-card__title">
-      <a href="{{ post.url }}">{{ post.data.title }}</a>
-    </h2>
+    <h3 class="post-card__title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
 
-    {% if showDate and post.data.date %}
-    <time class="post-card__date" datetime="{{ post.data.date | dateFormat }}">
-      {{ post.data.date | dateFormat }}
-    </time>
-    {% endif %}
+    <p class="post-card__meta">
+      <time datetime="{{ post.date | dateToISO }}">{{ post.date | dateFormat(locale.id) }}</time>
+    </p>
 
-    {% if showExcerpt and post.data.description %}
+    {% if post.data.description %}
     <p class="post-card__excerpt">{{ post.data.description }}</p>
     {% endif %}
 
-    {% if showTags and post.data.tags %}
-      {{ tagList(post.data.tags) }}
+    {% if post.data.tags %}
+    <div class="post-card__tags">{{ tagList(post.data.tags, locale) }}</div>
     {% endif %}
   </div>
 </article>

@@ -1,0 +1,13 @@
+---
+layout: layouts/base.njk
+i18nPage: true
+pagination:
+  data: collections.posts
+  size: 10
+  alias: posts
+permalink: "/zh-hk/posts/{% if pagination.pageNumber > 0 %}{{ pagination.pageNumber | addOne }}/{% endif %}"
+eleventyComputed:
+  title: "全部文章{% if pagination.pageNumber > 0 %}（第 {{ pagination.pageNumber | addOne }} 頁）{% endif %}"
+description: 所有文章，按發佈時間倒序排列。
+---
+{% include "views/posts.njk" %}

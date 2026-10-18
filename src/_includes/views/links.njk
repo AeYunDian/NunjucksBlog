@@ -1,0 +1,42 @@
+{% set items = links %}
+
+<header class="page-head">
+  <h1 class="page-head__title">{{ ui.links.title }}</h1>
+  <p class="page-head__desc">{{ ui.links.description }}</p>
+</header>
+
+<div class="links-intro">
+  <h2>{{ ui.links.rules }}</h2>
+  <ul>
+    {% for rule in ui.links.rulesList %}
+    <li>{{ rule }}</li>
+    {% endfor %}
+  </ul>
+  <p>
+    <a class="btn btn--contained" href="https://github.com/{{ site.repo }}/issues/new?template=friend-link.yml">{{ ui.links.apply }}</a>
+  </p>
+</div>
+
+{% if items.length %}
+<div class="link-grid">
+  {% for item in items %}
+  <a class="link-card" href="{{ item.url }}" target="_blank" rel="noopener nofollow ugc" style="animation-delay: {{ loop.index0 * 30 }}ms">
+    <span class="link-card__avatar" aria-hidden="true">
+      <span class="link-card__initial">{{ item.name | truncate(1, true, "") }}</span>
+      {% if item.avatar %}
+      <img src="{{ item.avatar }}" alt="" width="44" height="44" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+      {% endif %}
+    </span>
+    <span class="link-card__body">
+      <span class="link-card__name">{{ item.name }}</span>
+      <span class="link-card__desc">{{ item.description }}</span>
+      <span class="link-card__host">{{ item.host }}</span>
+    </span>
+  </a>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+  <p>{{ ui.links.empty }}</p>
+</div>
+{% endif %}

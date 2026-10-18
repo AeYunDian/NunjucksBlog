@@ -53,7 +53,7 @@ for 标签用于遍历数组，比如站点导航、文章标签。
 ```njk
 <ul>
 {% for item in site.navigation %}
-  <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+  <li><a href="{{ item.url }}">{{ ui.nav[item.key] }}</a></li>
 {% endfor %}
 </ul>
 ```
@@ -64,7 +64,7 @@ for 标签用于遍历数组，比如站点导航、文章标签。
 
 <ul>
 {% for item in site.navigation %}
-  <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+  <li><a href="{{ item.url }}">{{ ui.nav[item.key] }}</a></li>
 {% endfor %}
 </ul>
 

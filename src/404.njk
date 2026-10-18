@@ -1,19 +1,15 @@
 ---
 layout: layouts/base.njk
 title: 找不到页面
-css:
-  - pages/404
 description: 你访问的页面不存在。
 permalink: /404.html
 eleventyExcludeFromCollections: true
 sitemap:
-  exclude: true
+  ignore: true
 ---
-
-
 <div class="error-page">
-  <div class="error-img"></div>
-  <h1>404 Not Found</h1>
-  <p>如果您是在地址栏输入网址的，请确认其拼写正确。注意：大多数网址是区分大小写的。</p>
-  <a href="/">返回首页</a>
+  <p class="error-page__code">404</p>
+  <h1>{{ 'notFound.title' | t(locale.id) }}</h1>
+  <p>{{ 'notFound.description' | t(locale.id) }}</p>
+  <a class="btn btn--contained" href="{{ '/' | localeUrl(locale) }}">{{ 'notFound.back' | t(locale.id) }}</a>
 </div>

@@ -1,16 +1,43 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="{{ locale.htmlLang }}">
 <head>
   {% include "partials/head.njk" %}
 </head>
 <body>
-  {% include "partials/header.njk" %}
-  <main class="main">
-    <div class="container">
-      {{ content | safe }}
-    </div>
-  </main>
-  {% include "partials/footer.njk" %}
-  <script src="/assets/js/main.js"></script>
+  <!--[if lt IE 10]>
+  <div class="ie-fallback">
+    <h1>浏览器版本过低</h1>
+    <p>本站最低需要 IE10；推荐使用最新版的 Chrome、Edge、Firefox 或 Safari。</p>
+    <p>升级浏览器后，可以看到完整的排版、动画、响应式布局与无障碍支持。</p>
+  </div>
+  <style>
+    #site { display: none !important; }
+    .ie-fallback { display: block !important; max-width: 640px; margin: 80px auto; padding: 0 24px; font-family: "Microsoft YaHei", sans-serif; color: #202124; }
+    .ie-fallback h1 { font-size: 24px; line-height: 1.4; margin: 0 0 12px; }
+    .ie-fallback p { font-size: 15px; line-height: 1.8; color: #5f6368; margin: 0 0 8px; }
+  </style>
+  <![endif]-->
+
+  <div id="site">
+    <a class="skip-link" href="#main">{{ ui.footer.skip }}</a>
+
+    {% include "partials/app-bar.njk" %}
+    {% include "partials/drawer.njk" %}
+
+    <main class="main" id="main" tabindex="-1">
+      <div class="container">
+        {{ content | safe }}
+      </div>
+    </main>
+
+    {% include "partials/footer.njk" %}
+
+    {% from "components/icon.njk" import icon %}
+    <button class="fab-top" id="to-top" type="button" aria-label="{{ ui.footer.top }}">
+      {{ icon("arrow-up") }}
+    </button>
+  </div>
+
+  {% include "partials/scripts.njk" %}
 </body>
 </html>

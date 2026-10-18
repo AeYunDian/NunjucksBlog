@@ -1,51 +1,89 @@
 ---
 layout: layouts/base.njk
-css:
-  - components/tag
-  - components/breadcrumb
-  - pages/post
+ogType: article
 ---
-
 {% from "components/breadcrumb.njk" import breadcrumb %}
 {% from "components/tag.njk" import tagList %}
+{% from "components/icon.njk" import icon %}
+
 {% set shareUrl = site.url + page.url %}
-{% set shareTitle = title + " - " + site.title %}
-{% set shareSummary = description or title %}
+{% set shareTitle = title + " - " + ui.site.name %}
+{% set shareDesc = description or "" %}
+{% set postAuthors = authors or author or site.author %}
+{% if postAuthors is string %}
+  {% set authorText = postAuthors %}
+{% else %}
+  {% set authorText = postAuthors | join("、") %}
+{% endif %}
 
-{{ breadcrumb([
-    { text: "首页", href: "/" },
-    { text: "文章", href: "/posts/" },
-    { text: title }
-]) }}
-<article class="post">
-  <header class="post__header">
-    <h1 class="post__title">{{ title }}</h1>
-    {% if date %}
-    <time class="post__date" datetime="{{ date | dateFormat }}">{{ date | dateFormat }}</time>
-    {% endif %}
+{% set homeUrl = '/' | localeUrl(locale) %}
+{% set postsUrl = '/posts/' | localeUrl(locale) %}
+{% set dateIso = date | dateToISO %}
+{% set postImage = cover or ogImage or site.ogImage %}
 
-    <div class="post__meta">
-    {% if tags %}
-      <div class="post__tags">
-        {{ tagList(tags) }}
+{% set related = collections.posts | relatedPosts(tags, page.url, 3) %}
+
+<div class="post-layout">
+  <div class="post-main">
+    {{ breadcrumb([
+      { text: ui.nav.home, href: homeUrl },
+      { text: ui.nav.posts, href: postsUrl },
+      { text: title }
+    ], locale) }}
+
+    <article class="post">
+    <header class="post__header">
+      <h1 class="post__title">{{ title }}</h1>
+
+      <div class="post__meta">
+        <span class="post__author">{{ authorText }}</span>
+        {% if date %}
+        <time datetime="{{ date | dateToISO }}">{{ date | dateFormat(locale.id) }}</time>
+        {% endif %}
+        <span>{{ 'post.readingTime' | t(locale.id) | replace('{n}', content | readingTime) }}</span>
+
+        <div class="post__actions">
+          <div class="share">
+            <a class="share__btn" href="https://service.weibo.com/share/share.php?url={{ shareUrl | urlencode }}&title={{ shareTitle | urlencode }}" target="_blank" rel="noopener" aria-label="分享到微博">
+              <img src="/assets/images/weibo.png" alt="" width="22" height="22">
+            </a>
+            <a class="share__btn" href="/share/wechat/?url={{ shareUrl | urlencode }}" target="_blank" rel="noopener" aria-label="分享到微信">
+              <img src="/assets/images/weixin.png" alt="" width="22" height="22">
+            </a>
+            <a class="share__btn" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url={{ shareUrl | urlencode }}&title={{ shareTitle | urlencode }}&summary={{ shareDesc | urlencode }}" target="_blank" rel="noopener" aria-label="分享到 QQ 空间">
+              <img src="/assets/images/qqzone.png" alt="" width="22" height="22">
+            </a>
+          </div>
+
+          <button class="icon-btn print-btn" type="button" data-action="print" aria-label="打印本页" title="打印本页">
+            {{ icon("print") }}
+          </button>
+        </div>
       </div>
-    {% endif %}
-    <div class="share-box">
-        <a class="share-btn share_tsina"  target="_blank" rel="noopener" 
-            href="https://service.weibo.com/share/share.php?url={{ shareUrl | urlencode }}&title={{ shareTitle | urlencode }}{% if ogImage or site.ogImage %}&pic={{ (site.url + (ogImage or site.ogImage)) | urlencode }}{% endif %}"
-        title="新浪微博"></a>
 
-        <a class="share-btn share_weixin"  target="_blank" rel="noopener" 
-           href="/share/wechat/?url={{ shareUrl | urlencode }}"
-        title="微信"></a>
-        <a class="share-btn share_qzone"  target="_blank" rel="noopener" 
-            href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url={{ shareUrl | urlencode }}&title={{ shareTitle | urlencode }}&summary={{ shareSummary | urlencode }}{% if ogImage or site.ogImage %}&pics={{ (site.url + (ogImage or site.ogImage)) | urlencode }}{% endif %}"
-        title="QQ空间"></a>
-      </div>
-      </div>
-  </header>
+      {% if tags %}
+      <div class="post__tags">{{ tagList(tags, locale) }}</div>
+      {% endif %}
+    </header>
 
-  <div class="post__content">
-    {{ content | safe }}
+    <div class="post__content">
+      {{ content | safe }}
+    </div>
+    </article>
+
+    <script type="application/ld+json">{{ jsonldPost({ title: title, description: description, date: dateIso, lang: locale.htmlLang, url: site.url + page.url, siteName: ui.site.name, siteUrl: site.url, image: postImage, authors: postAuthors, tags: tags }) | safe }}</script>
+    <script type="application/ld+json">{{ jsonldBreadcrumb([{ name: ui.nav.home, url: site.url + homeUrl }, { name: ui.nav.posts, url: site.url + postsUrl }, { name: title, url: site.url + page.url }]) | safe }}</script>
   </div>
-</article>
+  {% if related.length %}
+  <aside class="related-aside">
+    <section class="related">
+      <h2>{{ 'post.related' | t(locale.id) }}</h2>
+      <ul class="related__list">
+        {% for post in related %}
+        <li><a href="{{ post.url }}">{{ post.data.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+  </aside>
+  {% endif %}
+</div>

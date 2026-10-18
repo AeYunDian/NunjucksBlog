@@ -1,0 +1,44 @@
+{% from "components/icon.njk" import icon %}
+
+<div class="drawer__scrim" id="drawer-scrim"></div>
+
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true"
+       aria-label="{{ ui.footer.nav }}" aria-hidden="true" tabindex="-1">
+  <div class="drawer__head">
+    <span class="drawer__title">{{ ui.site.shortName }}</span>
+    <button class="icon-btn drawer__close" type="button" id="menu-close"
+            aria-label="{{ ui.a11y.close }}">{{ icon("close") }}</button>
+  </div>
+
+  <nav aria-label="{{ ui.footer.nav }}">
+    {% for item in site.navigation %}
+      {% if item.url == '/' %}
+        {% set itemUrl = '/' | localeUrl(locale) %}
+        {% set isActive = page.url == itemUrl %}
+      {% else %}
+        {% set itemUrl = item.url | localeUrl(locale) %}
+        {% set isActive = page.url | navActive(itemUrl) %}
+      {% endif %}
+      <a class="drawer__link" href="{{ itemUrl }}"
+         {% if isActive %}aria-current="page"{% endif %}>{{ ui.nav[item.key] }}</a>
+    {% endfor %}
+  </nav>
+
+  {% if site.i18nReady %}
+  <p class="drawer__section">{{ ui.a11y.langSwitch }}</p>
+  <nav aria-label="{{ ui.a11y.langSwitch }}">
+    {% for l in locales %}
+      {% if l.id == locale.id %}
+      <a class="drawer__link" href="{{ page.url }}" aria-current="page" lang="{{ l.htmlLang }}">{{ l.label }}</a>
+      {% else %}
+      {% if i18nPage %}
+        {% set switchUrl = page.url | localeUrl(l) %}
+      {% else %}
+        {% set switchUrl = '/' | localeUrl(l) %}
+      {% endif %}
+      <a class="drawer__link" href="{{ switchUrl }}" hreflang="{{ l.hreflang }}" lang="{{ l.htmlLang }}">{{ l.label }}</a>
+      {% endif %}
+    {% endfor %}
+  </nav>
+  {% endif %}
+</aside>

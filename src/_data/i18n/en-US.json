@@ -1,0 +1,110 @@
+{
+    "site": {
+        "name": "AeYunDian",
+        "shortName": "AeYunDian",
+        "tagline": "Notes on front-end engineering, design, and everyday reading.",
+        "description": "AeYunDian — notes on front-end engineering, design, and everyday reading."
+    },
+    "nav": {
+        "home": "Home",
+        "posts": "Posts",
+        "tags": "Tags",
+        "archive": "Archive",
+        "links": "Links",
+        "about": "About",
+        "contact": "Contact"
+    },
+    "home": {
+        "title": "Home",
+        "browse": "Browse all posts",
+        "rss": "RSS feed",
+        "latest": "Latest posts",
+        "viewAll": "View all",
+        "services": "My Services"
+    },
+    "services": {
+        "account": "Manage your avatar, email and signed-in devices in one place.",
+        "console": "Manage OAuth apps, review usage, and track feedback.",
+        "analytics": "See traffic, referrers and real-time visitors for your sites."
+    },
+    "posts": {
+        "title": "All posts",
+        "description": "All posts, newest first.",
+        "count": "{n} posts",
+        "empty": "No posts published yet."
+    },
+    "post": {
+        "published": "Published",
+        "readingTime": "{n} min read",
+        "prev": "Previous",
+        "next": "Next",
+        "share": "Share",
+        "related": "Related posts"
+    },
+    "tags": {
+        "title": "Tags",
+        "description": "Browse posts by tag.",
+        "count": "{n} posts",
+        "empty": "No tags yet.",
+        "back": "All tags"
+    },
+    "archive": {
+        "title": "Archive",
+        "description": "All posts by year.",
+        "empty": "Nothing to archive yet."
+    },
+    "links": {
+        "title": "Links",
+        "description": "A list of independent sites.",
+        "apply": "Apply for a link",
+        "rules": "Link rules",
+        "rulesList": [
+            "The site publishes original content and is not a scraper or a pure marketing page.",
+            "The site is served over HTTPS and loads normally.",
+            "Content must be lawful; we may remove any link at any time."
+        ],
+        "empty": "No links yet."
+    },
+    "rss": {
+        "title": "RSS feed",
+        "description": "Subscribe with an RSS reader and new posts will show up in your reading list.",
+        "address": "Feed URL",
+        "open": "Open feed",
+        "copy": "Copy URL",
+        "howto": "How to use",
+        "steps": [
+            "Get an RSS reader such as Feedly, Inoreader, NetNewsWire, or FreshRSS.",
+            "Choose “Add subscription” and paste the URL above.",
+            "New posts will sync automatically — no need to visit the site."
+        ],
+        "note": "The feed contains Chinese posts only; the interface language does not affect it."
+    },
+    "pagination": {
+        "prev": "Previous",
+        "next": "Next",
+        "page": "Page {n}",
+        "label": "Pagination"
+    },
+    "footer": {
+        "nav": "Navigation",
+        "contact": "Contact",
+        "rights": "All rights reserved.",
+        "top": "Back to top",
+        "skip": "Skip to content"
+    },
+    "a11y": {
+        "menu": "Open menu",
+        "close": "Close",
+        "langSwitch": "Switch language",
+        "breadcrumb": "Breadcrumb",
+        "share": "Share to"
+    },
+    "notFound": {
+        "title": "Page not found",
+        "description": "The page you requested does not exist or has moved.",
+        "back": "Back to home"
+    },
+    "doc": {
+        "updated": "Last updated"
+    }
+}

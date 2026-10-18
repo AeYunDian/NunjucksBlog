@@ -1,0 +1,110 @@
+{
+    "site": {
+        "name": "韻典綜合平台",
+        "shortName": "韻典",
+        "tagline": "記錄前端工程實踐、設計思考與日常閱讀。",
+        "description": "韻典綜合平台：記錄前端工程實踐、設計思考與日常閱讀的獨立站點。"
+    },
+    "nav": {
+        "home": "首頁",
+        "posts": "文章",
+        "tags": "標籤",
+        "archive": "歸檔",
+        "links": "友鏈",
+        "about": "關於",
+        "contact": "聯絡"
+    },
+    "home": {
+        "title": "首頁",
+        "browse": "瀏覽全部文章",
+        "rss": "RSS 訂閱",
+        "latest": "最新文章",
+        "viewAll": "查看全部",
+        "services": "我的服務"
+    },
+    "services": {
+        "account": "集中管理頭像、郵箱與登入裝置，授權關係清晰可見。",
+        "console": "管理 OAuth 應用、查看調用情況、提交與跟蹤反饋。",
+        "analytics": "查看站點訪問量、來源與實時在線數據。"
+    },
+    "posts": {
+        "title": "全部文章",
+        "description": "所有文章，按發佈時間倒序排列。",
+        "count": "共 {n} 篇",
+        "empty": "還沒有發佈文章。"
+    },
+    "post": {
+        "published": "發佈於",
+        "readingTime": "約 {n} 分鐘",
+        "prev": "上一篇",
+        "next": "下一篇",
+        "share": "分享",
+        "related": "相關文章"
+    },
+    "tags": {
+        "title": "標籤",
+        "description": "按標籤瀏覽文章。",
+        "count": "{n} 篇",
+        "empty": "還沒有標籤。",
+        "back": "所有標籤"
+    },
+    "archive": {
+        "title": "歸檔",
+        "description": "按年份歸檔的全部文章。",
+        "empty": "還沒有文章可以歸檔。"
+    },
+    "links": {
+        "title": "友鏈",
+        "description": "這裏是一些長期維護的獨立站點。",
+        "apply": "申請友鏈",
+        "rules": "友鏈規則",
+        "rulesList": [
+            "站點有持續更新的原創內容，非採集站或純營銷頁。",
+            "全站 HTTPS，頁面可正常訪問。",
+            "內容合規；本站保留隨時移除友鏈的權利。"
+        ],
+        "empty": "還沒有友鏈，歡迎申請。"
+    },
+    "rss": {
+        "title": "RSS 訂閱",
+        "description": "用 RSS 閱讀器訂閱本站，新文章會直接出現在你的閱讀列表裏。",
+        "address": "訂閱地址",
+        "open": "開啟 Feed",
+        "copy": "複製地址",
+        "howto": "怎麼用",
+        "steps": [
+            "準備一個 RSS 閱讀器，例如 Feedly、Inoreader、NetNewsWire、FreshRSS。",
+            "在閱讀器裏選擇「新增訂閱」，貼上上面的地址。",
+            "之後每次更新都會自動同步，不需要再開啟本站。"
+        ],
+        "note": "Feed 只包含中文文章；介面語言不影響訂閱內容。"
+    },
+    "pagination": {
+        "prev": "上一頁",
+        "next": "下一頁",
+        "page": "第 {n} 頁",
+        "label": "分頁導覽"
+    },
+    "footer": {
+        "nav": "導覽",
+        "contact": "聯絡",
+        "rights": "保留所有權利。",
+        "top": "回到頂部",
+        "skip": "跳至正文"
+    },
+    "a11y": {
+        "menu": "開啟導覽",
+        "close": "關閉",
+        "langSwitch": "切換語言",
+        "breadcrumb": "麵包屑",
+        "share": "分享到"
+    },
+    "notFound": {
+        "title": "頁面不存在",
+        "description": "您訪問的頁面不存在或已被移動。",
+        "back": "返回首頁"
+    },
+    "doc": {
+        "updated": "最後更新"
+    }
+}

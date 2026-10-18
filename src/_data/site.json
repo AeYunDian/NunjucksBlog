@@ -1,31 +1,23 @@
 {
     "title": "韵典综合平台",
-    "titleSuffix": "AYP",
     "author": "AeYunDian",
     "workTime": "周一至周五 09:00-18:00",
-    "description": "一个用 Eleventy 搭建的兼容性博客",
+    "description": "记录前端工程实践、设计思考与日常阅读。",
     "url": "https://undz.cn",
+    "repo": "AeYunDian/NunjucksBlog",
+    "i18nReady": true,
+    "services": [
+        { "key": "account", "name": "AyAccount", "url": "https://online.undz.cn" },
+        { "key": "console", "name": "AyConsole", "url": "https://console.undz.cn" },
+        { "key": "analytics", "name": "AyAnalytics", "url": "https://mysites.undz.cn" }
+    ],
     "ogImage": "",
     "navigation": [
-        {
-            "title": "首页",
-            "url": "/"
-        },
-        {
-            "title": "文章",
-            "url": "/posts/"
-        },
-        {
-            "title": "标签",
-            "url": "/tags/"
-        },
-        {
-            "title": "归档",
-            "url": "/archive/"
-        },
-        {
-            "title": "关于",
-            "url": "/about/"
-        }
+        { "key": "home", "url": "/" },
+        { "key": "posts", "url": "/posts/" },
+        { "key": "tags", "url": "/tags/" },
+        { "key": "archive", "url": "/archive/" },
+        { "key": "links", "url": "/links/" },
+        { "key": "about", "url": "/about/" }
     ]
 }

@@ -1,0 +1,16 @@
+{% from "components/post-card.njk" import postCard %}
+{% from "components/pagination.njk" import paginationNav %}
+
+<header class="page-head">
+  <h1 class="page-head__title">{{ 'posts.title' | t(locale.id) }}</h1>
+  <p class="page-head__desc">{{ 'posts.count' | t(locale.id) | replace('{n}', collections.posts.length) }}</p>
+</header>
+
+{% if posts.length %}
+<div class="post-list">
+  {% for post in posts %}{{ postCard(post, locale, loop.index0) }}{% endfor %}
+</div>
+{{ paginationNav(pagination, locale) }}
+{% else %}
+<div class="empty-state"><p>{{ 'posts.empty' | t(locale.id) }}</p></div>
+{% endif %}

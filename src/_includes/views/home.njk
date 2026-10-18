@@ -1,0 +1,41 @@
+{% from "components/post-card.njk" import postCard %}
+
+<section class="home-hero">
+  <h1 class="home-hero__title">{{ ui.site.name }}</h1>
+  <p class="home-hero__lead">{{ ui.site.tagline }}</p>
+  <div class="home-hero__actions">
+    <a class="btn btn--contained" href="{{ '/posts/' | localeUrl(locale) }}">{{ ui.home.browse }}</a>
+    <a class="btn btn--text" href="{{ '/rss/' | localeUrl(locale) }}">{{ ui.home.rss }}</a>
+  </div>
+</section>
+
+<div class="section-head">
+  <h2>{{ ui.home.latest }}</h2>
+  <a href="{{ '/posts/' | localeUrl(locale) }}">{{ ui.home.viewAll }}</a>
+</div>
+
+{% if collections.posts.length %}
+<div class="post-list">
+  {% for post in collections.posts %}
+    {% if loop.index <= 6 %}{{ postCard(post, locale, loop.index0) }}{% endif %}
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty-state"><p>{{ ui.posts.empty }}</p></div>
+{% endif %}
+
+{% if site.services.length %}
+<section class="home-services">
+  <div class="section-head">
+    <h2>{{ ui.home.services }}</h2>
+  </div>
+  <div class="service-grid">
+    {% for s in site.services %}
+    <a class="service-card" href="{{ s.url }}" target="_blank" rel="noopener">
+      <span class="service-card__name">{{ s.name }}</span>
+      <span class="service-card__desc">{{ ui.services[s.key] }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}

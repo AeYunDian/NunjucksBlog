@@ -1,0 +1,18 @@
+{% from "components/post-card.njk" import postCard %}
+
+{% set posts = collections.posts | filterByTag(tag) %}
+
+<header class="page-head">
+  <h1 class="page-head__title">{{ 'tags.title' | t(locale.id) }}：{{ tag }}</h1>
+  <p class="page-head__desc">{{ 'tags.count' | t(locale.id) | replace('{n}', posts.length) }}</p>
+</header>
+
+{% if posts.length %}
+<div class="post-list">
+  {% for post in posts %}{{ postCard(post, locale, loop.index0) }}{% endfor %}
+</div>
+{% else %}
+<div class="empty-state"><p>{{ 'tags.empty' | t(locale.id) }}</p></div>
+{% endif %}
+
+<p style="margin-top: 24px"><a href="{{ '/tags/' | localeUrl(locale) }}">← {{ 'tags.back' | t(locale.id) }}</a></p>

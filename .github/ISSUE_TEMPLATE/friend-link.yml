@@ -1,0 +1,68 @@
+name: 友链申请
+description: 申请把您的网站加入本站友链（会自动审核）
+title: "[友链] "
+labels: ["friend-link"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        申请前请先阅读 [友链规则](https://undz.cn/links/)。提交后会自动检查站点可达性、回链与重复，通常几秒内出结果。
+
+  - type: input
+    id: site-name
+    attributes:
+      label: 网站名称
+      placeholder: 例如：Example Blog
+    validations:
+      required: true
+      max_length: 40
+
+  - type: input
+    id: site-url
+    attributes:
+      label: 网站地址
+      placeholder: https://example.com
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 描述
+      placeholder: 描述您的网站
+    validations:
+      required: true
+      max_length: 80
+
+  - type: input
+    id: avatar
+    attributes:
+      label: 头像地址（可选）
+      placeholder: https://example.com/avatar.png
+
+  - type: input
+    id: backlink
+    attributes:
+      label: 友链页面地址（可选）
+      description: 如果已经在自己的站点添加了本站，可以填写；不填也可以。
+      placeholder: https://example.com/links/
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: 分类
+      options:
+        - 技术
+        - 设计
+        - 生活
+        - 其他
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 确认
+      options:
+        - label: 我确认网站内容合法合规
+          required: true

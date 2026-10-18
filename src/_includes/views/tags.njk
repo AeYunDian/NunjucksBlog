@@ -1,0 +1,19 @@
+{% from "components/tag.njk" import chip %}
+
+{% set allTags = collections.posts | tagCounts %}
+
+<header class="page-head">
+  <h1 class="page-head__title">{{ 'tags.title' | t(locale.id) }}</h1>
+  <p class="page-head__desc">{{ 'tags.description' | t(locale.id) }}</p>
+</header>
+
+{% if allTags | length %}
+<div class="tag-cloud">
+  {% for t, count in allTags %}
+    {% set href = ('/tags/' | localeUrl(locale)) + (t | tagSlug) + '/' %}
+    {{ chip(t, href, count) }}
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty-state"><p>{{ 'tags.empty' | t(locale.id) }}</p></div>
+{% endif %}

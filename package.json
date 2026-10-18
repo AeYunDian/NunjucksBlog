@@ -1,18 +1,27 @@
 {
     "name": "newblog",
-    "version": "1.0.0",
-    "description": "",
+    "version": "2.0.0",
+    "description": "韵典综合平台 · Eleventy 静态站点",
     "scripts": {
         "clean": "rimraf dist",
-        "dev": "rimraf dist && npx @11ty/eleventy --serve",
-        "build": "rimraf dist && npx @11ty/eleventy",
-        "build:prod": "rimraf dist && cross-env ELEVENTY_ENV=production npx @11ty/eleventy"
+        "dev": "rimraf dist && cross-env ELEVENTY_ENV=development eleventy --serve",
+        "build": "rimraf dist && cross-env ELEVENTY_ENV=production eleventy",
+        "build:prod": "rimraf dist && cross-env ELEVENTY_ENV=production eleventy",
+        "verify": "npm run build:prod"
     },
     "browserslist": [
-        "ie >= 7",
-        "last 2 versions",
-        "> 1%"
+        "ie 10",
+        "ie 11",
+        "last 2 chrome versions",
+        "last 2 firefox versions",
+        "last 2 safari versions",
+        "last 2 edge versions",
+        "ios >= 12",
+        "android >= 8"
     ],
+    "engines": {
+        "node": ">=20"
+    },
     "keywords": [],
     "type": "commonjs",
     "devDependencies": {
@@ -22,12 +31,14 @@
         "@quasibit/eleventy-plugin-sitemap": "^2.2.0",
         "autoprefixer": "^10.6.1",
         "cross-env": "^10.1.0",
+        "cssnano": "^7.0.0",
         "html-minifier-terser": "^7.2.0",
         "postcss": "^8.5.28",
+        "postcss-custom-properties": "^14.0.0",
+        "postcss-import": "^16.0.0",
         "rimraf": "^6.1.3"
     },
     "dependencies": {
-        "@11tyrocks/eleventy-plugin-lightningcss": "^1.6.0",
         "node-pinyin": "^0.2.3"
     }
 }

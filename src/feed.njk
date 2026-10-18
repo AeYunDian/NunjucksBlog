@@ -15,7 +15,7 @@ eleventyExcludeFromCollections: true
   </author>
   <generator>Eleventy</generator>
 
-  {%- for post in collections.posts | reverse %}
+  {%- for post in collections.posts %}
   {%- set absolutePostUrl = site.url + post.url %}
   <entry>
     <title>{{ post.data.title }}</title>

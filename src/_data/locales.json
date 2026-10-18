@@ -1,0 +1,35 @@
+[
+    {
+        "id": "zh-CN",
+        "prefix": "",
+        "label": "简体中文",
+        "short": "简",
+        "htmlLang": "zh-CN",
+        "hreflang": "zh-CN",
+        "ogLocale": "zh_CN",
+        "dateLocale": "zh-CN",
+        "default": true
+    },
+    {
+        "id": "en-US",
+        "prefix": "en-us/",
+        "label": "English",
+        "short": "EN",
+        "htmlLang": "en-US",
+        "hreflang": "en-US",
+        "ogLocale": "en_US",
+        "dateLocale": "en-US",
+        "default": false
+    },
+    {
+        "id": "zh-HK",
+        "prefix": "zh-hk/",
+        "label": "繁體中文",
+        "short": "繁",
+        "htmlLang": "zh-HK",
+        "hreflang": "zh-HK",
+        "ogLocale": "zh_HK",
+        "dateLocale": "zh-HK",
+        "default": false
+    }
+]

@@ -1,0 +1,320 @@
+/* ==========================================================================
+   Base — reset + typography + utilities
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--md-bg);
+  color: var(--md-text);
+  font-family: var(--md-font);
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+a {
+  color: var(--md-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--md-text);
+}
+
+p {
+  margin: 0 0 16px;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--md-divider);
+  margin: 24px 0;
+}
+
+code,
+pre,
+kbd {
+  font-family: var(--md-mono);
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/* 鼠标点击不要出现焦点框；键盘 Tab 仍保留 */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--md-primary);
+  outline-offset: 2px;
+}
+
+/* IE10/11 不支持 :focus-visible，用 JS 给键盘用户加类 */
+.keyboard-focus :focus {
+  outline: 2px solid var(--md-primary);
+  outline-offset: 2px;
+}
+
+/* typography scale（MD2 + 中文行高） */
+.display {
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+h1,
+.h1 {
+  font-size: 32px;
+  line-height: 40px;
+}
+
+h2,
+.h2 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+h3,
+.h3 {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.lead {
+  font-size: 16px;
+  line-height: 28px;
+  color: var(--md-text-2);
+}
+
+.meta {
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--md-text-2);
+}
+
+.caption {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--md-text-2);
+}
+
+/* layout helpers */
+.container {
+  width: 100%;
+  max-width: var(--md-container);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.main {
+  display: block;
+  min-height: 60vh;
+  padding: 24px 0 48px;
+}
+
+.stack > * + * {
+  margin-top: 16px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -64px;
+  z-index: 300;
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: var(--md-radius);
+  background: var(--md-surface);
+  color: var(--md-primary);
+  box-shadow: var(--md-z8);
+  transition: top var(--md-fast) var(--md-ease);
+}
+
+.skip-link:focus {
+  top: 12px;
+  text-decoration: none;
+}
+
+@media (min-width: 600px) {
+  .container {
+    padding: 0 24px;
+  }
+}
+
+@media (min-width: 905px) {
+  .main {
+    padding-top: 40px;
+  }
+}
+
+/* 正文容器（面包屑与文章标题对齐） */
+.narrow {
+  max-width: var(--md-content);
+  margin: 0 auto;
+}
+
+/* 主内容获得焦点时（点击页面会触发）不要出现整屏蓝框 */
+.main:focus {
+  outline: none;
+}
+
+/* 锚点跳转避开吸顶导航 */
+[id] {
+  scroll-margin-top: 88px;
+}
+
+/* 入场动画：轻量的淡入 + 8px 位移，卡片依次出现 */
+@keyframes md-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.main > .container {
+  animation: md-enter 320ms var(--md-ease) both;
+}
+
+.post-list > .post-card {
+  animation: md-enter 320ms var(--md-ease) both;
+}
+
+.post-list > .post-card:nth-child(2) {
+  animation-delay: 40ms;
+}
+
+.post-list > .post-card:nth-child(3) {
+  animation-delay: 80ms;
+}
+
+.post-list > .post-card:nth-child(4) {
+  animation-delay: 120ms;
+}
+
+.post-list > .post-card:nth-child(5) {
+  animation-delay: 160ms;
+}
+
+.post-list > .post-card:nth-child(6) {
+  animation-delay: 200ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .main > .container,
+  .post-list > .post-card {
+    animation: none;
+  }
+
+  * {
+    transition-duration: 0ms !important;
+  }
+}
+
+@page {
+  margin: 0;
+}
+
+@media print {
+  .app-bar,
+  .site-footer,
+  .fab-top,
+  .share,
+  .print-btn,
+  .skip-link,
+  .related,
+  .breadcrumb {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .main {
+    padding: 16mm 14mm;
+  }
+
+  .post,
+  .doc {
+    max-width: none;
+  }
+
+  .post__title {
+    font-size: 26pt;
+    line-height: 1.25;
+  }
+
+  .post__content {
+    font-size: 11pt;
+    line-height: 1.7;
+  }
+
+  .post__content a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  .post__content pre {
+    border: 1px solid #ccc;
+    white-space: pre-wrap;
+  }
+}

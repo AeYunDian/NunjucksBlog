@@ -1,0 +1,22 @@
+<div class="narrow">
+  <header class="page-head">
+    <h1 class="page-head__title">{{ ui.rss.title }}</h1>
+    <p class="page-head__desc">{{ ui.rss.description }}</p>
+  </header>
+
+  <div class="rss-box">
+    <p class="rss-box__label">{{ ui.rss.address }}</p>
+    <p class="rss-box__url"><a href="/feed.xml">https://undz.cn/feed.xml</a></p>
+    <p>
+      <a class="btn btn--contained" href="/feed.xml">{{ ui.rss.open }}</a>
+      <button class="btn btn--outlined" type="button" data-action="copy" data-copy="https://undz.cn/feed.xml">{{ ui.rss.copy }}</button>
+    </p>
+  </div>
+
+  <h2>{{ ui.rss.howto }}</h2>
+  <ol class="rss-steps">
+    {% for step in ui.rss.steps %}<li>{{ step }}</li>{% endfor %}
+  </ol>
+
+  <p class="caption">{{ ui.rss.note }}</p>
+</div>

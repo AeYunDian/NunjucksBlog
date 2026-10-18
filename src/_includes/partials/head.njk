@@ -1,95 +1,59 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0B57D0">
 
-<title>{{ title or site.title }}{% if site.titleSuffix %} - {{ site.titleSuffix }}{% endif %}</title>
-{% if description or site.description %}
-<meta name="description" content="{{ description or site.description }}">
-{% endif %}
-{% if site.author %}
+<title>{% if title and title != ui.site.name %}{{ title }} · {{ ui.site.name }}{% else %}{{ ui.site.name }}{% endif %}</title>
+
+{% set metaDescription = description or ui.site.description %}
+<meta name="description" content="{{ metaDescription }}">
 <meta name="author" content="{{ site.author }}">
+
+{# ---- 语言 / canonical / hreflang ---- #}
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+{% if i18nPage and site.i18nReady %}
+  {% for l in locales %}
+  <link rel="alternate" hreflang="{{ l.hreflang }}" href="{{ site.url }}{{ page.url | localeUrl(l) }}">
+  {% endfor %}
+  <link rel="alternate" hreflang="x-default" href="{{ site.url }}{{ page.url | localeUrl(locales[0]) }}">
 {% endif %}
 
 {# ---- Open Graph ---- #}
-{% set ogDescription = ogDescription or description or site.description %}
-{% set ogUrl = site.url + page.url %}
-{% set ogImage = ogImage or site.ogImage %}
-{% set ogTitle = ogTitle or title or site.title %}
-{% set ogTitleFull = ogTitle + ((" - " + site.titleSuffix) if site.titleSuffix else "") %}
-
-{% if ogType %}
-<meta property="og:type" content="{{ ogType }}">
+{% set ogTitleText = ogTitle or title or ui.site.name %}
+{% set ogDesc = ogDescription or metaDescription %}
+{% set ogImagePath = ogImage or cover or site.ogImage %}
+<meta property="og:type" content="{{ ogType or 'website' }}">
+<meta property="og:site_name" content="{{ ui.site.name }}">
+<meta property="og:title" content="{{ ogTitleText }}">
+<meta property="og:description" content="{{ ogDesc }}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:locale" content="{{ locale.ogLocale }}">
+{% for l in locales %}{% if l.id != locale.id %}
+<meta property="og:locale:alternate" content="{{ l.ogLocale }}">
+{% endif %}{% endfor %}
+{% if ogImagePath %}
+<meta property="og:image" content="{{ site.url }}{{ ogImagePath }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ site.url }}{{ ogImagePath }}">
+{% else %}
+<meta name="twitter:card" content="summary">
+{% endif %}
+<meta name="twitter:title" content="{{ ogTitleText }}">
+<meta name="twitter:description" content="{{ ogDesc }}">
+{% if ogType == 'article' and date %}
+<meta property="article:published_time" content="{{ date | dateToISO }}">
 {% endif %}
 
-{% if ogTitle %}
-<meta property="og:title" content="{{ ogTitleFull  }}">
+{# ---- Feed ---- #}
+<link rel="alternate" type="application/atom+xml" title="{{ ui.site.name }}" href="{{ site.url }}/feed.xml">
+
+{# ---- 字体 / 样式 ---- #}
+<link rel="preconnect" href="https://cdn.undz.cn" crossorigin>
+<link rel="stylesheet" href="https://cdn.undz.cn/css2?family=Roboto:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<noscript><style>.only-js { display: none !important; }</style></noscript>
+
+{% if page.url == ('/' | localeUrl(locale)) %}
+<script type="application/ld+json">{{ jsonldWebsite({ name: ui.site.name, url: site.url, description: ui.site.description, lang: locale.htmlLang }) | safe }}</script>
 {% endif %}
-
-{% if ogDescription %}
-<meta property="og:description" content="{{ ogDescription }}">
-{% endif %}
-
-{% if ogUrl %}
-<meta property="og:url" content="{{ ogUrl }}">
-{% endif %}
-
-{% if ogImage %}
-<meta property="og:image" content="{{ ogImage }}">
-{% endif %}
-
-{% if site.title %}
-<meta property="og:site_name" content="{{ site.title }}">
-{% endif %}
-
-{% if ogLocale %}
-<meta property="og:locale" content="{{ ogLocale }}">
-{% endif %}
-
-{% if twitterCard %}
-<meta name="twitter:card" content="{{ twitterCard }}">
-{% endif %}
-
-{% if ogTitle %}
-<meta name="twitter:title" content="{{ ogTitleFull }}">
-{% endif %}
-
-{% if ogDescription %}
-<meta name="twitter:description" content="{{ ogDescription }}">
-{% endif %}
-
-{% if ogImage %}
-<meta name="twitter:image" content="{{ ogImage }}">
-{% endif %}
-
-{# ---- Canonical ---- #}
-<link rel="canonical" href="{{ site.url }}{{ page.url }}">
-{# ---- RSS Feed 自动发现 ---- #}
-<link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ site.url }}/feed.xml">
-{# ---- 样式 ---- #}
-<link rel="stylesheet" href="/assets/css/style.css">
-
-<script src="/assets/vendor/jquery-1.12.4.min.js"></script>
-
-<noscript>
-  <style>
-    .only-js { display: none !important; }
-  </style>
-</noscript>
-
-<link rel="stylesheet" href="/assets/css/base/reset.css">
-<link rel="stylesheet" href="/assets/css/base/variables.css">
-<link rel="stylesheet" href="/assets/css/base/layout.css">
-<link rel="stylesheet" href="/assets/css/components/header.css">
-<link rel="stylesheet" href="/assets/css/components/footer.css">
-
-<script defer src="https://mysites.undz.cn/analytics.js?token=ec7944e73713d894717260c0ddd8271a49a6dce038bfd128f7d021917396ac4b" data-domain="undz.cn"></script>
-
-{% for css in css %}
-<link rel="stylesheet" href="/assets/css/{{ css }}.css">
-{% endfor %}
-
-<!--[if lt IE 8]>
-<link rel="stylesheet" href="/assets/css/ie7.css">
-<![endif]-->
-
-<!-- 当前页声明的组件 CSS: {{ css | join(", ") if css else "(无)" }} -->

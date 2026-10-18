@@ -1,0 +1,14 @@
+/sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+
+/feed.xml
+  Content-Type: application/atom+xml; charset=utf-8
+
+/assets/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: geolocation=(), microphone=(), camera=()

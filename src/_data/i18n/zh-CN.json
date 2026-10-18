@@ -1,0 +1,110 @@
+{
+    "site": {
+        "name": "韵典综合平台",
+        "shortName": "韵典",
+        "tagline": "记录前端工程实践、设计思考与日常阅读。",
+        "description": "韵典综合平台：记录前端工程实践、设计思考与日常阅读的独立站点。"
+    },
+    "nav": {
+        "home": "首页",
+        "posts": "文章",
+        "tags": "标签",
+        "archive": "归档",
+        "links": "友链",
+        "about": "关于",
+        "contact": "联系"
+    },
+    "home": {
+        "title": "首页",
+        "browse": "浏览全部文章",
+        "rss": "RSS 订阅",
+        "latest": "最新文章",
+        "viewAll": "查看全部",
+        "services": "我的服务"
+    },
+    "services": {
+        "account": "统一管理头像、邮箱与登录设备，授权关系清晰可见。",
+        "console": "管理 OAuth 应用、查看调用情况、提交与跟踪反馈。",
+        "analytics": "查看站点访问量、来源与实时在线数据。"
+    },
+    "posts": {
+        "title": "全部文章",
+        "description": "所有文章，按发布时间倒序排列。",
+        "count": "共 {n} 篇",
+        "empty": "还没有发布文章。"
+    },
+    "post": {
+        "published": "发布于",
+        "readingTime": "约 {n} 分钟",
+        "prev": "上一篇",
+        "next": "下一篇",
+        "share": "分享",
+        "related": "相关文章"
+    },
+    "tags": {
+        "title": "标签",
+        "description": "按标签浏览文章。",
+        "count": "{n} 篇",
+        "empty": "还没有标签。",
+        "back": "所有标签"
+    },
+    "archive": {
+        "title": "归档",
+        "description": "按年份归档的全部文章。",
+        "empty": "还没有文章可以归档。"
+    },
+    "links": {
+        "title": "友链",
+        "description": "这里是一些长期维护的独立站点。",
+        "apply": "申请友链",
+        "rules": "友链规则",
+        "rulesList": [
+            "站点有持续更新的原创内容，非采集站或纯营销页。",
+            "全站 HTTPS，页面可正常访问。",
+            "内容合规；本站保留随时移除友链的权利。"
+        ],
+        "empty": "还没有友链，欢迎申请。"
+    },
+    "rss": {
+        "title": "RSS 订阅",
+        "description": "用 RSS 阅读器订阅本站，新文章会直接出现在你的阅读列表里。",
+        "address": "订阅地址",
+        "open": "打开 Feed",
+        "copy": "复制地址",
+        "howto": "怎么用",
+        "steps": [
+            "准备一个 RSS 阅读器，例如 Feedly、Inoreader、NetNewsWire、FreshRSS。",
+            "在阅读器里选择「添加订阅」，粘贴上面的地址。",
+            "之后每次更新都会自动同步，不需要再打开本站。"
+        ],
+        "note": "Feed 只包含中文文章；界面语言不影响订阅内容。"
+    },
+    "pagination": {
+        "prev": "上一页",
+        "next": "下一页",
+        "page": "第 {n} 页",
+        "label": "分页导航"
+    },
+    "footer": {
+        "nav": "导航",
+        "contact": "联系",
+        "rights": "保留所有权利",
+        "top": "回到顶部",
+        "skip": "跳到正文"
+    },
+    "a11y": {
+        "menu": "打开导航",
+        "close": "关闭",
+        "langSwitch": "切换语言",
+        "breadcrumb": "面包屑",
+        "share": "分享到"
+    },
+    "notFound": {
+        "title": "页面不存在",
+        "description": "您访问的页面不存在或已被移动。",
+        "back": "返回首页"
+    },
+    "doc": {
+        "updated": "最后更新"
+    }
+}

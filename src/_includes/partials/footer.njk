@@ -4,6 +4,7 @@
       <div class="footer__brand">
         <p class="footer__brand-name">{{ ui.site.name }}</p>
         <p class="footer__tagline">{{ ui.site.tagline }}</p>
+      <p id="someInfo" style="margin: 0"></p>
       </div>
 
       <nav class="footer__nav" aria-label="{{ ui.footer.nav }}">
@@ -38,3 +39,59 @@
     </div>
   </div>
 </footer>
+<script>
+(function() {
+    var elFooterP = document.getElementById("someInfo");
+
+    function checkTimeAndUpdate() {
+        if (!elFooterP) return;
+
+        var now = new Date();
+        var month = now.getMonth();
+        var day = now.getDate();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+
+        var isSpecial =  (month === 4 && day === 20) ||
+                        (month === 10 && day === 12) ||
+                        (hours === 5 && minutes === 20) ||
+                        (hours === 11 && minutes === 12) ||
+                        (hours === 13 && minutes === 14);
+
+        if (isSpecial) {
+            if (elFooterP.textContent !== "万康驰我爱你！") {
+                elFooterP.textContent = "万康驰我爱你！";
+                elFooterP.style.color = "#FF5555";
+            }
+        } else {
+            if (elFooterP.textContent !== "") {
+                elFooterP.textContent = "";
+                elFooterP.style.color = "";
+            }
+        }
+    }
+
+    setTimeout(checkTimeAndUpdate, 100);
+    setInterval(checkTimeAndUpdate, 30000);
+
+    var hidden, visibilityChange;
+    if (typeof document.hidden !== "undefined") {
+        hidden = "hidden";
+        visibilityChange = "visibilitychange";
+    } else if (typeof document.msHidden !== "undefined") {
+        hidden = "msHidden";
+        visibilityChange = "msvisibilitychange";
+    } else if (typeof document.webkitHidden !== "undefined") {
+        hidden = "webkitHidden";
+        visibilityChange = "webkitvisibilitychange";
+    }
+
+    if (typeof document.addEventListener !== "undefined" && typeof hidden !== "undefined") {
+        document.addEventListener(visibilityChange, function() {
+            if (!document[hidden]) {
+                checkTimeAndUpdate();
+            }
+        }, false);
+    }
+})();
+</script>

@@ -12,7 +12,10 @@
         "archive": "Archive",
         "links": "Links",
         "about": "About",
-        "contact": "Contact"
+        "contact": "Contact",
+        "terms": "Terms of Service",
+        "privacy": "Privacy Policy",
+        "cookie": "Cookie Policy"
     },
     "home": {
         "title": "Home",

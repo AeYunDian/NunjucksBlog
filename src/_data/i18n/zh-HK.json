@@ -12,7 +12,10 @@
         "archive": "歸檔",
         "links": "友鏈",
         "about": "關於",
-        "contact": "聯絡"
+        "contact": "聯絡",
+        "terms": "服務條款",
+        "privacy": "隱私政策",
+        "cookie": "Cookie 政策"
     },
     "home": {
         "title": "首頁",

@@ -13,12 +13,20 @@
         {% endfor %}
       </nav>
 
+       <nav class="footer__nav" aria-label="{{ ui.footer.nav }}">
+        <a href="/cookies/">{{ ui.nav.cookies }}</a>
+        <a href="/privacy/">{{ ui.nav.privacy }}</a>
+        <a href="/terms/">{{ ui.nav.terms }}</a>
+      </nav>
+
       <nav class="footer__nav" aria-label="{{ ui.footer.contact }}">
         <a href="{{ '/contact/' | localeUrl(locale) }}">{{ ui.nav.contact }}</a>
         <a href="{{ '/rss/' | localeUrl(locale) }}">RSS</a>
         <a href="/sitemap.xml">Sitemap</a>
         <a href="https://github.com/{{ site.repo }}" target="_blank" rel="noopener">GitHub</a>
       </nav>
+
+
     </div>
 
     <div class="footer__legal">

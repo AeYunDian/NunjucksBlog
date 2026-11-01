@@ -42,18 +42,6 @@
             "url": "/archive/"
         },
         {
-            "key": "cookie",
-            "url": "/cookie/"
-        },
-        {
-            "key": "privacy",
-            "url": "/privacy/"
-        },
-        {
-            "key": "terms",
-            "url": "/terms/"
-        },
-        {
             "key": "links",
             "url": "/links/"
         },
